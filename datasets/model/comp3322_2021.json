@@ -1,0 +1,132 @@
+{
+    "subject": "Computer Science",
+    "pastpaper_name": "COMP3322",
+    "pastpaper_year": "2021",
+    "totalmark": 100,
+    "difficulty_level_distribution": {
+        "high": 20,
+        "mid": 40,
+        "low": 40
+    },
+    "creative": {
+        "repeatability": 60,
+        "new": 40
+    },
+    "question_type": [
+      "Programming",
+      "Short question"
+    ],
+  "totaltime": 180,
+    "questions": [
+        {
+            "question": "Short Questions",
+            "question_type": "Short question",
+            "position": "1",
+            "marks": "18",
+            "sub_questions": [
+                {
+                    "sub_question": "Describe how a web client knows whether it can cache a web object and for how long after it has received the object from the web server.",
+                    "marks": "4",
+                    "key_point": ["cache control", "expiration", "web server", "HTTP headers"],
+                    "difficulty": "4",
+                    "time_require": "5",
+                    "repeatability": "no",
+                    "repeatability_level": "no"
+                },
+                {
+                    "sub_question": "Explain two ways to improve the accessibility of an image embedded in a Web page for users with different abilities.",
+                    "marks": "5",
+                    "key_point": ["accessibility", "alt text", "image description", "ARIA attributes"],
+                    "difficulty": "3",
+                    "time_require": "5",
+                    "repeatability": "yes",
+                    "repeatability_level": "medium"
+                },
+                {
+                    "sub_question": "HTML forms can be submitted to the server by the GET or POST method. Explain the differences between the two methods with regards to the (i) URL, (ii) headers, and (iii) message body.",
+                    "marks": "4",
+                    "key_point": ["GET method", "POST method", "URL parameters", "headers", "message body"],
+                    "difficulty": "4",
+                    "time_require": "5",
+                    "repeatability": "yes",
+                    "repeatability_level": "medium"
+                },
+                {
+                    "sub_question": "Consider that a user wants to retrieve the Mozilla Developer Network home page (https://developer.mozilla.org/en-US/) but his computer does not have the IP address of the Web server. Describe the process of how his computer obtains the IP address of the Web server. Assume that the local DNS server has not cached the address.",
+                    "marks": "5",
+                    "key_point": ["DNS resolution", "local DNS server", "recursive DNS query", "IP address"],
+                    "difficulty": "5",
+                    "time_require": "6",
+                    "repeatability": "no",
+                    "repeatability_level": "no"
+                }
+            ]
+        },
+        {
+            "question": "Create CSS styling rules based on the HTML structure provided to align form elements as shown in the browser rendering.",
+            "question_type": "Programming",
+            "position": "2",
+            "key_point": ["CSS", "selectors", "alignment", "form styling"],
+            "marks": "10",
+            "difficulty": "5",
+            "time_require": "15",
+            "repeatability": "yes",
+            "repeatability_level": "medium"
+        },
+        {
+            "question": "Implement a JavaScript function to display images in a canvas element as a photo slider.",
+            "question_type": "Programming",
+            "position": "3",
+            "key_point": ["JavaScript", "canvas API", "AJAX", "fetch JSON"],
+            "marks": "12",
+            "difficulty": "6",
+            "time_require": "20",
+            "repeatability": "no",
+            "repeatability_level": "no"
+        },
+        {
+            "question": "Develop a PHP script to track website visits using sessions.",
+            "question_type": "Programming",
+            "position": "4",
+            "key_point": ["PHP", "sessions", "tracking", "visit count"],
+            "marks": "12",
+            "difficulty": "5",
+            "time_require": "15",
+            "repeatability": "yes",
+            "repeatability_level": "medium"
+        },
+        {
+            "question": "Write an Express.js program to retrieve student exam scores from a MongoDB database.",
+            "question_type": "Programming",
+            "position": "5",
+            "key_point": ["Express.js", "MongoDB", "API endpoints", "JSON responses"],
+            "marks": "24",
+            "difficulty": "8",
+            "time_require": "30",
+            "repeatability": "no",
+            "repeatability_level": "no"
+        },
+        {
+            "question": "Create a Pug template to render a histogram with a specified array of integers.",
+            "question_type": "Programming",
+            "position": "6",
+            "key_point": ["Pug templating", "CSS styling", "dynamic HTML"],
+            "marks": "12",
+            "difficulty": "6",
+            "time_require": "15",
+            "repeatability": "no",
+            "repeatability_level": "no"
+        },
+        {
+            "question": "Design a React component to render a digital clock that updates every second.",
+            "question_type": "Programming",
+            "position": "7",
+            "key_point": ["React", "components", "state", "digital clock"],
+            "marks": "12",
+            "difficulty": "4",
+            "time_require": "10",
+            "repeatability": "yes",
+            "repeatability_level": "medium"
+        }
+    ]
+}

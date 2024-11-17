@@ -1,0 +1,191 @@
+{
+  "subject": "Computer Science",
+  "pastpaper_name": "COMP3322",
+  "pastpaper_year": "2020",
+  "totalmark": 100,
+  "difficulty_level_distribution": {
+    "high": 30,
+    "mid": 60,
+    "low": 10
+  },
+  "creative": {
+    "repeatability": 70,
+    "new": 30
+  },
+  "question_type": [
+    "Coding",
+    "Short Answer"
+  ],
+  "totaltime": 180,
+  "questions": [
+    {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "HTTP is said to be a stateless protocol. Name two enhancements or extensions included in HTTP which make it no longer a true stateless protocol. In one to two sentences, explain how the enhancements/extensions introduce the concept of states to HTTP.",
+      "question_type": "Short Answer",
+      "position": 1,
+      "key_point": ["Identify two enhancements to HTTP that introduce statefulness", "Brief explanation of how each introduces state"],
+      "marks": 4,
+      "difficulty": 3,
+      "time_require": 5,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    },
+    {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "What is meant by 'shorthand property' in CSS? Give one example to illustrate this.",
+      "question_type": "Short Answer",
+      "position": 2,
+      "key_point": ["Definition of 'shorthand property'", "Provide a valid example, e.g., 'margin: 10px 20px;'"],
+      "marks": 3,
+      "difficulty": 1,
+      "time_require": 3,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    },
+    {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "What is meant by 'CSS breakpoint'?",
+      "question_type": "Short Answer",
+      "position": 3,
+      "key_point": ["Definition of CSS breakpoint"],
+      "marks": 3,
+      "difficulty": 1,
+      "time_require": 2,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    },
+    {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "As the tutor of a course, you are designing an API for accessing the course's student database. Your API should support the CRUD operations in accessing an individual student record and the list operation to get the full list of student records. Design the API based on the concepts you have learned from the course.",
+      "question_type": "Short Answer",
+      "position": 4,
+      "key_point": ["Provide CRUD endpoints with correct HTTP methods", "List endpoint with method and path"],
+      "marks": 5,
+      "difficulty": 3,
+      "time_require": 7,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    },
+    {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "Analyze the output of the given JavaScript code. (Provide the JavaScript code within this question)", // Important: Include the actual code here
+      "question_type": "Short Answer",
+      "position": 5,
+      "key_point": ["Understanding of asynchronous behavior with promises", "Output sequence based on code logic"],
+      "marks": 5,
+      "difficulty": 8,
+      "time_require": 8,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    },
+    {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "In setting up AJAX communication, the 3rd argument to the open function on the XMLHttpRequest object is a Boolean value representing whether the request will be made synchronously (false) or asynchronously (true). Explain what synchronous and asynchronous AJAX calls are. Give an example scenario where using synchronous AJAX call would be appropriate.",
+      "question_type": "Short Answer",
+      "position": 6,
+      "key_point": ["Define synchronous vs asynchronous AJAX", "Provide example scenario for synchronous AJAX"],
+      "marks": 5,
+      "difficulty": 3,
+      "time_require": 5,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    },
+    {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "Write a Drag-and-drop program with specified features. (Provide specific requirements and instructions here)", // Include the detailed prompt
+      "question_type": "Coding",
+      "position": 2,
+      "key_point": ["HTML framework usage", "JavaScript logic for drag-and-drop functionality", "CSS styling as required"],
+      "marks": 15,
+      "difficulty": 8,
+      "time_require": 20,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    },
+     {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "Convert the given jQuery code to Vanilla JavaScript. (Provide the jQuery code within this question)", // Include the jQuery code to be converted
+      "question_type": "Coding",
+      "position": 3,
+      "key_point": ["Use of DOM manipulation with JavaScript", "Event handling without jQuery"],
+      "marks": 14,
+      "difficulty": 5,
+      "time_require": 15,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    },
+    {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "Implement show() and remove() functions for given HTML file. (Provide the HTML structure and further instructions)", // Include the necessary HTML and instructions
+      "question_type": "Coding",
+      "position": 4,
+      "key_point": ["Correct handling of onmouseover and onclick events", "Functionality to add and remove images as per requirement"],
+      "marks": 8,
+      "difficulty": 5,
+      "time_require": 10,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    },
+    {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "Write an Express.js program to fetch data from MongoDB and display it using Pug. (Include specific data retrieval requirements and output format)", // Add details about data and output
+      "question_type": "Coding",
+      "position": 5,
+      "key_point": ["Connection to MongoDB using Express", "Data retrieval and processing", "HTML output using Pug template with table structure"],
+
+      "marks": 20,
+      "difficulty": 8,
+      "time_require": 25,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    },
+    {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "Analyze the React.js app for initial and click-based output. (Provide the React.js code)",
+      "question_type": "Coding",
+      "position": 6,
+      "key_point": ["Explanation of React component behavior", "Effect of setState on rendering"],
+      "marks": 8,
+      "difficulty": 5,
+      "time_require": 12,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    },
+    {
+      "subject": "Computer Science",
+      "pastpaper_name": "COMP3322",
+      "pastpaper_year": "2020",
+      "question": "Design a React component to render a progress bar. (Specify requirements for interactivity and styling)",
+      "question_type": "Coding",
+      "position": 7,
+      "key_point": ["Structure of progress bar using React", "Styling and dynamic progress update"],
+      "marks": 10,
+      "difficulty": 5,
+      "time_require": 15,
+      "repeatability": "no",
+      "repeatability_level": "no"
+    }
+  ]
+}
