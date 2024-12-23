@@ -210,16 +210,17 @@ class OllamaLanguageModel:
     )
     
     
-cls = OllamaLanguageModel("qwen2.5:14b")
+if __name__ == "__main__":
+  cls = OllamaLanguageModel("qwen2.5:14b")
 
-my_input = None
-while True:
-    my_input = input("input your input (type 'end' to quit): ")
-    if my_input == "end":
-        break
-    # elif my_input.startswith("MCQ: "):
-    #     cls.sample_choice(my_input)
-    
-    response = cls.sample_text(my_input)
-    
-    print(response) 
+  my_input = None
+  while True:
+      my_input = input("input your input (type 'end' to quit): ")
+      if my_input == "end":
+          break
+      # elif my_input.startswith("MCQ: "):
+      #     cls.sample_choice(my_input)
+      
+      response = cls.sample_text(my_input)
+      
+      print(response) 
