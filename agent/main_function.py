@@ -36,15 +36,7 @@ model = utils.language_model_setup(
     model_name=model_name,
     disable_language_model=disable_language_model,
 )
-
 memory_bank = NaiveAssociativeMemory(embedder)
-memory_bank.add("how are you")
-memory_bank.add("how are you")
-memory_bank.add("how are you_1")
-
-
-print(memory_bank.get_all_memories_as_text())
-print(memory_bank.retrieve_associative("how are you"))
 
 
 
@@ -59,5 +51,11 @@ if __name__ == "__main__":
         "Question: 'We conducted a coin flip consisting of 100 flips, resulting in 61 heads and 39 tails. Our null hypothesis states that 'The coin is fair', meaning that the probability of getting a head is 0.5, and the probability of getting a tail is also 0.5. Your task is to determine whether to accept or reject the null hypothesis. Please support your decision using the p-value of the outcome. You may consult the 'snd' table to obtain an upper bound on the p-value."
     )
     print(extractor.extract_knowledge_point(question))
-    pass
+    memory_bank.add("how are you")
+    memory_bank.add("how are you")
+    memory_bank.add("how are you_1")
+
+
+    print(memory_bank.retrieve_associative("how are you"))
+    print(memory_bank.get_all_memories_as_text())
     
