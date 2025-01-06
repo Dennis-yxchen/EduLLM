@@ -8,3 +8,4 @@ datasets/json/model.xcodeproj/xcuserdata/linruiyi.xcuserdatad/xcschemes/xcscheme
 datasets/json/.DS_Store
 
 */__pycache__/*.pyc
+log.txt
