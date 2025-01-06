@@ -7,4 +7,4 @@ datasets/json/model.xcodeproj/project.xcworkspace/xcuserdata/linruiyi.xcuserdata
 datasets/json/model.xcodeproj/xcuserdata/linruiyi.xcuserdatad/xcschemes/xcschememanagement.plist
 datasets/json/.DS_Store
 
-*.pyc
+*/__pycache__/*.pyc
