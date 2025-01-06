@@ -23,7 +23,7 @@ from concordia.typing.entity_component import EntityWithComponents
 from concordia.document import interactive_document
 
 from extract_knowledge_point import knowledge_point_extractor
-from memory_ import NaiveAssociativeMemory
+from EduLLM.agent.memory_without_time import NaiveAssociativeMemory
 st_model = sentence_transformers.SentenceTransformer(
     'sentence-transformers/all-mpnet-base-v2')
 embedder = lambda x: st_model.encode(x, show_progress_bar=False)
