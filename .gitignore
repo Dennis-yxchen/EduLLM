@@ -6,3 +6,5 @@ datasets/json/model.xcodeproj/project.xcworkspace/contents.xcworkspacedata
 datasets/json/model.xcodeproj/project.xcworkspace/xcuserdata/linruiyi.xcuserdatad/UserInterfaceState.xcuserstate
 datasets/json/model.xcodeproj/xcuserdata/linruiyi.xcuserdatad/xcschemes/xcschememanagement.plist
 datasets/json/.DS_Store
+
+*.pyc

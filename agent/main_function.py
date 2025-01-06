@@ -54,8 +54,12 @@ if __name__ == "__main__":
     memory_bank.add("how are you")
     memory_bank.add("how are you")
     memory_bank.add("how are you_1")
+    memory_bank.add("good morning")
+    memory_bank.add("good night")
+    memory_bank.add(question)
 
-
-    print(memory_bank.retrieve_associative("how are you"))
+    print("")
     print(memory_bank.get_all_memories_as_text())
+    print("")
+    print(memory_bank.retrieve_associative("how are you"))
     
