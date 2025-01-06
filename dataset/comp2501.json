@@ -1,0 +1,229 @@
+[
+{
+    "Question_number": 1,
+    "subquestions": {
+      "a": {
+        "question": "(3%) Construct a table named ‘snd’ in R that displays the probabilities Pr(Z < z) for values of z in the sequence 1.0, 1.05, ..., 3.0, where Z follows the Standard Normal Distribution. We show in the following the head, tail and the complete table of ‘snd’:",
+        "table": {
+          "head": [
+            {"z": 1.00, "Prob": 0.6826895},
+            {"z": 1.05, "Prob": 0.7062819},
+            {"z": 1.10, "Prob": 0.7286679},
+            {"z": 1.15, "Prob": 0.7498561},
+            {"z": 1.20, "Prob": 0.7698607},
+            {"z": 1.25, "Prob": 0.7887005}
+          ],
+          "tail": [
+            {"z": 2.75, "Prob": 0.9940405},
+            {"z": 2.80, "Prob": 0.9948597},
+            {"z": 2.85, "Prob": 0.9956281},
+            {"z": 2.90, "Prob": 0.9962604},
+            {"z": 2.95, "Prob": 0.9968223},
+            {"z": 3.00, "Prob": 0.9973002}
+          ],
+          "full_table": [
+            {"z": 1.00, "Prob": 0.6826895},
+            {"z": 1.05, "Prob": 0.7062819},
+            {"z": 1.10, "Prob": 0.7286679},
+            {"z": 1.15, "Prob": 0.7498561},
+            {"z": 1.20, "Prob": 0.7698607},
+            {"z": 1.25, "Prob": 0.7887005},
+            {"z": 1.30, "Prob": 0.8063900},
+            {"z": 1.35, "Prob": 0.8228494},
+            {"z": 1.40, "Prob": 0.8381456},
+            {"z": 1.45, "Prob": 0.8529415},
+            {"z": 1.50, "Prob": 0.8663856},
+            {"z": 1.55, "Prob": 0.8786555},
+            {"z": 1.60, "Prob": 0.8904014},
+            {"z": 1.65, "Prob": 0.9010571},
+            {"z": 1.70, "Prob": 0.9106910},
+            {"z": 1.75, "Prob": 0.9193617},
+            {"z": 1.80, "Prob": 0.9271394},
+            {"z": 1.85, "Prob": 0.9340565},
+            {"z": 1.90, "Prob": 0.9402589},
+            {"z": 1.95, "Prob": 0.9458239},
+            {"z": 2.00, "Prob": 0.9504497},
+            {"z": 2.05, "Prob": 0.9596356},
+            {"z": 2.10, "Prob": 0.9642712},
+            {"z": 2.15, "Prob": 0.9684448},
+            {"z": 2.20, "Prob": 0.9721931},
+            {"z": 2.25, "Prob": 0.9755311},
+            {"z": 2.30, "Prob": 0.9785675},
+            {"z": 2.35, "Prob": 0.9812256},
+            {"z": 2.40, "Prob": 0.9836049},
+            {"z": 2.45, "Prob": 0.9857144},
+            {"z": 2.50, "Prob": 0.9875807},
+            {"z": 2.55, "Prob": 0.9892277},
+            {"z": 2.60, "Prob": 0.9906776},
+            {"z": 2.65, "Prob": 0.9919508},
+            {"z": 2.70, "Prob": 0.9930661},
+            {"z": 2.75, "Prob": 0.9940405},
+            {"z": 2.80, "Prob": 0.9948597},
+            {"z": 2.85, "Prob": 0.9956281},
+            {"z": 2.90, "Prob": 0.9962604},
+            {"z": 2.95, "Prob": 0.9968223},
+            {"z": 3.00, "Prob": 0.9973002}
+          ]
+        }
+      },
+      "b": {
+        "question": "(7%) The time X (in seconds) taken for a certain chemical reaction follows a normal distribution with a standard deviation of S seconds. To estimate the mean time taken for the reaction, nine experiments were conducted and the reactions were recorded as follows: 11.1, 13.2, 9.8, 12.1, 10.9, 12.2, 14.3, 10.8, 11.7. Using this data, construct an 80% confidence interval for the mean reaction time. Please round your answer to 2 decimal places. You may consult the ‘snd’ table for your calculation."
+      }
+    }
+  },
+  {
+    "Question_number": 2,
+    "subquestions": {
+      "a": {
+        "question": "(10%) Assuming the variable n stores a positive number. Give a single R statement that prints a list of all prime numbers greater than 2 and smaller than n."
+      }
+    }
+  },
+  {
+    "Question_number": 3,
+    "subquestions": {
+        "a": {
+            "question": "(5%) We conducted a coin flip experiment consisting of 100 flips, resulting in 61 heads and 39 tails. Our null hypothesis states that “The coin is fair”, meaning that the probability of getting a head is 0.5, and the probability of getting a tail is also 0.5. Your task is to determine whether to accept or reject the null hypothesis. Please support your decision using the p-value of the outcome. You may consult the ‘snd’ table to obtain an upper bound on the p-value."
+        },
+        "b": {
+            "question": "(5%) Recall that the covariance of two sequences of numbers x1, x2, ..., xn and y1, y2, ..., yn is defined as:\n\n```\nCov(X, Y) = (x1 - Mx)(y1 - My) + ... + (xn - Mx)(yn - My) / n\n```\nwhere My and Mx are the mean of x and y, respectively. Your task is to complete the following two sequences x=[-3,-2,-1,...] and y=[3,2,1,...] such that (i) the two sequences are closely related, meaning that given a value of x, we can determine the corresponding value of y correctly, and (ii) the covariance of the two sequences is zero. Justify your answer."
+        }
+    }
+},
+{
+"Question_number": 4,
+  "subquestions": {
+    "a": {
+      "question": "(5%) Let s = \"Bookname: A happy teacher, author: Peter Chan, borrower: UID12345\". What is the output of the print statements given in (a) to (e):\n\n```R\na. print(str_extract(s, \"Bookname:\\s*[A-Z][a-z|\\s]+\")) \nb. print(str_extract(s, \"(?=[^ABC][^DEF])Bookname:\\s*[A-Z][a-z|\\s*]+\")) \nc. tab <- str_match(s, \"(borrower:)\\s*UID(\\d{5})\") print(tab[[2]]) \nd. print(str_extract(s, \"(?<=P)[a-zA-Z]+\")) \ne. s = c(\"5'2\", \"8'34\", \"5' 25\", \"5, 8\", \"6, \") print(sum(str_detect(s, \"^[4-7]'\\d{1,2}$\")))\n```"
+    },
+    "b": {
+      "question": "(5%) Give the regular expression pattern that will accept the following two strings as valid (email addresses):\n\n```\nangus12.junior@gmail.com\nmy.friend-386.email@my-school.org\n```\nand the following string as invalid (email address):\n\n```\npeterchan.hku.hk\n```\n"
+    }
+  }
+},
+{
+    "Question_number": 5,
+    "subquestions": {
+      "i": {
+        "question": "Suppose that the True outcomes and Predicted outcomes are stored in the vectors y and y_hat, respectively. Give the R statement that creates the confusion matrix of y and y_hat and assigns it to the variable CM."
+      },
+      "ii": {
+        "question": "What is the accuracy, sensitivity, specificity, and F1-score of the test method."
+      },
+      "iii": {
+        "question": "Can a model be created that guarantees 100% specificity? Justify your answer."
+      },
+      "iv": {
+        "question": "Can a model be created that guarantees 100% sensitivity? Justify your answer."
+      },
+      "v": {
+        "question": "Prove that if you can have a model with 100% specificity and 100% sensitivity, then it has 100% accuracy."
+      },
+      "tables": {
+        "table1": [
+          {"Data point": "X1", "True outcome": "Y", "Predict outcome": "Y"},
+          {"Data point": "X2", "True outcome": "N", "Predict outcome": "Y"},
+          {"Data point": "X3", "True outcome": "Y", "Predict outcome": "N"},
+          {"Data point": "X4", "True outcome": "Y", "Predict outcome": "Y"},
+          {"Data point": "X5", "True outcome": "N", "Predict outcome": "Y"},
+          {"Data point": "X6", "True outcome": "Y", "Predict outcome": "N"},
+          {"Data point": "X7", "True outcome": "Y", "Predict outcome": "N"},
+          {"Data point": "X8", "True outcome": "N", "Predict outcome": "Y"},
+          {"Data point": "X9", "True outcome": "Y", "Predict outcome": "Y"},
+          {"Data point": "X10", "True outcome": "Y", "Predict outcome": "N"},
+          {"Data point": "X11", "True outcome": "Y", "Predict outcome": "N"},
+          {"Data point": "X12", "True outcome": "N", "Predict outcome": "N"},
+          {"Data point": "X13", "True outcome": "Y", "Predict outcome": "Y"},
+          {"Data point": "X14", "True outcome": "N", "Predict outcome": "Y"},
+          {"Data point": "X15", "True outcome": "Y", "Predict outcome": "N"},
+          {"Data point": "X16", "True outcome": "N", "Predict outcome": "N"},
+          {"Data point": "X17", "True outcome": "Y", "Predict outcome": "N"},
+          {"Data point": "X18", "True outcome": "Y", "Predict outcome": "Y"},
+          {"Data point": "X19", "True outcome": "Y", "Predict outcome": "Y"},
+          {"Data point": "X20", "True outcome": "N", "Predict outcome": "N"}
+        ]
+      }
+    }
+  },
+  {
+    "Question_number": 6,
+    "subquestions": {
+      "a": {
+        "question": "(a) (2%) Give R's `ggplot2` code to generate the following scatterplots of life expectancy vs fertility rates in 1962."
+      },
+      "b": {
+        "question": "(b) (2%) Modify your code in (a) so that different colors are used for the points for different continents."
+      },
+      "c": {
+        "question": "(c) (3%) Give the `ggplot2` code to display the following diagram for comparing the relationship between fertility and life expectancy in the years 1962 and 2012."
+      },
+      "d": {
+        "question": "(d) (3%) Give the `ggplot2` code for the following plot showing the fertility rate in the US over the years."
+      }
+    }
+  },
+  {
+    "Question_number": 7,
+    "statement": "Suppose the following excel file 'marks.xls' is stored in the working directory.",
+    "table": [
+      {"A": "UID", "B": "Subclass", "C": "Marks"},
+      {"A": "U2022123", "B": "A", "C": "A1_34"},
+      {"A": "U2022123", "B": "A", "C": "MidTerm_67"},
+      {"A": "U2022123", "B": "A", "C": "A2_100"},
+      {"A": "U2022123", "B": "A", "C": "Final_95"},
+      {"A": "U1987136", "B": "D", "C": "A1_100"},
+      {"A": "U1987136", "B": "D", "C": "MidTerm_76"},
+      {"A": "U1987136", "B": "D", "C": "A2_92"},
+      {"A": "U1987136", "B": "D", "C": "Final_86"},
+      {"A": "U2003642", "B": "B", "C": "A1_75"},
+      {"A": "U2002087", "B": "C", "C": "A1_86"},
+      {"A": "U1999482", "B": "C", "C": "A1_52"},
+      {"A": "U2005683", "B": "B", "C": "A2_84"},
+      {"A": "U2015176", "B": "D", "C": "Final_53"},
+      {"A": "U2020245", "B": "A", "C": "Midterm_100"},
+      {"A": "U2021732", "B": "D", "C": "Final_75"}
+    ],
+    "subquestions": {
+      "a": {
+        "question": "(4%) Please provide the R statements that can read the file 'marks.xls' and store its contents in a data frame named ‘marksdf’."
+      },
+      "b": {
+        "question": "(4%) Reshape and transform 'marksdf' as follows:",
+        "table": {
+          "table": [
+            {"UID": "U2022123", "Subclass": "A", "A1": 34, "Midterm": 67, "A2": 100, "Final": 95},
+            {"UID": "U1987136", "Subclass": "D", "A1": 100, "Midterm": 76, "A2": 92, "Final": 86},
+            {"UID": "U2003642", "Subclass": "B", "A1": 75, "Midterm": 84, "A2": 74, "Final": 100},
+            {"UID": "U2002087", "Subclass": "C", "A1": 86, "Midterm": 20, "A2": 55, "Final": 54}
+          ]
+        }
+      },
+      "c": {
+        "question": "(4%) The entries in the UID column should follow the format of a letter 'U' followed by 6 digits, while the entries in the Subclass column should be limited to 'A', 'B', 'C', and 'D'. Give the R statements that detect if the UID and Subclass columns in the transformed data frame ‘marksdf’ from (b) have invalid entries."
+      },
+      "d": {
+        "question": "(4%) We have observed that some values in the UID column are invalid and do not follow the format of a letter 'U' followed by 6 digits. Specifically, the invalid values have the format: Xdddddd where X is a character other than ‘U’ and the d’s represent digits. Give the R statements to make the correction by replacing X with 'U'."
+      },
+      "e": {
+        "question": "(4%) Add a column called ‘Weighted Mark’ to the data frame. This column should calculate and store the weighted average of the marks in each row. The calculation should be based on the following weights: 0.15 * A1 + 0.15 * A2 + 0.2 * mid_term + 0.5 * final."
+      }
+    }
+  },
+  {
+    "Question_number": 8,
+    "statement": "This question does not have a definitive answer and is open-ended. You will be evaluated on the quality of your response, which should demonstrate insightful and logical arguments. There are no right or wrong answers, but a good grade will be awarded based on the quality of your insights and reasoning.",
+    "subquestions": {
+      "a": {
+        "question": "(6%) The highest kidney-cancer rates in the United States, measured by the number of cases per 100,000 of population, occur in very rural counties sprawled out across the Midwest, South, and West regions of the country. Think about why this might be? Give your reasons."
+      },
+      "b": {
+        "question": "(7%) We observe another fact: the lowest kidney-cancer rates in the United States also occur in very rural counties sprawled out across the Midwest, South, and West, often neighboring the borders of the highest-rate counties. How can both (a) and (b) be true? How can two towns (or cities) with similar demographics have so very different results? Try to give your reasons."
+      },
+      "c": {
+        "question": "(7%) The following diagram plots the cancer rate and population for all the counties. Does it give you some idea to answer (b)?",
+        "informations": "Note: Rural counties are small towns/cities made up of rural areas, with a low population density, and usually focus on agriculture, natural resource extraction, and traditional rural industries. They may face unique challenges related to economic development, healthcare access, and infrastructure maintenance due to their remote location and sparse population."
+      }
+    }
+  }
+
+]
