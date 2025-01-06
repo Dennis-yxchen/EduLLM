@@ -7,8 +7,9 @@ from concordia.language_model import utils
 import json
 import os
 from concordia.document import interactive_document
-from extract_knowledge_point import knowledge_point_extractor
-from memory_without_time import NaiveAssociativeMemory
+from knowledge_point_extractor.extract_knowledge_point import knowledge_point_extractor
+from rag_related.memory_without_time import NaiveAssociativeMemory
+from bloom_classifier.bloom_classifier import bloom_level_classifier
 st_model = sentence_transformers.SentenceTransformer(
     'sentence-transformers/all-mpnet-base-v2')
 embedder = lambda x: st_model.encode(x, show_progress_bar=False)
