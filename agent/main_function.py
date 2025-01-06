@@ -1,36 +1,21 @@
-import collections
-import concurrent.futures
-import datetime
-import random
+
 import matplotlib.pyplot as plt
 import sys
 from IPython import display
 import sentence_transformers
-from collections.abc import Callable, Sequence
-from concordia.associative_memory import associative_memory
-from concordia.associative_memory import blank_memories
-from concordia.associative_memory import formative_memories
-from concordia.associative_memory import importance_function
-from concordia.language_model.language_model import LanguageModel
-from concordia.utils import measurements as measurements_lib
-from concordia.utils import html as html_lib
-from concordia.utils import plotting
 from concordia.language_model import utils
 import json
 import os
-## setting start here
-from concordia.typing.entity_component import EntityWithComponents
 from concordia.document import interactive_document
-
 from extract_knowledge_point import knowledge_point_extractor
-from EduLLM.agent.memory_without_time import NaiveAssociativeMemory
+from memory_without_time import NaiveAssociativeMemory
 st_model = sentence_transformers.SentenceTransformer(
     'sentence-transformers/all-mpnet-base-v2')
 embedder = lambda x: st_model.encode(x, show_progress_bar=False)
 
 api_type = 'ollama'
 model_name = 'qwen2.5:14b'
-disable_language_model = True
+disable_language_model = False
 model = utils.language_model_setup(
     api_type=api_type,
     model_name=model_name,
