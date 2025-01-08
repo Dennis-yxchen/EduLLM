@@ -1,0 +1,283 @@
+{
+  "Section A": {
+    "Multiple Choice Questions": [
+      {
+        "Question": "Sam, Tom, and Joe want to start a small business. Joe will fund the venture but wants to limit his liability to his initial investment and has no interest in the daily operations. Sam will contribute his full efforts on a daily basis but has limited funds to invest in the business. Tom will be involved as an active consultant and manager and will also contribute funds. Sam and Tom are willing to accept liability for the firm's debts as they feel they have nothing to lose by doing so. All three individuals will share in the firm's profits and wish to keep the initial organizational costs of the business to a minimum. Which form of business entity should these individuals adopt and what is the role of Sam?",
+        "Options": [
+          "A. limited partnership; a general partner",
+          "B. limited partnership; a limited partner",
+          "C. general partnership; a general partner",
+          "D. general partnership; a limited partner",
+          "E. Corporation; a shareholder"
+        ]
+      },
+      {
+        "Question": "You are depositing $1,500 in a retirement account today and expect to earn an average annual return of 7.5 percent on this money. How much additional income will you earn if you leave the money invested for 45 years instead of just 40 years?",
+        "Options": [
+          "A. $10,723.08",
+          "B. $11,790.90",
+          "C. $12,441.56",
+          "D. $12,908.19",
+          "E. $13,590.93"
+        ]
+      },
+      {
+        "Question": "Interest earned on both the initial principal and the interest reinvested from prior periods is called:",
+        "Options": [
+          "A. free interest.",
+          "B. dual interest.",
+          "C. simple interest.",
+          "D. interest on interest.",
+          "E. compound interest."
+        ]
+      },
+      {
+        "Question": "Which one of the following statements related to annuities and perpetuities is incorrect?",
+        "Options": [
+          "A. A ten-year ordinary annuity is worth more than a nine-year annuity due if both have equal annual cash flows and 10 percent interest compounded annually.",
+          "B. A perpetuity comprised of $500 monthly payments is worth more than an annuity comprised of $600 monthly payments for 10 years, given an interest rate of 12 percent, compounded monthly.",
+          "C. Payments to an amortized loan with fixed equal payment form an annuity.",
+          "D. The future value of a perpetuity cannot be computed.",
+          "E. The total present value of a perpetuity with cash flows occurring at the beginning of each period is higher than a perpetuity with the same cash flows occurring at the end of each period."
+        ]
+      },
+      {
+        "Question": "You are considering two loans. The terms of the two loans are equivalent with the exception of the interest rates. Loan H offers a rate of 8 percent, compounded quarterly. Loan Z offers a rate of 7 percent, compounded semi-annually. Which loan should you borrow and why?",
+        "Options": [
+          "A. H; the effective annual rate is lower.",
+          "B. H; the period rate is lower.",
+          "C. Z; the annual percentage rate is lower.",
+          "D. Z; the effective annual rate is lower.",
+          "E. The loans are equivalent offers so you can select either one."
+        ]
+      },
+      {
+        "Question": "The bonds issued by Stainless Tubs bear a 6 percent coupon, payable semiannually. The bonds mature in 11 years and have a $1,000 face value. Currently, the bonds sell for $989. What is the yield to maturity?",
+        "Options": [
+          "A. 5.87 percent",
+          "B. 5.92 percent",
+          "C. 6.08 percent",
+          "D. 6.14 percent",
+          "E. 6.20 percent"
+        ]
+      },
+      {
+        "Question": "Which one of the following will produce the highest present value interest factor?",
+        "Options": [
+          "A. 6 percent interest for five years",
+          "B. 6 percent interest for eight years",
+          "C. 6 percent interest for ten years",
+          "D. 8 percent interest for five years",
+          "E. 8 percent interest for ten years"
+        ]
+      },
+      {
+        "Question": "Which one of the following statements concerning interest rates is correct?",
+        "Options": [
+          "A. Savers would prefer annual compounding over monthly compounding given the same interest rate.",
+          "B. The effective annual rate decreases as the number of compounding periods per year increases.",
+          "C. The effective annual rate equals the annual percentage rate when interest is compounded annually.",
+          "D. Borrowers would prefer monthly compounding over annual compounding given the same interest rate.",
+          "E. For any positive rate of interest, the effective annual rate will always exceed the annual percentage rate."
+        ]
+      },
+      {
+        "Question": "You are comparing two annuities with equal present values. The annual discount rate is 8.75 percent. One annuity pays $5,000 on the first day of each year for 20 years. How much does the second annuity pay each year for 20 years if it pays at the end of each year?",
+        "Options": [
+          "A. $4,287",
+          "B. $4,598",
+          "C. $5,000",
+          "D. $5,390",
+          "E. $5,438"
+        ]
+      },
+      {
+        "Question": "Which of the following increases the price sensitivity (interest rate risk) of a bond to changes in interest rates?",
+        "Options": [
+          "I. increase in time to maturity",
+          "II. decrease in time to maturity",
+          "III. increase in coupon rate",
+          "IV. decrease in coupon rate",
+          "A. II only",
+          "B. I and III only",
+          "C. I and IV only",
+          "D. II and III only",
+          "E. II and IV only"
+        ]
+      },
+      {
+        "Question": "You purchased an investment which will pay you $8,000 in real dollars each year for the next three years. Each payment will be received at the end of the period with the first payment occurring one year from today. The nominal discount rate is 7.5 percent and the inflation rate is 2.9 percent. What is the present value of these payments?",
+        "Options": [
+          "A. $21,720",
+          "B. $22,004",
+          "C. $22,511",
+          "D. $23,406",
+          "E. $23,529"
+        ]
+      },
+      {
+        "Question": "A bond has a market price that is below its face value. Which of the following features currently apply to this bond?",
+        "Options": [
+          "I. it is a discounted bond",
+          "II. it sells with premium",
+          "III. Yield to maturity exceeds the coupon rate",
+          "IV. Yield to maturity is less than the coupon rate",
+          "V. current yield is less than the coupon rate",
+          "A. I and III only",
+          "B. I and IV only",
+          "C. I, IV, and V",
+          "D. I, III, and V",
+          "E. II and IV only"
+        ]
+      },
+      {
+        "Question": "Kaiser Industries has bonds on the market making annual payments, with 14 years to maturity and a face value of $1000, and selling for $1,382.01. At this price, the bonds yield 7.5 percent. What is the coupon rate?",
+        "Options": [
+          "A. 8.00 percent",
+          "B. 8.50 percent",
+          "C. 9.00 percent",
+          "D. 10.50 percent",
+          "E. 12.00 percent"
+        ]
+      },
+      {
+        "Question": "Answer this question based on the dividend growth model. If you expect the market rate of return to increase on all equity securities, then you should also expect:",
+        "Options": [
+          "A. an increase in all stock values.",
+          "B. all stock values to remain constant.",
+          "C. a decrease in all stock values.",
+          "D. dividend-paying stocks to maintain a constant price while non-dividend paying stocks decrease in value.",
+          "E. dividend-paying stocks to increase in price while non-dividend paying stocks decrease in value."
+        ]
+      },
+      {
+        "Question": "Sixteen years ago, Alicia invested $1,000. Eight years ago, Travis invested $2,000. Today, both Alicia's and Travis' investments are each worth $2,400. Assume that both Alicia and Travis continue to earn their respective rates of return. Which one of the following statements is correct concerning these investments?",
+        "Options": [
+          "A. Three years from today, Travis' investment will be worth more than Alicia's.",
+          "B. One year ago, Alicia's investment was worth less than Travis' investment.",
+          "C. Travis earns a higher rate of return than Alicia.",
+          "D. Travis has earned an average annual interest rate twice as high as Alicia’s.",
+          "E. Alicia has earned an average annual interest rate twice as high as Travis’s."
+        ]
+      },
+      {
+        "Question": "Which one of the following terms is defined as a conflict of interest between the corporate shareholders and the corporate managers?",
+        "Options": [
+          "A. articles of incorporation",
+          "B. corporate breakdown",
+          "C. agency problem",
+          "D. bylaws",
+          "E. legal liability"
+        ]
+      },
+      {
+        "Question": "The real rate of return on a stock is approximately equal to the nominal rate of return:",
+        "Options": [
+          "A. multiplied by (1 + inflation rate).",
+          "B. plus the inflation rate.",
+          "C. minus the inflation rate.",
+          "D. divided by (1 + inflation rate).",
+          "E. divided by (1- inflation rate)."
+        ]
+      },
+      {
+        "Question": "The required rate of return of Cathay Pacific is 6%. It just announced a $0.64 dividend to be paid next year and the share price is quoted on stock exchange as $16. Assume the company has constant dividend growth, what is the capital gain yield (i.e., the percentage growth of stock price between this and next year) of Cathay Pacific?",
+        "Options": [
+          "A. 1.92%",
+          "B. 2%",
+          "C. 2.24%",
+          "D. 2.52%",
+          "E. not enough information to answer"
+        ]
+      },
+      {
+        "Question": "Tina holds 60% of a company’s stock and this year the company needs to elect three new board members. To guarantee all three seats are won by candidates she supports, which voting method should Tina recommend the company to use?",
+        "Options": [
+          "A. voting in person",
+          "B. proxy voting",
+          "C. cumulative voting",
+          "D. straight voting",
+          "E. different votes for different share classes"
+        ]
+      },
+      {
+        "Question": "Jack is considering buying company A’s stock, which currently sells at $20 per share. An analyst report forecasts that company A’s earning will be $5 per share next year. Meanwhile, Jack also notes that company B, which is in the same industry as A, has its earnings forecast to be $4 per share. After making a comparison, Jack decides to buy company B’s stock instead. Which of the following is the most plausible reason for Jack’s decision?",
+        "Options": [
+          "A. company B’s stock price is lower than $20",
+          "B. company B’s stock price is higher than $20",
+          "C. company B’s stock price is lower than $16",
+          "D. company B’s stock price is higher than $16",
+          "E. not enough information to answer"
+        ]
+      }
+    ]
+  },
+  "Section B": {
+    "Short-answer Questions": [
+      {
+        "Question": "You have just arranged for a $800,000 mortgage to finance the purchase of a flat. The mortgage has an 8% APR, and it calls for monthly payments over the next 30 years.",
+        "Parts": [
+          {
+            "Part": "a. Assume the loan calls for equal monthly payment:",
+            "Subparts": [
+              "(i) Calculate the interest and principal payment for the first two months.",
+              "(ii) After 8 years, you would like to pay off the remaining loan by making a lump sum payment. How much is the lump sum payment?"
+            ]
+          },
+          {
+            "Part": "b. Assume the loan calls for equal principal reduction:",
+            "Subparts": [
+              "(iii) Calculate the interest and principal payment for the first two months.",
+              "(iv) After 8 years, you would like to pay off the remaining loan by making a lump sum payment. How much is the lump sum payment?"
+            ]
+          }
+        ]
+      },
+      {
+        "Question": "One year ago, Holiday Inn paid $30 per share as dividend D0 for common stock and announced the company will adopt a progressive policy that dividend payout for common stocks will grow 3% per year. Market researchers widely believe that the required rate of return for common stocks issued by Holiday Inn is 8%.",
+        "Parts": [
+          {
+            "Part": "a. What is the stock price today if this year’s dividend is already paid?"
+          },
+          {
+            "Part": "b. Holiday Inn also issued preferred stocks 5 years ago with a $10 dividend payment every year forever and this year’s dividend is not paid yet, what is the value of the preferred stock today?"
+          },
+          {
+            "Part": "c. ANA InterContinental is another leader in the hotel industry. It paid $20 dividend per share yesterday. A star analyst expects that it will experience an extremely high growth rate of 20% for the coming ten years. After that the growth rate will slow down and the normal growth rate would be the same as Holiday Inn’s growth rate (3%) and the discount rate is 8%. What is the value of ANA InterContinental share today?"
+          }
+        ]
+      },
+      {
+        "Question": "A CFA charter holder is in contract negotiations. JPN Investment Co. has offered the following salary structure for the coming 6 years contract: All salaries are to be paid in lump sums at the end of each year. The charter holder has asked the Human Resource Manager to renegotiate the terms. He wants a contract value increase of $190,000. He also wants an equal salary paid every month with the first salary received one month from now and the required return is 12%. The CEO of JPN Investment Co. accepts the new 6 years contract negotiations.",
+        "Salary Structure": [
+          { "Year": 0, "Salary": "$70,000" },
+          { "Year": 1, "Salary": "$75,000" },
+          { "Year": 2, "Salary": "$80,000" },
+          { "Year": 3, "Salary": "$85,000" },
+          { "Year": 4, "Salary": "$90,000" },
+          { "Year": 5, "Salary": "$95,000" },
+          { "Year": 6, "Salary": "$100,000" }
+        ],
+        "Parts": [
+          {
+            "Part": "a. What is the amount of the monthly salary?"
+          },
+          {
+            "Part": "b. JPN Investment Co. is also offering a voluntary benefit scheme to the charter holder with a perpetual monthly cash flow of $2,000 and the first cash flow will be paid now. The scheme costs $200,500 today if the charter holder participates. Should the charter holder participate?"
+          }
+        ]
+      },
+      {
+        "Question": "The YTM on a bond is the interest rate you earn on your investment if interest rates don’t change. If you sell the bond before it matures, your realized return is known as the holding period yield (HPY).",
+        "Parts": [
+          {
+            "Part": "a. Suppose that today you buy an 8 percent semi-annual coupon bond for $1,080. The bond has 10 years to maturity. What rate of return do you expect to earn on your investment if you plan to hold the bond to maturity?"
+          },
+          {
+            "Part": "b. Three years from now, you expect the YTM on your bond decline by 2 percent, and you will sell the bond at that time. What price will your bond sell for? What is the HPY on your investment?"
+          }
+        ]
+      }
+    ]
+  }
+}

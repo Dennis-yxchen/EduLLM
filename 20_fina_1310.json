@@ -1,0 +1,158 @@
+{
+  "Section A": {
+    "Multiple Choice Questions": [
+      {
+        "Question": "Henry just deposited some money into his savings account that offers an APR of 4% compounded quarterly. He would like the money in his savings account to be worth $80,000 after ten years. Assume he will not make any withdrawals over the ten years. Given this, which one of the following statements is correct?",
+        "Options": [
+          "A. Henry deposited less than $50,000 into his savings account.",
+          "B. Henry could have deposited less money than what he had if his savings account offers 1% simple interest per quarter instead and still wanted to have $80,000 after ten years.",
+          "C. The amount of interest earned each year is the same across the ten years.",
+          "D. Henry would have to deposit more money than what he had if his savings account offers an APR of 4.6% compounded annually instead and still wanted to have $80,000 after ten years.",
+          "E. Henry could have deposited less money than what he had if his savings account offers an APR of 4.2% compounded semiannually instead and still wanted to have $80,000 after ten years."
+        ]
+      },
+      {
+        "Question": "Which of the following statement(s) is (are) correct?",
+        "Options": [
+          "I. The sole proprietorship business life is limited to the life of the owner.",
+          "II. The sale of currently outstanding stock by a dealer to an individual investor is an example of a primary market transaction.",
+          "III. The only goal of financial management is to maximize profits and minimize costs.",
+          "IV. Corporation’s liability is limited to the amount they invested in the firm.",
+          "A. III only",
+          "B. I and IV only",
+          "C. I, III, and IV only",
+          "D. II, III, and IV only",
+          "E. I, II, III, and IV"
+        ]
+      },
+      {
+        "Question": "Which one of the following actions by a financial manager is most apt to create an agency problem?",
+        "Options": [
+          "A. Accepting an investment opportunity that will add value to the firm.",
+          "B. Refusing to increase the selling price of a product if doing so would reduce the net profits.",
+          "C. Spending money on research and development when doing so will improve the value of equity.",
+          "D. Cutting costs on employee training when doing so will reduce the equity value.",
+          "E. Shutting down a factory of the company that is operating at a loss when doing so will improve the value of equity."
+        ]
+      },
+      {
+        "Question": "You would like to have $400,000 in real dollars in your savings account to buy a car in 20 years. The nominal return on your saving is 8.65% and the inflation rate is 2.5%. The real amount you must deposit each year to achieve your goal is closest to ____________.",
+        "Options": [
+          "A. $6,012.64",
+          "B. $6,123.82",
+          "C. $8,131.10",
+          "D. $10,873.82",
+          "E. $12,684.34"
+        ]
+      },
+      {
+        "Question": "Which one of the following statements regarding bond pricing is correct?",
+        "Options": [
+          "A. The lower the discount rate, the less valuable the coupon payments are today, all else held constant.",
+          "B. If the bond is selling at a premium, the YTM must be greater than the coupon rate.",
+          "C. When market interest rates rise, bond prices will also rise, all held remain constant.",
+          "D. Bonds with long maturities are generally more sensitive to changes in interest rates than bonds with shorter maturities, all else held constant.",
+          "E. All else held constant, bonds with larger coupon payments will have a lower price today."
+        ]
+      },
+      {
+        "Question": "XYZ Bond has a face value of $1,000 and matures in 20 years. The bond carries a 12% coupon that is paid semi-annually. If the yield to maturity of the bond is 8%, the current bond price is closest to _____________.",
+        "Options": [
+          "A. 946.67",
+          "B. 962.33",
+          "C. $1,076.67",
+          "D. $1,171.81",
+          "E. $1,395.86"
+        ]
+      },
+      {
+        "Question": "Maxwell Corp has five different bonds currently outstanding. Which one of the following bonds has the greatest interest rate risk?",
+        "Options": [
+          "A. Bond 1",
+          "B. Bond 2",
+          "C. Bond 3",
+          "D. Bond 4",
+          "E. Bond 5"
+        ],
+        "Bond Details": [
+          {"Bond": "1", "Coupon Rate": "12%", "Maturity": "10 years"},
+          {"Bond": "2", "Coupon Rate": "9%", "Maturity": "7 years"},
+          {"Bond": "3", "Coupon Rate": "8%", "Maturity": "8 years"},
+          {"Bond": "4", "Coupon Rate": "10%", "Maturity": "8 years"},
+          {"Bond": "5", "Coupon Rate": "8%", "Maturity": "10 years"}
+        ]
+      },
+      {
+        "Question": "Redwood Corp is experiencing rapid growth, sales and earnings are expected to grow at a rate of 8% per year. Its dividend is expected to grow at the same rate. The company just paid a dividend of $2.80 per share. If the required return is 12%, what is the stock price of the company today?",
+        "Options": [
+          "A. $48.00",
+          "B. $55.20",
+          "C. $58.80",
+          "D. $60.78",
+          "E. $75.60"
+        ]
+      },
+      {
+        "Question": "Selwyn Ltd just paid a dividend of $2 per share and dividends are expected to grow at a rate of 7% per year indefinitely. The price of a share of stock is $40. What must the required return be on the stock?",
+        "Options": [
+          "A. 5.35%",
+          "B. 6.77%",
+          "C. 10.65%",
+          "D. 12.35%",
+          "E. 13.65%"
+        ]
+      }
+    ]
+  },
+  "Section B": {
+    "Short Questions": [
+      {
+        "Question": "Milford Corporation has a bond with 8% coupon with a face value of $1,000. The bond makes semiannual coupon payments, has a yield to maturity of 12% and has a current yield of 10.2113%. How many years does the bond have left until it mature?"
+      },
+      {
+        "Question": "You just took out a 30-year loan of $420,000. The interest rate is 6% per annum, and the loan calls for a fixed amount of principal to be repaid every year. How much are the interest and principal components respectively in the 18th instalment? How much in total should you pay in the 18th instalment?"
+      },
+      {
+        "Question": "Westfield Corporation just paid $12 dividend per share. The dividends are expected to grow at a high growth rate of 16% per year for the coming eight years. After that, the growth rate will slow down and return to a normal growth rate of 4% per year. The required return for the stock is 10%. What is the value of Westfield common share today?"
+      },
+      {
+        "Question": "Shirley Ltd is a conglomerate and had announced that the company would adopt a progressive policy that dividend payout for common stocks will grow 3% per year constantly. Research analysts widely believe that the dividend yield for the company’s common stocks is 6%. The company just paid a dividend of $9 per share. What is the company’s stock price today?"
+      },
+      {
+        "Question": "ABC stock had returns of 10%, −11%, 17%, and 24% for four of the last five years. The arithmetic average return of the stock over this period was 11%. What was the stock’s return for the missing year? What is the standard deviation of the stock’s returns?"
+      }
+    ]
+  },
+  "Section C": {
+    "Long Questions": [
+      {
+        "Question": "You took out a 40 years mortgage from Jumbo Bank 3 years ago. The mortgage required monthly payments of $16,000; and had an APR of 6% compounded monthly. Over the last three years, interest rates have fallen and you decided to refinance your mortgage. You planned to roll over the outstanding balance into a new mortgage offered by Premium Bank. The new mortgage by Premium Bank has a 45-year term, requires monthly payments, and has an APR of 4% compounded monthly.",
+        "Parts": [
+          {
+            "Part": "a. What is the outstanding balance of the mortgage from Jumbo Bank?"
+          },
+          {
+            "Part": "b. What monthly payment will be required with the new mortgage from Premium Bank?"
+          },
+          {
+            "Part": "c. If you want to pay off the new mortgage from Premium Bank in 30 years, what monthly payment should you make? (assume the interest rate remains the same)"
+          }
+        ]
+      },
+      {
+        "Question": "Today is your 25th birthday, you have just graduated from university and got your first job. You want to retire at age 60. To live comfortably in retirement, you are thinking about your retirement plan. You plan to deposit a constant amount of money in your savings account each year until retirement to support your retirement spending. You will start making these deposits on your 26th birthday and continues to make deposit until you are 60; the last deposit will be on your 60th birthday. You want to be able to withdraw $90,000 from your savings account on each birthday for 30 years following your retirement to support your spending; the first withdrawal will be on your 61st birthday. The interest rate on your savings account is 8% per year.",
+        "Parts": [
+          {
+            "Part": "a. How much do you have to accumulate at the time you retire to support your retirement spending?"
+          },
+          {
+            "Part": "b. How much do you need to deposit in your savings account each year to fund your retirement?"
+          },
+          {
+            "Part": "c. Suppose you have just won the lotto. Rather than making equal annual contributions to your retirement plan, you decided to make one lump sum payment on your 25th birthday to cover your retirement spending. What amount do you have to deposit in your savings account?"
+          }
+        ]
+      }
+    ]
+  }
+}

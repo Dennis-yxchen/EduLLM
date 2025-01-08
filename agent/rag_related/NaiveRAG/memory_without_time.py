@@ -1,6 +1,7 @@
 from collections import abc
 from collections.abc import Callable, Iterable, Sequence
 import datetime
+import json
 import threading
 
 import numpy as np
@@ -295,3 +296,18 @@ class NaiveAssociativeMemory:
         memories_data_frame = self.get_data_frame()
         texts = self._pd_to_text(memories_data_frame)
         return texts
+    
+    def save(self, file_path: str) -> None:
+        """将记忆库保存到 JSON 文件"""
+        state = self.get_state()
+        with open(file_path, 'w') as f:
+            json.dump(state, f, indent=4)
+
+    def load(self, file_path: str) -> None:
+        """从 JSON 文件加载记忆库"""
+        with open(file_path, 'r') as f:
+            state = json.load(f)
+        # 将 embedding 从列表转换回 np.ndarray
+        for item in state['memory_bank']:
+            item['embedding'] = np.array(item['embedding'])
+        self.set_state(state)
