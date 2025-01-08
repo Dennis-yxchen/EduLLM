@@ -1,0 +1,50 @@
+import os
+import json
+
+class DatasetReader:
+    def __init__(self, file_name='comp2501.json', preprocess_func=None):
+        # 获取当前脚本的目录
+        current_dir = os.path.dirname(__file__)
+        # 构建数据文件的路径
+        self.data_path = os.path.join(current_dir, '..', '..', 'dataset', file_name)
+        # 预处理函数
+        self.preprocess_func = preprocess_func
+    
+    def read_data(self):
+        # 读取JSON文件
+        with open(self.data_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return data
+    
+    def preprocess(self, data):
+        # 使用提供的预处理函数或默认处理逻辑
+        if self.preprocess_func:
+            return self.preprocess_func(data)
+        else:
+            # 默认的处理逻辑，返回原始数据
+            return data
+    
+    def get_data(self):
+        # 读取并预处理数据
+        data = self.read_data()
+        processed_data = self.preprocess(data)
+        return processed_data
+
+# 自定义预处理函数示例
+def uppercase_values(data):
+    result = []
+    for i in data:
+        tmp = str(i).upper()
+        result.append(tmp)
+    return result
+
+if __name__ == '__main__':
+    # 测试案例：使用自定义预处理函数
+    reader = DatasetReader(preprocess_func=uppercase_values)
+    data = reader.get_data()
+    print(data)
+    print(f"end of uppercase_values test")
+    # 测试案例：不使用自定义预处理函数
+    reader = DatasetReader()
+    data = reader.get_data()
+    print(data)

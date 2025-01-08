@@ -1,0 +1,202 @@
+{
+  "Section A": {
+    "Multiple Choice Questions": [
+      {
+        "Question": "Which of the following decision(s) is(are) associated with capital structure management?",
+        "Options": [
+          "I. Company XYZ deciding to build a new plant in India",
+          "II. Company XYZ deciding to issue $15 million worth of new bonds in the stock market",
+          "III. Company XYZ deciding to take a 25-year loan from a bank at an APR of 8%",
+          "IV. Company XYZ deciding to use cash to purchase $20,000 of raw materials from its supplier",
+          "a. II only",
+          "b. III only",
+          "c. IV only",
+          "d. I and II only",
+          "e. II and III only",
+          "f. II and IV only"
+        ]
+      },
+      {
+        "Question": "Which of the following statement(s) is (are) true about business organizational forms?",
+        "Options": [
+          "I. When the CEO of a corporation holds more equity shares of this corporation, the agency problem is less severe",
+          "II. A general partnership has limited liability",
+          "III. A disadvantage of corporation is it is double taxed",
+          "IV. It is easier to start a business as a corporation than as a sole proprietorship",
+          "V. Sole proprietorships are taxed on personal income",
+          "VI. It is hard for sole proprietorships to raise capital and they have limited growth opportunities",
+          "a. I, II, III and V only",
+          "b. II, III, IV and VI only",
+          "c. I, III, V, and VI only",
+          "d. I, III, IV, and V only",
+          "e. II, IV, V, and VI only",
+          "f. All I, II, III, IV, V and VI are true"
+        ]
+      },
+      {
+        "Question": "Which of the following statement(s) is(are) true about a discount bond?",
+        "Options": [
+          "I. Price of bond will decrease over time as it approaches maturity, given all else unchanged",
+          "II. Before the bond matures, the price of the bond is lower than its face value",
+          "III. Coupon rate of the bond is lower than the yield to maturity",
+          "IV. Bond value will decrease if coupon rate decreases, given all else unchanged",
+          "V. Value of the bond would decrease if the yield to maturity decrease, given all else unchanged",
+          "a. II, III and IV only",
+          "b. I, II, and IV only",
+          "c. I, II, III, and IV only",
+          "d. II, III, IV and V only",
+          "e. I, II, III and V only",
+          "f. All I, II, III, IV and V are true"
+        ]
+      },
+      {
+        "Question": "Which of the above bond has the lowest interest rate risk?",
+        "Options": [
+          "Bond A is a 13-year bond that pays out annual coupon of $40 and has a face value of $2000.",
+          "Bond B will mature in 10 years and has a coupon rate of 9%.",
+          "Bond C is a zero-coupon bond that has a time to maturity of 15 years.",
+          "Bond D has an annual coupon payment of $20 and will mature in 20 years.",
+          "Bond E is a 15-year bond with a face value of $3,000 and pays out annual coupons of $270.",
+          "a. Bond A",
+          "b. Bond B",
+          "c. Bond C",
+          "d. Bond D",
+          "e. Bond E",
+          "f. Not enough information is available"
+        ]
+      },
+      {
+        "Question": "High Growth Bank wants to charge an EAR of 9% on their borrowers. If quarterly compounding is used, the bank needs to report an APR of _____. Choose the closest answer.",
+        "Options": [
+          "a. 8.5%",
+          "b. 8.7%",
+          "c. 8.9%",
+          "d. 9.0%",
+          "e. 9.4%"
+        ]
+      },
+      {
+        "Question": "Stock ABC is a constant growth stock that would pay out dividends each year till forever. A dividend of $2 was just paid today and the price of stock ABC today is $210. One year from today (at the end of Year 1), the stock price is $220.5 (after Year-1’s dividend is just paid). The required return is _____, capital gains yield is ______, dividend yield is _____. Choose the closest answer.",
+        "Options": [
+          "a. 6.5%, 5%, 1.1%",
+          "b. 6%, 1%, 5%",
+          "c. 6%, 5%, 1%",
+          "d. 5%, 1%, 4%",
+          "e. 5.5%, 5%, 0.5%"
+        ]
+      },
+      {
+        "Question": "A bond has an AA rating. The price of the bond is $2040.16 and this bond makes semi-annual coupon payments. If it matures in 20 years, what is the coupon rate of this bond? Choose the closest answer.",
+        "Options": [
+          "a. 5%",
+          "b. 10%",
+          "c. 15%",
+          "d. 20%",
+          "e. 25%"
+        ],
+        "Table": {
+          "Rating": ["AAA", "AA", "A", "BBB", "BB"],
+          "YTM": ["5.4%", "6.0%", "6.5%", "6.9%", "7.2%"]
+        }
+      },
+      {
+        "Question": "Stock Alpha just paid out a dividend of $50 today. The dividend payment will be made annually with a 2% growth rate over the next 15 years. After that, the dividend payments will remain at a constant level. The required return is 9%. Stock Gamma is going to pay a dividend of $15 today, and it will make constant quarterly dividend payments till forever. The current market price is $765. Which of the below statement(s) is(are) true about stock Alpha and stock Gamma?",
+        "Options": [
+          "I. In terms of APR, the required return is lower for stock Alpha than stock Gamma",
+          "II. Price of stock Alpha today is higher than stock Gamma",
+          "a. None of the statements are true",
+          "b. I only",
+          "c. II only",
+          "d. Both I and II are true"
+        ]
+      },
+      {
+        "Question": "You just bought an insurance that costs you $510,000 at the beginning of the year. The insurance is an annuity that will pay you $50,000 at the end of each year. The first payment would be made at the end of this year. If it takes you 20 years to earn back what you paid, what is the APR of this annuity? Choose the closest answer.",
+        "Options": [
+          "a. 5.5%",
+          "b. 6.0%",
+          "c. 6.5%",
+          "d. 7.5%",
+          "e. 8.0%",
+          "f. 9.0%"
+        ]
+      },
+      {
+        "Question": "Which of the below statement(s) is(are) true about the term structure?",
+        "Options": [
+          "I. Assume the term structure is upward sloping now. All else unchanged, if the expected long-term inflation increases relative to the short-term inflation, the slope of the term structure will become steeper.",
+          "II. Assume the term structure is downward sloping now and the real rate is flat. It is likely the expected long-term inflation is lower than the short-term inflation.",
+          "III. Assume the term structure is downward sloping now and the real rate is flat. It is likely the long-term interest rate risk premium is lower than the short-term interest rate risk premium.",
+          "IV. I and II only",
+          "a. I and III only",
+          "b. II and III only",
+          "c. I, II and III",
+          "d. None of the statements are true"
+        ]
+      }
+    ]
+  },
+  "Section B": {
+    "Short Answer Questions": [
+      {
+        "Question": "Assume today is January 1, 2023. You are planning for your retirement on January 1, 2038, and you have two retirement goals.",
+        "Parts": [
+          {
+            "Part": "Goal 1: Five months after you retire, you want to go on a vacation to Europe. To do so, you are going to need to withdraw a lump sum payment of $85,000 at the beginning of the fifth month that you retire."
+          },
+          {
+            "Part": "Goal 2: Once you retire, at the end of each month you are going to withdraw some money for daily and medical expenses. Your first withdrawal will be at the end of the month that you retire. For your first withdrawal, you want to take $12,000, and after that, you expect that the expenses are going to grow by 0.25% each month and last for 25 years."
+          },
+          {
+            "Part": "a. To fulfil your two retirement goals, what is the total amount that you need to have saved by the time you retire?"
+          },
+          {
+            "Part": "b. On average your salary is expected to grow at a rate of 0.2% each month, and you are going to deposit 30% of your monthly salary into a savings account. If by the time you retire you have saved $X in total (amount as calculated in part (a)), what is your monthly salary when you make your first deposit? What is your monthly salary when you make your third deposit?"
+          }
+        ]
+      },
+      {
+        "Question": "Company MNL currently has bond A in the market. Bond A is a 15% 12-year bond which pays out quarterly coupons. Bond A has a face value of $3500. Company MNL just issued a new Bond - Bond B. Bond B sells as a premium bond in which it is sold at 12% above par. Bond B pays out coupon every 6 months and has 15 years to maturity. The YTM for both bonds today is 8%.",
+        "Parts": [
+          {
+            "Part": "a. What is the current yield of bond A? (Hint: consider the APR)"
+          },
+          {
+            "Part": "b. What is the coupon rate of bond B? (Hint: consider the APR)"
+          },
+          {
+            "Part": "c. 6 years from now YTM decreases to 4% for both bonds, and you sell bond A, what is the holding period return for bond A?"
+          }
+        ]
+      },
+      {
+        "Question": "Company RA is going to undertake a large project in collaboration with Company EF. Company RA will undertake on the project starting today, the beginning of the year. The project will cost $15,000,000 in today's value, and it will take full 7 years in total to complete (i.e. the project is completed at the end of the 7th year). After the project is completed, company EF is going to pay company RA $20,000,000 in a lump sum, and it is agreed that the payment will be paid exactly two months after the project is completed. 80% of the project cost is financed by a loan. Company RA arranged a 20-year loan today with a bank, and company RA is required to make fixed equal payments every month. (The first repayment will be made at the end of this month).",
+        "Parts": [
+          {
+            "Part": "a. If the APR is 3%, how much does company RA need to repay each month?"
+          },
+          {
+            "Part": "b. Exactly one month after Company RA receives payments from Company EF (after the loan repayment for that month is made), the company is going to repay all remaining instalments of the bank loan in one balloon payment. How large would the balloon payment be? (Hint: Balloon payment is the present value of all remaining instalment payments)"
+          }
+        ]
+      },
+      {
+        "Question": "Below is a summary of dividends paid by stock XY issued by Company XY. Each dividend of this stock is paid on Jan 1st.",
+        "Parts": [
+          {
+            "Part": "2002 Jan 1st: Company XY just paid a dividend of $3, and company XY announced that to prepare financially for a project, dividend paid is going to fall by $1 each year for the following two years. That is, the 2003 dividend will be $1 less than 2002, and the 2004 dividend will be $1 less than 2003."
+          },
+          {
+            "Part": "2005 Jan 1st – 2008 Jan 1st: When Company XY undertake the project, there were no dividend paid"
+          },
+          {
+            "Part": "2009 Jan 1st: Project was completed and a dividend of $2 was paid on 2009 Jan 1st. Company XY announced that for the following years the growth rate of dividend will be 2%. The growth rate will then increase by 2 percentage point each year until it reaches 6%, afterwards the dividend would grow at a growth rate of 6% indefinitely."
+          },
+          {
+            "Part": "The required return for stock XY is 9%. What is the price of the stock XY on 2002 Jan 1st?"
+          }
+        ]
+      }
+    ]
+  }
+}
