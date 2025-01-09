@@ -18,6 +18,7 @@ class DatasetReader:
     
     def preprocess(self, data):
         # 使用提供的预处理函数或默认处理逻辑
+        # print(self.preprocess_func)
         if self.preprocess_func:
             return self.preprocess_func(data)
         else:
@@ -28,17 +29,18 @@ class DatasetReader:
         # 读取并预处理数据
         data = self.read_data()
         processed_data = self.preprocess(data)
+        # print(f"processed_data: {processed_data}")
         return processed_data
 
-# 自定义预处理函数示例
-def uppercase_values(data):
-    result = []
-    for i in data:
-        tmp = str(i).upper()
-        result.append(tmp)
-    return result
 
 if __name__ == '__main__':
+    # 自定义预处理函数示例
+    def uppercase_values(data):
+        result = []
+        for i in data:
+            tmp = str(i).upper()
+            result.append(tmp)
+        return result
     # 测试案例：使用自定义预处理函数
     reader = DatasetReader(preprocess_func=uppercase_values)
     data = reader.get_data()

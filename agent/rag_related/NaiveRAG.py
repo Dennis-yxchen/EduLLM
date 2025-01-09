@@ -1,3 +1,4 @@
+from typing import Iterable
 from rag_related.memory_without_time import NaiveAssociativeMemory
 
 from rag_related.extract_knowledge_point import KnowledgePointExtractor
@@ -19,7 +20,7 @@ class NaiveRAG(AbstractRAG):
         return self._memory_bank.retrieve_associative(question,
                                                         self._num_of_question_to_retrieve)
     
-    def add_question_to_memory(self, question:str, tags:tuple | None=None):
+    def add_question_to_memory(self, question:str, tags:Iterable[str] = ()):
         self._memory_bank.add(text = question, tags = tags)
         
         

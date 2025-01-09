@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Iterable
 
 class AbstractRAG(ABC):
     def __init__(self, model, embedder, memory_bank):
@@ -11,5 +12,5 @@ class AbstractRAG(ABC):
         raise NotImplementedError
     
     @abstractmethod
-    def add_question_to_memory(self, question:str,tags:tuple | None=None):
+    def add_question_to_memory(self, question:str,tags:Iterable[str] = ()):
         raise NotImplementedError
