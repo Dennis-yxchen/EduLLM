@@ -9,3 +9,6 @@ datasets/json/.DS_Store
 
 */__pycache__/*.pyc
 log.txt
+*/__pycache__/
+__pycache__/
+output.log

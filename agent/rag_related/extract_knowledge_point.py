@@ -1,7 +1,6 @@
 from concordia.document import interactive_document
 
-
-class knowledge_point_extractor():
+class KnowledgePointExtractor():
     # assume input is question
     def __init__(self, model, max_knowledge):
         self._model = model

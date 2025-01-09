@@ -20,7 +20,7 @@ def reformat_bloom_level_definition(definition):
     return result
     
 
-class bloom_level_classifier():
+class BloomLevelClassifier():
     def __init__(self, model, path):
         self._model = model
         self._definition = get_bloom_level_definition(path)

@@ -6,7 +6,7 @@ import threading
 
 import numpy as np
 import pandas as pd
-from importance_model import ConstantImportanceModel
+from rag_related.importance_model import ConstantImportanceModel
 
 _NUM_TO_RETRIEVE_TO_CONTEXTUALIZE_IMPORTANCE = 25
 class NaiveAssociativeMemory:
@@ -166,6 +166,26 @@ class NaiveAssociativeMemory:
 
             # 返回前k行。
             return self._memory_bank.iloc[similarity_score.head(k).index]
+        
+    def _get_similar_rows_with_threshold(
+        self, x, threshold: float
+    ):
+        """
+        返回与输入向量x相似度大于阈值的行
+        """
+        with self._memory_bank_lock:
+            cosine_similarities = self._memory_bank['embedding'].apply(
+                lambda y: np.dot(x, y)
+            )
+
+            similarity_score = cosine_similarities
+
+            # 按相似度降序排序。
+            similarity_score.sort_values(ascending=False, inplace=True)
+
+            # 返回前k行。
+            return self._memory_bank.iloc[similarity_score[similarity_score > threshold].index]
+
 
     def _pd_to_text(
         self,
@@ -204,6 +224,30 @@ class NaiveAssociativeMemory:
             query_embedding,
             k,
             use_importance=use_importance,
+        )
+
+        return self._pd_to_text(data)
+    
+    def retrieve_by_similarity_with_threshold(
+        self,
+        query: str,
+        threshold: float = 0.7,
+    ) -> Sequence[str]:
+        """关联检索记忆
+
+        参数:
+          query: 用于检索的字符串
+          k: 要检索的记忆数量
+          use_importance: 是否使用重要性进行检索
+
+        返回:
+          对应记忆的字符串列表
+        """
+        query_embedding = self._embedder(query)
+
+        data = self._get_similar_rows_with_threshold(
+            query_embedding,
+            threshold
         )
 
         return self._pd_to_text(data)
