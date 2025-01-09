@@ -12,6 +12,7 @@
 #             hash_table[i] = self.
 import sys
 import os
+from typing import Iterable
 
 # 添加EduLLM目录到sys.path
 from memory_without_time import NaiveAssociativeMemory
@@ -30,7 +31,7 @@ class knowledge_memory(AbstractRAG):
         self._extractor = KnowledgePointExtractor(model, max_knowledge).extract_knowledge_point
         self._threshold = threshold
                 
-    def add_knowledge_point_from_question(self, question, tags:tuple | None=None):
+    def add_knowledge_point_from_question(self, question, tags:Iterable[str] = ()):
         knowledge_points, prompt = self._extractor(question)
         self._knowledge_point.extend(knowledge_points.split('\n'))
         # 可以尝试用其他方法 e.g. 直接将knowledge point embed 进去，然后把所有knowledge point的embedding算cosine similarity
