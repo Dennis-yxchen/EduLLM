@@ -5,3 +5,10 @@ tar -C /usr -xzf ollama-linux-amd64.tgz
 export PATH="/userhome/cs2/u3592844/bin:$PATH"
 ollama serve & ollama run qwen2.5:14b
 
+
+
+# RUN:
+gpu-interactive
+nohup ollama serve > ./output.log 2>&1 & 
+conda 打开虚拟环境
+python main_function.py 
