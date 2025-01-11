@@ -1,0 +1,17 @@
+class RAGConfig:
+    # Retrieval parameters
+    NUM_RETRIEVED_DOCS = 3
+
+    SIMILARITY_THRESHOLD = 0.65
+
+    MIN_SIMILARITY_SCORE = 0.5
+
+    USE_IMPORTANCE_WEIGHTING = True
+
+    # Memory parameters
+    MAX_MEMORIES = 1000
+
+    IMPORTANCE_THRESHOLD = 0.6
+
+    CONTEXTUALIZE_SIZE = 25
+    DEDUPLICATION_THRESHOLD = 0.95
