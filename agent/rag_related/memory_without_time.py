@@ -8,16 +8,19 @@ import numpy as np
 import pandas as pd
 from rag_related.importance_model import ConstantImportanceModel
 
-_NUM_TO_RETRIEVE_TO_CONTEXTUALIZE_IMPORTANCE = 25
+# _NUM_TO_RETRIEVE_TO_CONTEXTUALIZE_IMPORTANCE = 25
 class NaiveAssociativeMemory:
     """实现关联记忆的类"""
 
-    def __init__(
-        self,
-        sentence_embedder: Callable[[str], np.ndarray],
-        importance: Callable[[str, Sequence[tuple[str, float]]], float] | None = None,
-        seed: int | None = None,
-    ):
+    def __init__(self,
+                 sentence_embedder : Callable[[str], np.ndarray],
+                 importance_threshold: float,
+                 max_memories: int,
+                 contextualize_size: int,
+                 deduplication_threshold: float,
+                 importance: Callable[[str, Sequence[tuple[str, float]]], float] | None = None,
+                 seed: int | None = None,
+                 ):
         """构造函数
 
         参数:
@@ -28,10 +31,15 @@ class NaiveAssociativeMemory:
         self._memory_bank_lock = threading.Lock()
         self._seed = seed
         self._embedder = sentence_embedder
-        self._num_to_retrieve_to_contextualize_importance = (
-            _NUM_TO_RETRIEVE_TO_CONTEXTUALIZE_IMPORTANCE)
+        self._num_to_retrieve_to_contextualize_importance = contextualize_size
         self._importance = (
             importance or ConstantImportanceModel().importance)
+
+        #  hyperparameters
+        self._importance_threshold = importance_threshold
+        self._max_memories = max_memories
+        self._contextualize_size = contextualize_size
+        self._deduplication_threshold = deduplication_threshold
 
         self._memory_bank = pd.DataFrame(
             columns=['text', 'tags', 'embedding', 'importance']
@@ -203,30 +211,33 @@ class NaiveAssociativeMemory:
         return output.tolist()
 
     def retrieve_associative(
-        self,
-        query: str,
-        k: int = 1,
-        use_importance: bool = True,
+            self,
+            query: str,
+            k: int = 1,
+            use_importance: bool = True,
     ) -> Sequence[str]:
-        """关联检索记忆
+        """Retrieve memories using associative retrieval
 
-        参数:
-          query: 用于检索的字符串
-          k: 要检索的记忆数量
-          use_importance: 是否使用重要性进行检索
+        Args:
+            query: Query string for retrieval
+            k: Number of memories to retrieve
+            use_importance: Whether to use importance weighting
 
-        返回:
-          对应记忆的字符串列表
+        Returns:
+            List of memory strings
         """
+        # Get query embedding
         query_embedding = self._embedder(query)
 
-        data = self._get_top_k_similar_rows(
+        # Get similar rows using pandas DataFrame
+        similar_rows = self._get_top_k_similar_rows(
             query_embedding,
             k,
             use_importance=use_importance,
         )
 
-        return self._pd_to_text(data)
+        # Convert to text format
+        return self._pd_to_text(similar_rows)
     
     def retrieve_by_similarity_with_threshold(
         self,

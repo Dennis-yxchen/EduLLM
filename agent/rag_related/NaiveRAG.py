@@ -1,12 +1,16 @@
+from collections.abc import Callable
 from typing import Iterable
+
+import numpy as np
 from rag_related.memory_without_time import NaiveAssociativeMemory
 
 from rag_related.extract_knowledge_point import KnowledgePointExtractor
 from rag_related.abstract_rag import AbstractRAG
 
 class NaiveRAG(AbstractRAG):
-    def __init__(self, model,
-                 sentence_embedder,
+    def __init__(self, 
+                 model, 
+                 sentence_embedder: Callable[[str], np.ndarray],
                  memory_bank: NaiveAssociativeMemory,
                 #  k: int,
                 #  similarity_threshold: float,
