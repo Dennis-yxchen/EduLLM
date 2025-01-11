@@ -18,6 +18,7 @@ from concordia.language_model import language_model
 from rag_related.abstract_rag import AbstractRAG
 from rag_related.NaiveRAG import NaiveRAG
 from data_utils.dataset_reader import DatasetReader
+from config import RAGConfig
 
 st_model = sentence_transformers.SentenceTransformer(
     'sentence-transformers/all-mpnet-base-v2')
@@ -25,14 +26,24 @@ embedder = lambda x: st_model.encode(x, show_progress_bar=False)
 
 api_type = 'ollama'
 model_name = 'qwen2.5:14b'
-disable_language_model = False
+disable_language_model = True
 model = utils.language_model_setup(
     api_type=api_type,
     model_name=model_name,
     disable_language_model=disable_language_model,
 )
-memory_bank = NaiveAssociativeMemory(embedder)
-rag_tool = NaiveRAG(model, embedder, memory_bank, 2)
+memory_bank = NaiveAssociativeMemory(
+    embedder,
+    importance_threshold=RAGConfig.IMPORTANCE_THRESHOLD,
+    max_memories=RAGConfig.MAX_MEMORIES,
+    deduplication_threshold=RAGConfig.DEDUPLICATION_THRESHOLD,
+    contextualize_size=RAGConfig.CONTEXTUALIZE_SIZE,)
+
+rag_tool = NaiveRAG(
+    model,
+    embedder, 
+    memory_bank, 
+    min_similarity_score = RAGConfig.MIN_SIMILARITY_SCORE)
 bloom_classifier = BloomLevelClassifier(model=model, path = r'./bloom_classifier/definition_of_bloom.json')
 knowledge_point_extractor = KnowledgePointExtractor(model, 3)
 
@@ -77,7 +88,10 @@ class EduLLM_Agent():
         for index, question in enumerate(past_paper):
             print(f"Generating question {index + 1}/{len(past_paper)}")
             prompt = interactive_document.InteractiveDocument(self._model)
-            questions = self._rag_tool.retrieve_question(question)
+            questions = self._rag_tool.retrieve_question_by_similarity(question = question, 
+                                                                       num_of_question_to_retrieve = RAGConfig.NUM_RETRIEVED_DOCS)
+            # questions = self._rag_tool.retrieve_question_by_threshold(question = question, 
+                                                                    #    threshold = RAGConfig.SIMILARITY_THRESHOLD)
             examples = "\n".join(questions)
             generating_questions = (
                 f"Given the target question '{question}' and the example question '{examples}', generate a new question that is analogous in terms of subject matter and complexity. "
@@ -105,65 +119,38 @@ class EduLLM_Agent():
 
 
 if __name__ == "__main__":
-    # prompt = interactive_document.InteractiveDocument(model)
-    # print("You can eat:", ['KFC', "hotpot", "ice cream"][prompt.multiple_choice_question("what should i eat this afternoon?", answers=['KFC', "hotpot", "ice cream"])])
-    # # print(prompt.open_question("what should i eat this afternoon?", terminators = (), answer_prefix="You can eat: "))
-    # print(f"embedder: {embedder('what should i eat this afternoon?')}")
-    # extractor = KnowledgePointExtractor(model, 3)
-    # question = (
-    #     "Question: 'We conducted a coin flip consisting of 100 flips, resulting in 61 heads and 39 tails. Our null hypothesis states that 'The coin is fair', meaning that the probability of getting a head is 0.5, and the probability of getting a tail is also 0.5. Your task is to determine whether to accept or reject the null hypothesis. Please support your decision using the p-value of the outcome. You may consult the 'snd' table to obtain an upper bound on the p-value."
-    # )
-    # print(extractor.extract_knowledge_point(question))
-    # memory_bank.add("how are you")
-    # memory_bank.add("how are you")
-    # memory_bank.add("how are you_1")
-    # memory_bank.add("good morning")
-    # memory_bank.add("good night")
-    # memory_bank.add(question)
-
-    # print("")
-    # print(memory_bank.get_all_memories_as_text())
-    # print("")
-    # print(memory_bank.retrieve_associative("how are you"))
     
     def format_question(questions):
-        preprocessed_questions = []
-        counter = 0
-        for section, type_of_question in questions.items():
-            # print(section)
-            # print(type_of_question)
-            for key,question in type_of_question.items():
-                question_string = ""
-                for question_component in question:
-                    for key, value in question_component.items():
-                        if not isinstance(value, list) and not isinstance(value, dict):
-                            question_string += f"{key}: {value}\n"
-                            # print(f"{counter}: {key}: {value}\n\n")
-                        else:
-                            if isinstance(value, list):
-                                for i in value:
-                                    if isinstance(i, str):
-                                        question_string += i + "\n"
-                                        # print(f"{counter}: {i}\n\n")
-                                    else:
-                                        for key, value in i.items():
-                                            question_string += f"{key}: {value}\n"
-                                            # print(f"{counter}: {key}: {value}\n\n")
-                                    
-                    counter += 1
-                    preprocessed_questions.append(question_string)
-        return preprocessed_questions
-        # print(f"{preprocessed_questions}")
-    reader_1 = DatasetReader('20_fina_1310.json', preprocess_func = format_question)
-    data_1 = reader_1.get_data()
-    
-    reader_2 = DatasetReader('21_fina_1310.json', preprocess_func = format_question)
-    data_2 = reader_2.get_data()
-    
+        combined_questions = []
+
+        # Iterate through each item in the data list
+        for item in questions:
+            # Extract the components
+            question = item['question']
+            q_type = item['type']
+            options = item.get('options', None)  # Use get to handle missing keys
+            
+            # Start building the formatted string
+            formatted_str = f"Question: {question}\nType: {q_type}\n"
+            
+            if options is not None:
+                # Join the options with newline and indentation
+                options_str = '\n    '.join(options)
+                formatted_str += f"Options:\n    {options_str}\n"
+            else:
+                formatted_str += "Options: No options provided.\n"
+            
+            # Append the formatted string to the list
+            combined_questions.append(formatted_str)
+        return combined_questions
+
+    file_names = ['20_fina_1310.json', '21_fina_1310.json']
+    readers = [DatasetReader(file_name, preprocess_func=format_question) for file_name in file_names]
+    data = []
+    for reader in readers:
+        data.extend(reader.get_data())
     agent = EduLLM_Agent(model, embedder, memory_bank, rag_tool, bloom_classifier, knowledge_point_extractor)
-    
-    whole_data = data_1 + data_2
-    agent._preprocess_past_paper(whole_data)
+    agent._preprocess_past_paper(data)
     
     test_reader = DatasetReader('23_fina_1310.json', preprocess_func = format_question)
     test_data = test_reader.get_data()
