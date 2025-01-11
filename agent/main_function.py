@@ -169,8 +169,9 @@ if __name__ == "__main__":
     test_data = test_reader.get_data()
     
     result = agent._generate_question_from_pastpaper(test_data)
-    
-    with open('./output/result.json', 'w') as f:
+    from datetime import datetime
+    timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+    with open(f'./output/{timestamp}.json', 'w') as f:
         json.dump(result, f, indent=4)
     
     
