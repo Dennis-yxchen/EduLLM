@@ -18,6 +18,7 @@ from concordia.language_model import language_model
 from rag_related.abstract_rag import AbstractRAG
 from rag_related.NaiveRAG import NaiveRAG
 from data_utils.dataset_reader import DatasetReader
+from config import RAGConfig
 
 st_model = sentence_transformers.SentenceTransformer(
     'sentence-transformers/all-mpnet-base-v2')
@@ -25,14 +26,24 @@ embedder = lambda x: st_model.encode(x, show_progress_bar=False)
 
 api_type = 'ollama'
 model_name = 'qwen2.5:14b'
-disable_language_model = False
+disable_language_model = True
 model = utils.language_model_setup(
     api_type=api_type,
     model_name=model_name,
     disable_language_model=disable_language_model,
 )
-memory_bank = NaiveAssociativeMemory(embedder)
-rag_tool = NaiveRAG(model, embedder, memory_bank, 2)
+memory_bank = NaiveAssociativeMemory(
+    embedder,
+    importance_threshold=RAGConfig.IMPORTANCE_THRESHOLD,
+    max_memories=RAGConfig.MAX_MEMORIES,
+    deduplication_threshold=RAGConfig.DEDUPLICATION_THRESHOLD,
+    contextualize_size=RAGConfig.CONTEXTUALIZE_SIZE,)
+
+rag_tool = NaiveRAG(
+    model,
+    embedder, 
+    memory_bank, 
+    min_similarity_score = RAGConfig.MIN_SIMILARITY_SCORE)
 bloom_classifier = BloomLevelClassifier(model=model, path = r'./bloom_classifier/definition_of_bloom.json')
 knowledge_point_extractor = KnowledgePointExtractor(model, 3)
 
@@ -77,7 +88,8 @@ class EduLLM_Agent():
         for index, question in enumerate(past_paper):
             print(f"Generating question {index + 1}/{len(past_paper)}")
             prompt = interactive_document.InteractiveDocument(self._model)
-            questions = self._rag_tool.retrieve_question(question)
+            questions = self._rag_tool.retrieve_question_by_similarity(question = question, 
+                                                                       num_of_question_to_retrieve = NUM_OF_QUESTION_TO_RETRIEVE)
             examples = "\n".join(questions)
             generating_questions = (
                 f"Given the target question '{question}' and the example question '{examples}', generate a new question that is analogous in terms of subject matter and complexity. "
@@ -154,16 +166,20 @@ if __name__ == "__main__":
                     preprocessed_questions.append(question_string)
         return preprocessed_questions
         # print(f"{preprocessed_questions}")
-    reader_1 = DatasetReader('20_fina_1310.json', preprocess_func = format_question)
-    data_1 = reader_1.get_data()
+    # reader_1 = DatasetReader('20_fina_1310.json', preprocess_func = format_question)
+    # data_1 = reader_1.get_data()
     
-    reader_2 = DatasetReader('21_fina_1310.json', preprocess_func = format_question)
-    data_2 = reader_2.get_data()
-    
+    # reader_2 = DatasetReader('21_fina_1310.json', preprocess_func = format_question)
+    # data_2 = reader_2.get_data()
+
+    file_names = ['20_fina_1310.json', '21_fina_1310.json', '22_fina_1310.json']
+    readers = [DatasetReader(file_name, preprocess_func=format_question) for file_name in file_names]
+    data = []
+    for reader in readers:
+        data.extend(reader.get_data())
     agent = EduLLM_Agent(model, embedder, memory_bank, rag_tool, bloom_classifier, knowledge_point_extractor)
     
-    whole_data = data_1 + data_2
-    agent._preprocess_past_paper(whole_data)
+    agent._preprocess_past_paper(data)
     
     test_reader = DatasetReader('23_fina_1310.json', preprocess_func = format_question)
     test_data = test_reader.get_data()

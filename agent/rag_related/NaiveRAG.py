@@ -8,17 +8,27 @@ class NaiveRAG(AbstractRAG):
     def __init__(self, model,
                  sentence_embedder,
                  memory_bank: NaiveAssociativeMemory,
-                 k: int):
+                #  k: int,
+                #  similarity_threshold: float,
+                #  use_importance_weighting: bool,
+                 min_similarity_score: float):
         super().__init__(model, sentence_embedder, memory_bank)
         self._model = model
         self._embedder = sentence_embedder
         self._memory_bank = memory_bank
         self._stored_hashes = set()
-        self._num_of_question_to_retrieve = k
+        # self._num_of_question_to_retrieve = k
+        # self._similarity_threshold = similarity_threshold
+        # self._use_importance = use_importance_weighting
+        self._min_similarity_score = min_similarity_score
             
-    def retrieve_question(self, question):
-        return self._memory_bank.retrieve_associative(question,
-                                                        self._num_of_question_to_retrieve)
+    def retrieve_question_by_similarity(self, question, num_of_question_to_retrieve):
+        return self._memory_bank.retrieve_associative(query = question,
+                                                        k = num_of_question_to_retrieve)
+        
+    def retrieve_question_by_threshold(self, question, threshold):
+        return self._memory_bank.retrieve_by_similarity_with_threshold(query = question,
+                                                        threshold = threshold)
     
     def add_question_to_memory(self, question:str, tags:Iterable[str] = ()):
         self._memory_bank.add(text = question, tags = tags)

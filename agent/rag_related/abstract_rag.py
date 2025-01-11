@@ -7,8 +7,13 @@ class AbstractRAG(ABC):
         self._model: None = None
         self._embedder: None = None
         self._memory_bank: None = None
+    
     @abstractmethod
-    def retrieve_question(self, question:str):
+    def retrieve_question_by_similarity(self, question:str, num_of_question_to_retrieve:int):
+        raise NotImplementedError
+    
+    @abstractmethod
+    def retrieve_question_by_threshold(self, question:str, threshold:float):
         raise NotImplementedError
     
     @abstractmethod
