@@ -96,7 +96,8 @@ class EduLLM_Agent():
                                                                     #    threshold = RAGConfig.SIMILARITY_THRESHOLD)
             examples = "\n".join(questions)
             generating_questions = (
-                f"Given the target question '{question}' and the example question '{examples}', generate a new question that is analogous in terms of subject matter and complexity. "
+                f"Given the target question '{question}' and the example question '{examples}', "
+                "generate a new question that is analogous in terms of subject matter and complexity. "
                 "Please provide only the new question in your response."
             )
             new_question = prompt.open_question(generating_questions, terminators=())
@@ -112,7 +113,8 @@ class EduLLM_Agent():
             print(f"Generating question {index + 1}/{len(past_paper)}")
             prompt = interactive_document.InteractiveDocument(self._model)
             generating_questions = (
-                f"Given the target question '{question}', generate a new question that is analogous in terms of subject matter and complexity. "
+                f"Given the target question '{question}', "
+                "generate a new question that is analogous in terms of subject matter and complexity. "
                 "Please provide only the new question in your response."
             )
             new_question = prompt.open_question(generating_questions, terminators = ())
