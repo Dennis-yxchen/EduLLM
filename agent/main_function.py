@@ -7,7 +7,8 @@ import sentence_transformers
 from concordia.language_model import utils
 import json
 import os
-# sys.path.insert(0, os.path.abspath('../../..'))
+
+
 sys.path.insert(0, os.path.abspath('.'))
 'nohup ollama serve > ./output.log 2>&1 &'
 from concordia.document import interactive_document
@@ -19,14 +20,15 @@ from rag_related.abstract_rag import AbstractRAG
 from rag_related.NaiveRAG import NaiveRAG
 from data_utils.dataset_reader import DatasetReader
 from config import RAGConfig
-
+from tqdm import tqdm
+from data_utils.data_output import generate_pdf_from_json
 st_model = sentence_transformers.SentenceTransformer(
     'sentence-transformers/all-mpnet-base-v2')
 embedder = lambda x: st_model.encode(x, show_progress_bar=False)
 
 api_type = 'ollama'
 model_name = 'qwen2.5:14b'
-disable_language_model = True
+disable_language_model = False
 model = utils.language_model_setup(
     api_type=api_type,
     model_name=model_name,
@@ -85,7 +87,7 @@ class EduLLM_Agent():
     
     def _generate_question_from_pastpaper(self, past_paper):
         new_questions = dict()
-        for index, question in enumerate(past_paper):
+        for index, question in enumerate(tqdm(past_paper, desc="Generating questions")):
             print(f"Generating question {index + 1}/{len(past_paper)}")
             prompt = interactive_document.InteractiveDocument(self._model)
             questions = self._rag_tool.retrieve_question_by_similarity(question = question, 
@@ -97,14 +99,28 @@ class EduLLM_Agent():
                 f"Given the target question '{question}' and the example question '{examples}', generate a new question that is analogous in terms of subject matter and complexity. "
                 "Please provide only the new question in your response."
             )
-            new_question = prompt.open_question(generating_questions, terminators = ())
+            new_question = prompt.open_question(generating_questions, terminators=())
             new_questions[index] = new_question
             print(f"Generated question: {new_question}")
-            print(f"prompt: {prompt.view().text()}")
+            # print(f"prompt: {prompt.view().text()}")
             print(f"\n\n\n")
         return new_questions
             
-            
+    def _generate_question_directly(self, past_paper):
+        new_questions = dict()
+        for index, question in enumerate(tqdm(past_paper, desc="Generating questions")):
+            print(f"Generating question {index + 1}/{len(past_paper)}")
+            prompt = interactive_document.InteractiveDocument(self._model)
+            generating_questions = (
+                f"Given the target question '{question}', generate a new question that is analogous in terms of subject matter and complexity. "
+                "Please provide only the new question in your response."
+            )
+            new_question = prompt.open_question(generating_questions, terminators = ())
+            new_questions[index] = new_question
+            print(f"Generated question: {new_question}")
+            # print(f"prompt: {prompt.view().text()}")
+            print(f"\n\n\n")
+        return new_questions
             
     
         
@@ -119,7 +135,7 @@ class EduLLM_Agent():
 
 
 if __name__ == "__main__":
-    
+    os.system('cls' if os.name == 'nt' else 'clear')
     def format_question(questions):
         combined_questions = []
 
@@ -157,9 +173,25 @@ if __name__ == "__main__":
     
     result = agent._generate_question_from_pastpaper(test_data)
     from datetime import datetime
+    import time
+
     timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     with open(f'./output/{timestamp}.json', 'w') as f:
         json.dump(result, f, indent=4)
+    generate_pdf_from_json(f"./output/{timestamp}.json", f"./output/{timestamp}.pdf", title = "FINA1310", footnotes=f"Generated time: {timestamp}")
+    
+    # Sleep for 5 seconds
+    time.sleep(5)
+
+    # Clear the terminal
+    os.system('cls' if os.name == 'nt' else 'clear')
+    
+    result_direct = agent._generate_question_directly(test_data)
+    timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+    with open(f'./output/{timestamp}_direct.json', 'w') as f:
+        json.dump(result_direct, f, indent=4)
+    generate_pdf_from_json(f"./output/{timestamp}_direct.json", f"./output/{timestamp}_direct.pdf", title = "FINA1310", footnotes=f"Generated time: {timestamp}")
+
     
     
     
