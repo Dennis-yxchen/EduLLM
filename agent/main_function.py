@@ -22,6 +22,9 @@ from data_utils.dataset_reader import DatasetReader
 from config import RAGConfig
 from tqdm import tqdm
 from data_utils.data_output import generate_pdf_from_json
+from models import get_model
+from concordia.language_model import no_language_model
+
 st_model = sentence_transformers.SentenceTransformer(
     'sentence-transformers/all-mpnet-base-v2')
 embedder = lambda x: st_model.encode(x, show_progress_bar=False)
@@ -29,11 +32,19 @@ embedder = lambda x: st_model.encode(x, show_progress_bar=False)
 api_type = 'ollama'
 model_name = 'qwen2.5:14b'
 disable_language_model = False
-model = utils.language_model_setup(
-    api_type=api_type,
-    model_name=model_name,
-    disable_language_model=disable_language_model,
-)
+# model = utils.language_model_setup(
+#     api_type=api_type,
+#     model_name=model_name,
+#     disable_language_model=disable_language_model,
+# )
+if disable_language_model:
+    model = no_language_model.NoLanguageModel()
+else:
+    model = get_model(
+        # model_name="deepseek-ai/DeepSeek-V3",
+        model_name='Qwen/Qwen2.5-14B-Instruct',
+        api_key="sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo",
+    )
 memory_bank = NaiveAssociativeMemory(
     embedder,
     importance_threshold=RAGConfig.IMPORTANCE_THRESHOLD,
