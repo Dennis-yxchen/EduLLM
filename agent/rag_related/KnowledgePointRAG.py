@@ -106,6 +106,8 @@ class KnowledgePointMemory(NaiveAssociativeMemory):
             'tags': tuple(tags),
             'importance': importance,
         }
+        hashed_contents = hash(tuple(contents.values()))
+        
         for i in range(self._num_knowledge_points):
             if i < len(knowledge_points):
                 contents['knowledge_point_' + str(i)] = knowledge_points[i]
@@ -114,7 +116,6 @@ class KnowledgePointMemory(NaiveAssociativeMemory):
         
         
         
-        hashed_contents = hash(tuple(contents.values()))
         derived = {'text_embedding': self._embedder(text)}
         for i in range(self._num_knowledge_points):
             if i < len(knowledge_points):
@@ -440,7 +441,7 @@ class KnowledgePointRAG(AbstractRAG):
     def __init__(self, 
                  model, 
                  sentence_embedder: Callable[[str], np.ndarray],
-                 memory_bank: NaiveAssociativeMemory,
+                 memory_bank: KnowledgePointMemory,
                 #  k: int,
                 #  similarity_threshold: float,
                 #  use_importance_weighting: bool,
@@ -456,15 +457,22 @@ class KnowledgePointRAG(AbstractRAG):
         self._min_similarity_score = min_similarity_score
             
     def retrieve_question_by_similarity(self, question, num_of_question_to_retrieve):
-        return self._memory_bank.retrieve_associative_wi(query = question,
+        return self._memory_bank.retrieve_associative_with_text(query = question,
                                                         k = num_of_question_to_retrieve)
         
     def retrieve_question_by_threshold(self, question, threshold):
-        return self._memory_bank.retrieve_by_similarity_with_threshold(query = question,
+        return self._memory_bank.retrieve_by_similarity_with_threshold_by_text(query = question,
                                                         threshold = threshold)
     
-    def add_question_to_memory(self, question:str, tags:Iterable[str] = ()):
-        self._memory_bank.add(text = question, tags = tags)
+    def retrieve_question_by_keywords(self, keywords, num_of_question_to_retrieve):
+        return self._memory_bank.retrieve_associative_with_keywords(keywords = keywords,
+                                                        k = num_of_question_to_retrieve)
+    
+    def add_question_to_memory(self, 
+                               question:str,
+                               knowledge_points: Sequence[str],
+                               tags:Iterable[str] = ()):
+        self._memory_bank.add(text = question, knowledge_points = knowledge_points,tags = tags)
         
         
 
@@ -484,35 +492,35 @@ if __name__ == "__main__":
         num_knowledge_points=3
     )
 
-    # rag = KnowledgePointRAG(
-    #     model=None,  # Replace with your actual model
-    #     sentence_embedder=dummy_embedder,
-    #     memory_bank=memory,
-    #     min_similarity_score=0.7
-    # )
+    rag = KnowledgePointRAG(
+        model=None,  # Replace with your actual model
+        sentence_embedder=embedder,
+        memory_bank=memory,
+        min_similarity_score=0.7
+    )
 
-    memory.add("Reverse a string in Python", knowledge_points=["string slicing", "loop structures", "function returns"])
-    memory.add("Count element frequency in a list", knowledge_points=["dictionary manipulation", "list iteration", "conditional updates"])
-    memory.add("Generate Fibonacci sequence", knowledge_points=["recursion/iteration", "list appending", "loop control"])
-    memory.add("Count word frequencies in a text file", knowledge_points=["file I/O", "string splitting", "dictionary counting"])
-    memory.add("Create a function timing decorator", knowledge_points=["decorator syntax", "time module", "closures"])
-    memory.add("Implement Student subclass inheritance", knowledge_points=["class inheritance", "super() method", "attribute encapsulation"])
-    memory.add("Remove list duplicates while preserving order", knowledge_points=["set operations", "list traversal", "order preservation"])
-    memory.add("Build a context manager for file handling", knowledge_points=["__enter__/__exit__", "exception handling", "resource management"])
-    memory.add("Create custom AgeError exception", knowledge_points=["exception inheritance", "raise statements", "try-except blocks"])
-    memory.add("Dynamically import modules using strings", knowledge_points=["importlib", "getattr()", "dynamic execution"])
-    memory.add("Calculate portfolio risk using CAPM", 
+    rag.add_question_to_memory("Reverse a string in Python", knowledge_points=["string slicing", "loop structures", "function returns"])
+    rag.add_question_to_memory("Count element frequency in a list", knowledge_points=["dictionary manipulation", "list iteration", "conditional updates"])
+    rag.add_question_to_memory("Generate Fibonacci sequence", knowledge_points=["recursion/iteration", "list appending", "loop control"])
+    rag.add_question_to_memory("Count word frequencies in a text file", knowledge_points=["file I/O", "string splitting", "dictionary counting"])
+    rag.add_question_to_memory("Create a function timing decorator", knowledge_points=["decorator syntax", "time module", "closures"])
+    rag.add_question_to_memory("Implement Student subclass inheritance", knowledge_points=["class inheritance", "super() method", "attribute encapsulation"])
+    rag.add_question_to_memory("Remove list duplicates while preserving order", knowledge_points=["set operations", "list traversal", "order preservation"])
+    rag.add_question_to_memory("Build a context manager for file handling", knowledge_points=["__enter__/__exit__", "exception handling", "resource management"])
+    rag.add_question_to_memory("Create custom AgeError exception", knowledge_points=["exception inheritance", "raise statements", "try-except blocks"])
+    rag.add_question_to_memory("Dynamically import modules using strings", knowledge_points=["importlib", "getattr()", "dynamic execution"])
+    rag.add_question_to_memory("Calculate portfolio risk using CAPM", 
            knowledge_points=["capital_asset_pricing_model", "beta_calculation", "market_risk_premium"])
 
-    memory.add("Optimize investment allocation with Markowitz model", 
+    rag.add_question_to_memory("Optimize investment allocation with Markowitz model", 
             knowledge_points=["efficient_frontier", "covariance_matrix", "risk_return_tradeoff"])
 
-    memory.add("Evaluate corporate capital structure using WACC", 
+    rag.add_question_to_memory("Evaluate corporate capital structure using WACC", 
             knowledge_points=["weighted_average_cost_of_capital", "debt_equity_ratio", "cost_of_capital_components"])
 
-    memory.add("Simulate Value-at-Risk (VaR) for stock holdings", 
+    rag.add_question_to_memory("Simulate Value-at-Risk (VaR) for stock holdings", 
             knowledge_points=["historical_simulation", "monte_carlo_methods", "confidence_levels"])
 
-    memory.add("Analyze financial health via DuPont ROE decomposition", 
+    rag.add_question_to_memory("Analyze financial health via DuPont ROE decomposition", 
             knowledge_points=["return_on_equity", "profit_margins", "asset_turnover_ratio"])
-    print(memory.retrieve_associative_with_keywords(['coding'], 4))
+    print(rag.retrieve_question_by_keywords(['coding'], 4))
