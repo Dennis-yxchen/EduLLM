@@ -29,9 +29,26 @@ class KnowledgePointExtractor():
         answer = prompt.open_question(question, terminators=(),)
         
         concerntate_question = (
-            'You should only output knowledge points without any other information. '
-            'You should return only with a few keywords that represent the knowledge point.'
+            "Extract exactly 3 distinct knowledge points from the input.\n"
+            "Format requirements:\n"
+            "1. Output ONLY the knowledge points\n"
+            "2. Use bullet points with - prefix (no numbers)\n"
+            "3. Ensure each point is a concise keyword/phrase\n"
+            "4. Avoid using punctuation in the points\n"
+            "5. Maintain original terminology\n"
+            "Example format:\n"
+            "- Knowledge point 1\n"
+            "- Knowledge point 2\n"
+            "- Knowledge point 3"
         )
-        
+        import re
         concerntate_answer = prompt.open_question(concerntate_question, terminators=(),)
-        return concerntate_answer, prompt.view().text()
+        
+        pattern = r'-\s*([^\n]+)'
+        matches = re.findall(pattern, concerntate_answer)
+        knowledge_points = []
+        for match in matches[:3]:  # Enforce 3 points max
+            cleaned = match.strip().rstrip(';.,').lstrip('- ')  # Remove trailing punctuation
+            if cleaned:
+                knowledge_points.append(cleaned)
+        return knowledge_points, prompt.view().text()

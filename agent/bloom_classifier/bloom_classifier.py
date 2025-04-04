@@ -32,6 +32,8 @@ class BloomLevelClassifier():
             f"{self._bloom_level_string}\n"
             f"Please classify the Bloom's level of the following question:\n"
             f"{question}"
+            f"Directly answer with the level name, such as 'Remembering', 'Understanding', 'Applying', 'Analyzing', 'Evaluating', or 'Creating'.\n"
+            f"Please do not add any other information.\n"
         )
-        answer = prompt.open_question(question, terminators=(),)
+        answer = prompt.open_question(input_prompt, terminators=(),max_tokens=2048)
         return answer, prompt.view().text()
