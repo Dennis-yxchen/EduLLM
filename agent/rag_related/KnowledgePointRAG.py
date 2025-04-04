@@ -4,7 +4,6 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
 from collections.abc import Callable
 from typing import Iterable
-
 import numpy as np
 from rag_related.memory_without_time import NaiveAssociativeMemory
 
