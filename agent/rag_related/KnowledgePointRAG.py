@@ -9,7 +9,7 @@ from rag_related.memory_without_time import NaiveAssociativeMemory
 
 from rag_related.extract_knowledge_point import KnowledgePointExtractor
 from rag_related.abstract_rag import AbstractRAG
-from memory_without_time import NaiveAssociativeMemory
+from rag_related.memory_without_time import NaiveAssociativeMemory
 from collections import abc
 from collections.abc import Callable, Iterable, Sequence
 import datetime
@@ -299,7 +299,7 @@ class KnowledgePointMemory(NaiveAssociativeMemory):
             self,
             keywords: Sequence[str],
             k: int = 3,
-    ) -> Sequence[str]:
+    ) -> dict[str: Sequence[str]]:
         
         similar_rows = self._get_top_k_cosine_base_on_keywords(
             keywords,
@@ -307,7 +307,8 @@ class KnowledgePointMemory(NaiveAssociativeMemory):
         )
         
         # Convert to text format
-        return self._pd_to_text(similar_rows)
+        return {'text': self._pd_to_text(similar_rows),
+                'knowledge_points': similar_rows[[f'knowledge_point_{i}' for i in range(self._num_knowledge_points)]].values.tolist()}
     
     def retrieve_by_similarity_with_threshold_by_text(
         self,
@@ -464,7 +465,7 @@ class KnowledgePointRAG(AbstractRAG):
         return self._memory_bank.retrieve_by_similarity_with_threshold_by_text(query = question,
                                                         threshold = threshold)
     
-    def retrieve_question_by_keywords(self, keywords, num_of_question_to_retrieve):
+    def retrieve_question_by_keywords(self, keywords, num_of_question_to_retrieve) -> dict[str:Sequence[str]]:
         return self._memory_bank.retrieve_associative_with_keywords(keywords = keywords,
                                                         k = num_of_question_to_retrieve)
     
