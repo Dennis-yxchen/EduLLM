@@ -94,7 +94,7 @@ class EduLLM_Agent():
         self._bloom_classifier = bloom_classifier
         self._knowledge_point_extractor = knowledge_point_extractor
         
-        self._question_info_dict = dict()
+        # self._question_info_dict = dict()
         
     
     
@@ -116,12 +116,12 @@ class EduLLM_Agent():
             print(f"\n\n\n")
             # 先用naive rag测试
             self._rag_tool.add_question_to_memory(question = question, knowledge_points = knowledge_point)
-            self._question_info_dict[question.strip()] = {
-                "bloom_level": bloom_level,
-                "knowledge_point": knowledge_point,
-                # "bloom_prompt_string": bloom_prompt_string,
-                # "extract_knowledge_string": extract_knowledge_string
-            }
+            # self._question_info_dict[question.strip()] = {
+            #     "bloom_level": bloom_level,
+            #     "knowledge_point": knowledge_point,
+            #     # "bloom_prompt_string": bloom_prompt_string,
+            #     # "extract_knowledge_string": extract_knowledge_string
+            # }
             # print(self._question_info_dict)
                 
     def _json_to_text(self, question_json):
@@ -142,7 +142,7 @@ class EduLLM_Agent():
                 "generate a new question that is analogous in terms of subject matter and complexity. "
                 "Please provide only the new question in your response."
             )
-            new_question = prompt.open_question(generating_questions, terminators=())
+            new_question = prompt.open_question(generating_questions, terminators=(), max_tokens = 4096)
             new_questions[index] = new_question
             print(f"Generated question: {new_question}")
             # print(f"prompt: {prompt.view().text()}")
@@ -159,7 +159,7 @@ class EduLLM_Agent():
                 "generate a new question that is analogous in terms of subject matter and complexity. "
                 "Please provide only the new question in your response."
             )
-            new_question = prompt.open_question(generating_questions, terminators = ())
+            new_question = prompt.open_question(generating_questions, terminators = (), max_tokens = 4096)
             new_questions[index] = new_question
             print(f"Generated question: {new_question}")
             # print(f"prompt: {prompt.view().text()}")
@@ -178,21 +178,22 @@ class EduLLM_Agent():
         print(questions_from_keywords_dict)
         
         formatted_data = [
-            f"question: {text}\nknowledge points: {','.join(knowledge_points)}\n"
+            f"{text}\nknowledge points: {','.join(knowledge_points)}\n"
             for text, knowledge_points in zip(questions_from_keywords_dict['text'], questions_from_keywords_dict['knowledge_points'])
         ]
         
         # 3. generate question
         generating_questions = (
                 f"Given knowledge points that this question want to assess:\n"
-                f"Knowledge point: {knowledge_point}\n"
+                f"Knowledge point: \n{','.join(knowledge_point)}\n"
                 f"Some example questions with related knowledge points:\n"
-                f"{formatted_data}\n"
+                f"{'\n'.join(formatted_data)}\n"
                 "generate a new question that is analogous in terms of subject matter and complexity. "
                 "Please provide only the new question in your response."
             )
         
-        new_question = prompt.open_question(generating_questions, terminators=())
+        new_question = prompt.open_question(generating_questions, terminators=(),
+                                            max_tokens = 4096,)
         return new_question, prompt.view().text()
         
         
@@ -203,18 +204,47 @@ class EduLLM_Agent():
         question_with_index = enumerate(past_paper)
         import concurrent.futures
         max_workers = min(8, len(past_paper))
-        # with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        #     # 提交任务并保留future对象
-        #     pass
-        for index, question in tqdm(question_with_index, desc="Generating questions"):
-            print(f"Generating question {index + 1}/{len(past_paper)}")
-            new_question, prompt_string = self._generate_question_by_knowledge_point_and_question(question)
-            new_questions[index] = new_question
-            print(f"Generated question: {new_question}")
-            print(f"prompt: {prompt_string}")
-            print(f"\n\n\n")
+        # for index, question in tqdm(question_with_index, desc="Generating questions"):
+        #     print(f"Generating question {index + 1}/{len(past_paper)}")
+        #     new_question, prompt_string = self._generate_question_by_knowledge_point_and_question(question)
+        #     new_questions[index] = new_question
+        #     print(f"Generated question: {new_question}")
+        #     print(f"prompt: {prompt_string}")
+        #     print(f"\n\n\n")
+        # return new_questions
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_index = {}
+            
+            for index, question in question_with_index:
+                print(f"Submitting question {index + 1}/{len(past_paper)} for generation")
+                # 提交任务到线程池
+                future = executor.submit(
+                    self._generate_question_by_knowledge_point_and_question, 
+                    question
+                )
+                future_to_index[future] = index
+            
+            # 初始化结果字典
+            new_questions = {}
+            
+            # 等待所有任务完成
+            for future in concurrent.futures.as_completed(future_to_index):
+                index = future_to_index[future]
+                try:
+                    new_question, prompt_string = future.result()
+                    new_questions[index] = new_question
+                    print(f"Generated question {index + 1}: {new_question}")
+                    print(f"prompt: {prompt_string}")
+                    print("\n\n\n")
+                except Exception as exc:
+                    print(f'Question {index + 1} generated an exception: {exc}')
+            
+            # 按原始索引排序结果
+            sorted_indices = sorted(new_questions.keys())
+            sorted_questions = {i: new_questions[i] for i in sorted_indices}
+            
+            return sorted_questions
     
-        return new_questions
             
 
             
