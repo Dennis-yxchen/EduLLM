@@ -204,18 +204,47 @@ class EduLLM_Agent():
         question_with_index = enumerate(past_paper)
         import concurrent.futures
         max_workers = min(8, len(past_paper))
-        # with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        #     # 提交任务并保留future对象
-        #     pass
-        for index, question in tqdm(question_with_index, desc="Generating questions"):
-            print(f"Generating question {index + 1}/{len(past_paper)}")
-            new_question, prompt_string = self._generate_question_by_knowledge_point_and_question(question)
-            new_questions[index] = new_question
-            print(f"Generated question: {new_question}")
-            print(f"prompt: {prompt_string}")
-            print(f"\n\n\n")
+        # for index, question in tqdm(question_with_index, desc="Generating questions"):
+        #     print(f"Generating question {index + 1}/{len(past_paper)}")
+        #     new_question, prompt_string = self._generate_question_by_knowledge_point_and_question(question)
+        #     new_questions[index] = new_question
+        #     print(f"Generated question: {new_question}")
+        #     print(f"prompt: {prompt_string}")
+        #     print(f"\n\n\n")
+        # return new_questions
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_index = {}
+            
+            for index, question in question_with_index:
+                print(f"Submitting question {index + 1}/{len(past_paper)} for generation")
+                # 提交任务到线程池
+                future = executor.submit(
+                    self._generate_question_by_knowledge_point_and_question, 
+                    question
+                )
+                future_to_index[future] = index
+            
+            # 初始化结果字典
+            new_questions = {}
+            
+            # 等待所有任务完成
+            for future in concurrent.futures.as_completed(future_to_index):
+                index = future_to_index[future]
+                try:
+                    new_question, prompt_string = future.result()
+                    new_questions[index] = new_question
+                    print(f"Generated question {index + 1}: {new_question}")
+                    print(f"prompt: {prompt_string}")
+                    print("\n\n\n")
+                except Exception as exc:
+                    print(f'Question {index + 1} generated an exception: {exc}')
+            
+            # 按原始索引排序结果
+            sorted_indices = sorted(new_questions.keys())
+            sorted_questions = {i: new_questions[i] for i in sorted_indices}
+            
+            return sorted_questions
     
-        return new_questions
             
 
             
