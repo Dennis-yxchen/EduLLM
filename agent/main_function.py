@@ -42,8 +42,8 @@ if disable_language_model:
     model = no_language_model.NoLanguageModel()
 else:
     model = get_model(
-        # model_name="deepseek-ai/DeepSeek-V3",
-        model_name='Qwen/Qwen2.5-14B-Instruct',
+        model_name="deepseek-ai/DeepSeek-V3",
+        # model_name='Qwen/Qwen2.5-14B-Instruct',
         api_key="sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo",
     )
 # memory_bank = NaiveAssociativeMemory(
