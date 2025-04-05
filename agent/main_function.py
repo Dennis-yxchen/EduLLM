@@ -94,7 +94,7 @@ class EduLLM_Agent():
         self._bloom_classifier = bloom_classifier
         self._knowledge_point_extractor = knowledge_point_extractor
         
-        self._question_info_dict = dict()
+        # self._question_info_dict = dict()
         
     
     
@@ -116,12 +116,12 @@ class EduLLM_Agent():
             print(f"\n\n\n")
             # 先用naive rag测试
             self._rag_tool.add_question_to_memory(question = question, knowledge_points = knowledge_point)
-            self._question_info_dict[question.strip()] = {
-                "bloom_level": bloom_level,
-                "knowledge_point": knowledge_point,
-                # "bloom_prompt_string": bloom_prompt_string,
-                # "extract_knowledge_string": extract_knowledge_string
-            }
+            # self._question_info_dict[question.strip()] = {
+            #     "bloom_level": bloom_level,
+            #     "knowledge_point": knowledge_point,
+            #     # "bloom_prompt_string": bloom_prompt_string,
+            #     # "extract_knowledge_string": extract_knowledge_string
+            # }
             # print(self._question_info_dict)
                 
     def _json_to_text(self, question_json):
@@ -142,7 +142,7 @@ class EduLLM_Agent():
                 "generate a new question that is analogous in terms of subject matter and complexity. "
                 "Please provide only the new question in your response."
             )
-            new_question = prompt.open_question(generating_questions, terminators=())
+            new_question = prompt.open_question(generating_questions, terminators=(), max_tokens = 4096)
             new_questions[index] = new_question
             print(f"Generated question: {new_question}")
             # print(f"prompt: {prompt.view().text()}")
@@ -159,7 +159,7 @@ class EduLLM_Agent():
                 "generate a new question that is analogous in terms of subject matter and complexity. "
                 "Please provide only the new question in your response."
             )
-            new_question = prompt.open_question(generating_questions, terminators = ())
+            new_question = prompt.open_question(generating_questions, terminators = (), max_tokens = 4096)
             new_questions[index] = new_question
             print(f"Generated question: {new_question}")
             # print(f"prompt: {prompt.view().text()}")
@@ -178,21 +178,22 @@ class EduLLM_Agent():
         print(questions_from_keywords_dict)
         
         formatted_data = [
-            f"question: {text}\nknowledge points: {','.join(knowledge_points)}\n"
+            f"{text}\nknowledge points: {','.join(knowledge_points)}\n"
             for text, knowledge_points in zip(questions_from_keywords_dict['text'], questions_from_keywords_dict['knowledge_points'])
         ]
         
         # 3. generate question
         generating_questions = (
                 f"Given knowledge points that this question want to assess:\n"
-                f"Knowledge point: {knowledge_point}\n"
+                f"Knowledge point: \n{','.join(knowledge_point)}\n"
                 f"Some example questions with related knowledge points:\n"
-                f"{formatted_data}\n"
+                f"{'\n'.join(formatted_data)}\n"
                 "generate a new question that is analogous in terms of subject matter and complexity. "
                 "Please provide only the new question in your response."
             )
         
-        new_question = prompt.open_question(generating_questions, terminators=())
+        new_question = prompt.open_question(generating_questions, terminators=(),
+                                            max_tokens = 4096,)
         return new_question, prompt.view().text()
         
         
