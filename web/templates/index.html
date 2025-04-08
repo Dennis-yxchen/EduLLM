@@ -4,19 +4,16 @@
   <meta charset="UTF-8">
   <title>EDULLM - Main Page</title>
   <link rel="stylesheet" href="../static/css/styles.css">
-
 </head>
 <body>
-
   <div class="container">
-    <!-- Sidebar (optional, can be removed or changed) -->
+    <!-- Sidebar -->
     <aside class="sidebar">
-      <h2 style="color:#fff;">EDULLM</h2>
-      <!-- If you only want a single button, put it here: -->
+      <h2>EDULLM</h2>
       <button id="knowledgeBaseBtn">Knowledge Base</button>
     </aside>
 
-    <!-- Main content shows two boxes (left: #KB, right: #files) -->
+    <!-- Main Content -->
     <main class="main-content">
       {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -27,8 +24,6 @@
           </ul>
         {% endif %}
       {% endwith %}
-
-      <!-- Stats container with two boxes side-by-side -->
       <div class="stats-container">
         <div class="stat-box">
           <h3>Number of Knowledge Bases</h3>
@@ -42,38 +37,50 @@
     </main>
   </div>
 
-  <!-- The Knowledge Base Modal -->
+  <!-- Knowledge Base Modal (80% of window size) -->
   <div id="kbModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Knowledge Base Management</h2>
-
-      <!-- 1) Create a new KB folder -->
-      <form id="createKBForm" action="{{ url_for('create_kb') }}" method="POST">
-        <label for="kb_name">Create New KB Folder:</label>
-        <input type="text" name="kb_name" id="kb_name" placeholder="Enter new folder name" required>
-        <button type="submit">Create</button>
-      </form>
-      <hr>
-
-      <!-- 2) Upload to an existing KB folder -->
-      <h3>Upload File to Existing KB</h3>
-      <form id="uploadFileForm" action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
-        <label for="kb_folder">Select Knowledge Base:</label>
-        <select name="kb_folder" id="kb_folder">
-          <!-- We'll populate this dropdown dynamically using JS (from /kb_list) -->
-        </select>
-        <br><br>
-        <!-- Single upload window -->
-        <div id="uploadWindow" class="upload-window">
-          <p>Drag & drop your file here or click to select a file</p>
-          <input type="file" name="file" id="fileInput" hidden>
+    <div class="modal-content modern-modal">
+      <div class="modal-header">
+        <h2>Knowledge Garden</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body two-column">
+        <!-- Left Column: KG list with creation and inline rename -->
+        <div class="modal-left">
+          <h3>Create New Knowledge Base</h3>
+          <form id="createKBForm" action="{{ url_for('create_kb') }}" method="POST">
+            <input type="text" name="kb_name" placeholder="Enter folder name" required>
+            <button type="submit">Create</button>
+          </form>
+          <div class="kb-list">
+            <h4>Existing Knowledge Bases</h4>
+            <ul id="kbList">
+              <!-- JavaScript populates this list with KG names and a rename button -->
+            </ul>
+          </div>
         </div>
-        <div id="previewBox" class="preview-box">
-          <p>No file selected.</p>
+        <!-- Right Column: File list display and file uploader -->
+        <div class="modal-right">
+          <h3>KG Files</h3>
+          <div id="filesContainer">
+            <!-- Files will be displayed as square containers with an icon and file name -->
+          </div>
+          <hr>
+          <h3>Upload File(s)</h3>
+          <form id="uploadFileForm" action="{{ url_for('upload_file_route') }}" method="POST" enctype="multipart/form-data">
+            <label for="kb_folder">Upload to KG:</label>
+            <select name="kb_folder" id="kb_folder"></select>
+            <div id="uploadWindow" class="upload-window" onclick="document.getElementById('fileInput').click()">
+              <p>Drag & drop file(s) here or click to select</p>
+              <input type="file" name="file" id="fileInput" hidden multiple>
+            </div>
+            <div id="previewBox" class="preview-box">
+              <p>No file selected.</p>
+            </div>
+            <button type="submit">Upload</button>
+          </form>
         </div>
-        <button type="submit">Upload</button>
-      </form>
+      </div>
     </div>
   </div>
 
