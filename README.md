@@ -17,7 +17,7 @@
 - 对每个传入的问题 $q_{example}$ 提取出对应的知识点 ${K_{example}}$
 - 通过文本嵌入函数 $Embedder$ 转化为向量 ${V_{example}}$, 如果 $|V_{example}| \ne p$, 则使用 $\vec{0}$ 填充, 直到 $|V_{example}| = p$
 - 对每个向量 $v_{example}^i \in V_{example}$, 对所有 $MEM$ 中的向量 $[V_1, V_2, ......, V_n]$ 计算点乘相似度
-- 最后对每个 $MEM$中的所有相似度进行求和，得到每个 question $q_i$的相似度向量(pairwise similarity): $sim({V_i, V_{example}})$，取平均
+- 最后对每个 $MEM$中的所有相似度进行求和，得到每个 question $q_i$的相似度向量(pairwise similarity): $sim = pairwise({V_i, V_{example}})$，取平均: $sum(sim) / p^2$
 - 返回 $topK$个相似问题以及对应的知识点
 
 生成问题：
