@@ -1,0 +1,147 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Container Layout */
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+/* Sidebar button */
+.sidebar button {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.sidebar button:hover {
+  background-color: #555;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Flash messages */
+.flashes {
+  list-style: none;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #ffdddd;
+  border: 1px solid #ff5c5c;
+}
+
+/* Stats Container (two boxes side by side) */
+.stats-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.stat-box {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Modal Window Overlay */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5); /* translucent background */
+}
+
+/* Modal Content Box */
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto; /* 5% from top, auto margin horizontally */
+  padding: 20px;
+  width: 600px; /* Adjust as needed */
+  border-radius: 5px;
+  position: relative;
+}
+
+/* Close Button (X) */
+.modal-content .close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  color: #aaa;
+  font-size: 24px;
+  cursor: pointer;
+}
+.modal-content .close:hover {
+  color: #555;
+}
+
+/* Upload Window in the modal */
+.upload-window {
+  border: 2px dashed #aaa;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.upload-window.dragover {
+  background-color: #e6f7ff;
+}
+
+.preview-box {
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #fafafa;
+  margin-bottom: 10px;
+}
+
+/* Buttons, inputs in forms */
+form input[type="text"],
+form select {
+  padding: 5px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+form button[type="submit"] {
+  padding: 6px 12px;
+  cursor: pointer;
+  border: 1px solid #aaa;
+  background-color: #eee;
+}
+
+hr {
+  margin: 20px 0;
+}

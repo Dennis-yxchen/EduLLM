@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EDULLM - Main Page</title>
+  <link rel="stylesheet" href="../static/css/styles.css">
+
+</head>
+<body>
+
+  <div class="container">
+    <!-- Sidebar (optional, can be removed or changed) -->
+    <aside class="sidebar">
+      <h2 style="color:#fff;">EDULLM</h2>
+      <!-- If you only want a single button, put it here: -->
+      <button id="knowledgeBaseBtn">Knowledge Base</button>
+    </aside>
+
+    <!-- Main content shows two boxes (left: #KB, right: #files) -->
+    <main class="main-content">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="flashes">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+
+      <!-- Stats container with two boxes side-by-side -->
+      <div class="stats-container">
+        <div class="stat-box">
+          <h3>Number of Knowledge Bases</h3>
+          <p id="kbCount">{{ kb_count }}</p>
+        </div>
+        <div class="stat-box">
+          <h3>Total Files Uploaded</h3>
+          <p id="totalFiles">{{ total_files }}</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- The Knowledge Base Modal -->
+  <div id="kbModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Knowledge Base Management</h2>
+
+      <!-- 1) Create a new KB folder -->
+      <form id="createKBForm" action="{{ url_for('create_kb') }}" method="POST">
+        <label for="kb_name">Create New KB Folder:</label>
+        <input type="text" name="kb_name" id="kb_name" placeholder="Enter new folder name" required>
+        <button type="submit">Create</button>
+      </form>
+      <hr>
+
+      <!-- 2) Upload to an existing KB folder -->
+      <h3>Upload File to Existing KB</h3>
+      <form id="uploadFileForm" action="{{ url_for('upload_file') }}" method="POST" enctype="multipart/form-data">
+        <label for="kb_folder">Select Knowledge Base:</label>
+        <select name="kb_folder" id="kb_folder">
+          <!-- We'll populate this dropdown dynamically using JS (from /kb_list) -->
+        </select>
+        <br><br>
+        <!-- Single upload window -->
+        <div id="uploadWindow" class="upload-window">
+          <p>Drag & drop your file here or click to select a file</p>
+          <input type="file" name="file" id="fileInput" hidden>
+        </div>
+        <div id="previewBox" class="preview-box">
+          <p>No file selected.</p>
+        </div>
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="../static/js/script.js"></script>
+</body>
+</html>
