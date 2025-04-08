@@ -6,7 +6,7 @@
 0406: finished algorithm
 ## algorithm design (0409)
 构建数据库：
-- 将所有dataset的question $Q = {q_1, q_2, ......, q_n}$传入数据库 $mem$
+- 将所有dataset的question $Q = {q_1, q_2, ......, q_n}$传入数据库 $MEM$
 - 对于每个question $q_i$, 都会提取出对应的知识点 $K_i=\{\[k_i^1,k_i^2,......,k_i^p\]\}$ , 其中 $p$ 为预先定义的超参数
 - 对每个知识点 $k \in K_i$ , 都将通过文本嵌入函数 $Embedder$ 转化为向量 $v \in V_i$ , 也就是说: $V_i = Embedder(K_i)$
   - 如果 $|V_i| \ne p$, 则使用 $\vec{0}$ 填充, 直到 $|V_i| = p$
