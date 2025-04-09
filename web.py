@@ -5,8 +5,6 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'agent'
 
 from agent.main_function import test
 
-test()
-
 from flask import Flask, request, redirect, url_for, render_template, send_from_directory, flash, jsonify
 from werkzeug.utils import secure_filename
 
