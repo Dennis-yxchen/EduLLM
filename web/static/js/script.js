@@ -16,7 +16,6 @@ if (closeSpan && kbModal) {
   });
 }
 
-// Close modal when clicking outside modal-content
 window.addEventListener('click', (event) => {
   if (event.target === kbModal) {
     kbModal.style.display = 'none';
@@ -28,31 +27,34 @@ function loadKnowledgeBases() {
   fetch('/kb_list')
     .then(response => response.json())
     .then(data => {
+      // Populate KG list in the modal left column and the test generation dropdown.
       const kbListEl = document.getElementById('kbList');
       const kbFolderSelect = document.getElementById('kb_folder');
+      const testKgSelect = document.getElementById('kg_select');
       if (kbListEl) kbListEl.innerHTML = '';
       if (kbFolderSelect) kbFolderSelect.innerHTML = '';
+      if (testKgSelect) testKgSelect.innerHTML = '';
 
       data.forEach(folderName => {
-        // Create list item for KG with name and rename button
+        // Create list item with KG name and rename button
         const li = document.createElement('li');
         const nameSpan = document.createElement('span');
         nameSpan.textContent = folderName;
         nameSpan.classList.add("kb-name");
 
-        // Implement single click with double click detection:
+        // Single/double click logic using timer:
         let clickTimer;
         nameSpan.addEventListener("click", () => {
           if (clickTimer) return;
           clickTimer = setTimeout(() => {
-             showKBFiles(folderName);
-             clickTimer = null;
+            showKBFiles(folderName);
+            clickTimer = null;
           }, 250);
         });
         nameSpan.addEventListener("dblclick", () => {
           if (clickTimer) {
-             clearTimeout(clickTimer);
-             clickTimer = null;
+            clearTimeout(clickTimer);
+            clickTimer = null;
           }
           showKBFiles(folderName);
         });
@@ -64,21 +66,27 @@ function loadKnowledgeBases() {
           e.stopPropagation();
           enableRename(li, folderName);
         });
-
         li.appendChild(nameSpan);
         li.appendChild(renameBtn);
         kbListEl.appendChild(li);
 
-        // Populate dropdown for upload
-        const option = document.createElement('option');
-        option.value = folderName;
-        option.textContent = folderName;
-        kbFolderSelect.appendChild(option);
+        // Populate modal upload KG dropdown
+        const opt1 = document.createElement('option');
+        opt1.value = folderName;
+        opt1.textContent = folderName;
+        if (kbFolderSelect) kbFolderSelect.appendChild(opt1);
+
+        // Populate test generation KG dropdown
+        const opt2 = document.createElement('option');
+        opt2.value = folderName;
+        opt2.textContent = folderName;
+        if (testKgSelect) testKgSelect.appendChild(opt2);
       });
 
       // Load files for the first KG by default if available
       if (data.length > 0) {
         showKBFiles(data[0]);
+        loadPromptFiles(data[0]); // Also load prompt file list in test generation box
       } else {
         document.getElementById('filesContainer').innerHTML = '<p>No KG available.</p>';
       }
@@ -122,7 +130,7 @@ function renameKB(oldName, newName) {
   })
   .then(res => res.json())
   .then(resData => {
-    if(resData.status !== 'success') {
+    if(resData.status !== 'success'){
       throw new Error(resData.message || 'Rename error');
     }
   });
@@ -130,6 +138,7 @@ function renameKB(oldName, newName) {
 
 // -------------- Show KG Files --------------
 function showKBFiles(kbName) {
+  // Update the upload dropdown selection as well
   const kbFolderSelect = document.getElementById('kb_folder');
   if(kbFolderSelect) kbFolderSelect.value = kbName;
   fetch(`/kb_files/${encodeURIComponent(kbName)}`)
@@ -186,7 +195,77 @@ function deleteFile(kbName, filename) {
   });
 }
 
-// -------------- Drag & Drop and Multi-File Upload --------------
+// -------------- Load Prompt Files for Test Generation --------------
+function loadPromptFiles(kbName) {
+  fetch(`/kb_files/${encodeURIComponent(kbName)}`)
+    .then(response => response.json())
+    .then(files => {
+      const promptFileSelect = document.getElementById('prompt_file');
+      if (promptFileSelect) {
+        promptFileSelect.innerHTML = '';
+        if (files.length === 0) {
+          const opt = document.createElement('option');
+          opt.value = "";
+          opt.textContent = "No files available";
+          promptFileSelect.appendChild(opt);
+        } else {
+          files.forEach(file => {
+            const opt = document.createElement('option');
+            opt.value = file;
+            opt.textContent = file;
+            promptFileSelect.appendChild(opt);
+          });
+        }
+      }
+    })
+    .catch(err => console.error('Error loading prompt files:', err));
+}
+
+// Update prompt files when test KG selection changes.
+const testKgSelect = document.getElementById('kg_select');
+if (testKgSelect) {
+  testKgSelect.addEventListener('change', (e) => {
+    const selectedKg = e.target.value;
+    loadPromptFiles(selectedKg);
+  });
+}
+
+// -------------- Test Generation Form Submission --------------
+const testGenForm = document.getElementById('testGenForm');
+if (testGenForm) {
+  testGenForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const kg_folder = document.getElementById('kg_select').value;
+    const prompt_file = document.getElementById('prompt_file').value;
+    if (!kg_folder || !prompt_file) {
+      alert("Please select both a KG and a prompt file.");
+      return;
+    }
+    const formData = new URLSearchParams();
+    formData.append('kg_folder', kg_folder);
+    formData.append('prompt_file', prompt_file);
+
+    fetch('/generate_test', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: formData.toString()
+    })
+    .then(res => res.json())
+    .then(data => {
+      const genResult = document.getElementById('genResult');
+      if (data.status === 'success') {
+        genResult.innerHTML = `<p><strong>Generated Question:</strong> ${data.generated_question}</p>`;
+      } else {
+        genResult.innerHTML = `<p>Error: ${data.message}</p>`;
+      }
+    })
+    .catch(err => {
+      alert('Generation failed: ' + err.message);
+    });
+  });
+}
+
+// -------------- Drag & Drop and Multi-File Upload (unchanged from before) --------------
 document.addEventListener('dragover', e => e.preventDefault());
 document.addEventListener('drop', e => e.preventDefault());
 

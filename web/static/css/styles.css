@@ -68,6 +68,47 @@ body {
   border-radius: 6px;
 }
 
+/* --- Test Generation Box --- */
+.test-generation {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.test-generation h3 {
+  margin-bottom: 10px;
+}
+.test-generation form label {
+  display: block;
+  margin-top: 10px;
+}
+.test-generation form select {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.test-generation form button {
+  margin-top: 15px;
+  padding: 8px 14px;
+  background-color: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.test-generation form button:hover {
+  background-color: #4338ca;
+}
+#genResult {
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fafafa;
+}
+
 /* --- Modal Overlay --- */
 .modal {
   display: none;
