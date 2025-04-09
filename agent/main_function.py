@@ -193,7 +193,8 @@ class EduLLM_Agent():
             return sorted_questions
 
     
-def run_simulation(dataset_path):
+def run_simulation(kg_path: str, prompt_filename: str):
+
     st_model = sentence_transformers.SentenceTransformer(
     'sentence-transformers/all-mpnet-base-v2')
     embedder = lambda x: st_model.encode(x, show_progress_bar=False)
@@ -273,15 +274,18 @@ def run_simulation(dataset_path):
             combined_questions.append(formatted_str)
         return combined_questions
 
-    file_names = ['20_fina_1310.json', '21_fina_1310.json']
-    readers = [DatasetReader(dataset_path, file_name, preprocess_func=format_question) for file_name in file_names]
+    all_files = [f for f in os.listdir(kg_path) if f.endswith('.json')]
+    dataset_files = [f for f in all_files if f != prompt_filename]
+
+    readers = [DatasetReader(kg_path, file_name, preprocess_func=format_question) for file_name in dataset_files]
     data = []
     for reader in readers:
         data.extend(reader.get_data())
+
     agent = EduLLM_Agent(model, embedder, memory_bank, rag_tool, bloom_classifier, knowledge_point_extractor)
     agent._preprocess_past_paper(data)
     
-    test_reader = DatasetReader(dataset_path, '23_fina_1310.json', preprocess_func = format_question)
+    test_reader = DatasetReader(kg_path, prompt_filename, preprocess_func = format_question)
     test_data = test_reader.get_data()
     
     # result = agent._generate_question_from_pastpaper(test_data)

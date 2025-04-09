@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'agent'))
 
-from agent.main_function import test
+from agent.main_function import run_simulation
 
 from flask import Flask, request, redirect, url_for, render_template, send_from_directory, flash, jsonify
 from werkzeug.utils import secure_filename
@@ -17,7 +17,7 @@ TEMPLATE_FOLDER = os.path.join(BASE_DIR, 'web', 'templates')
 STATIC_FOLDER = os.path.join(BASE_DIR, 'web', 'static')
 
 # Allowed file extensions
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'docx'}
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'docx','json'}
 
 app = Flask(__name__, template_folder=TEMPLATE_FOLDER, static_folder=STATIC_FOLDER)
 app.config['UPLOADS_DIR'] = UPLOADS_DIR
@@ -177,6 +177,31 @@ def serve_file(kb_folder, filename):
         return redirect(url_for('index'))
     return send_from_directory(os.path.join(UPLOADS_DIR, safe_kb), safe_filename)
 
+
+@app.route('/generate_test', methods=['POST'])
+def generate_test():
+    kg_folder = request.form.get('kg_folder', '').strip()
+    prompt_file = request.form.get('prompt_file', '').strip()
+
+    if not kg_folder or not prompt_file:
+        return jsonify({"status": "error", "message": "KG folder or prompt file not selected"}), 400
+
+    abs_kg_path = os.path.join(app.config['UPLOADS_DIR'], secure_filename(kg_folder))
+    full_prompt_path = os.path.join(abs_kg_path, secure_filename(prompt_file))
+
+    if not os.path.exists(full_prompt_path):
+        return jsonify({"status": "error", "message": "Selected file does not exist"}), 400
+
+    try:
+        run_simulation(abs_kg_path, prompt_file)
+        return jsonify({
+            "status": "success",
+            "message": f"Generation completed for {prompt_file} in {kg_folder}."
+        })
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+# TODO: 1. list of file upload 2. handle the transition of data file to json 3. storage of the output data 4. display of the file for user download
 if __name__ == '__main__':
     os.makedirs(app.config['UPLOADS_DIR'], exist_ok=True)
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5002)
