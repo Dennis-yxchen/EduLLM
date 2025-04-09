@@ -26,6 +26,61 @@ from data_utils.data_output import generate_pdf_from_json
 from models import get_model
 from concordia.language_model import no_language_model
 
+st_model = sentence_transformers.SentenceTransformer(
+    'sentence-transformers/all-mpnet-base-v2')
+embedder = lambda x: st_model.encode(x, show_progress_bar=False)
+
+# api_type = 'ollama'
+# model_name = 'qwen2.5:14b'
+disable_language_model = False
+# model = utils.language_model_setup(
+#     api_type=api_type,
+#     model_name=model_name,
+#     disable_language_model=disable_language_model,
+# )
+if disable_language_model:
+    model = no_language_model.NoLanguageModel()
+else:
+    model = get_model(
+        model_name="deepseek-ai/DeepSeek-V3",
+        # model_name='Qwen/Qwen2.5-14B-Instruct',
+        api_key="sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo",
+    )
+# memory_bank = NaiveAssociativeMemory(
+#     embedder,
+#     importance_threshold=RAGConfig.IMPORTANCE_THRESHOLD,
+#     max_memories=RAGConfig.MAX_MEMORIES,
+#     deduplication_threshold=RAGConfig.DEDUPLICATION_THRESHOLD,
+#     contextualize_size=RAGConfig.CONTEXTUALIZE_SIZE,)
+
+# rag_tool = NaiveRAG(
+#     model,
+#     embedder, 
+#     memory_bank, 
+#     min_similarity_score = RAGConfig.MIN_SIMILARITY_SCORE)
+
+memory_bank = KnowledgePointMemory(
+        sentence_embedder=embedder,
+        importance_threshold=0.5,
+        max_memories=1000,
+        contextualize_size=5,
+        deduplication_threshold=0.1,
+        num_knowledge_points=3
+    )
+
+rag_tool = KnowledgePointRAG(
+        model=model,  # Replace with your actual model
+        sentence_embedder=embedder,
+        memory_bank=memory_bank,
+        min_similarity_score=0.7
+    )
+
+
+DIR_NAME = os.path.dirname(os.path.abspath(__file__))
+bloom_classifier = BloomLevelClassifier(model=model, path = os.path.join(DIR_NAME, r'bloom_classifier/definition_of_bloom.json'))
+knowledge_point_extractor = KnowledgePointExtractor(model, 3)
+
+
 class EduLLM_Agent():
     def __init__(self, 
                  model:language_model,
@@ -192,62 +247,21 @@ class EduLLM_Agent():
             
             return sorted_questions
 
+
+            
     
-def run_simulation(dataset_path):
-    st_model = sentence_transformers.SentenceTransformer(
-    'sentence-transformers/all-mpnet-base-v2')
-    embedder = lambda x: st_model.encode(x, show_progress_bar=False)
-
-    # api_type = 'ollama'
-    # model_name = 'qwen2.5:14b'
-    disable_language_model = False
-    # model = utils.language_model_setup(
-    #     api_type=api_type,
-    #     model_name=model_name,
-    #     disable_language_model=disable_language_model,
-    # )
-    if disable_language_model:
-        model = no_language_model.NoLanguageModel()
-    else:
-        model = get_model(
-            model_name="deepseek-ai/DeepSeek-V3",
-            # model_name='Qwen/Qwen2.5-14B-Instruct',
-            api_key="sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo",
-        )
-    # memory_bank = NaiveAssociativeMemory(
-    #     embedder,
-    #     importance_threshold=RAGConfig.IMPORTANCE_THRESHOLD,
-    #     max_memories=RAGConfig.MAX_MEMORIES,
-    #     deduplication_threshold=RAGConfig.DEDUPLICATION_THRESHOLD,
-    #     contextualize_size=RAGConfig.CONTEXTUALIZE_SIZE,)
-
-    # rag_tool = NaiveRAG(
-    #     model,
-    #     embedder, 
-    #     memory_bank, 
-    #     min_similarity_score = RAGConfig.MIN_SIMILARITY_SCORE)
-
-    memory_bank = KnowledgePointMemory(
-            sentence_embedder=embedder,
-            importance_threshold=0.5,
-            max_memories=1000,
-            contextualize_size=5,
-            deduplication_threshold=0.1,
-            num_knowledge_points=3
-        )
-
-    rag_tool = KnowledgePointRAG(
-            model=model,  # Replace with your actual model
-            sentence_embedder=embedder,
-            memory_bank=memory_bank,
-            min_similarity_score=0.7
-        )
+        
+        
+            
+            
+            
+        
+        
 
 
-    DIR_NAME = os.path.dirname(os.path.abspath(__file__))
-    bloom_classifier = BloomLevelClassifier(model=model, path = os.path.join(DIR_NAME, r'bloom_classifier/definition_of_bloom.json'))
-    knowledge_point_extractor = KnowledgePointExtractor(model, 3)
 
+
+if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
     def format_question(questions):
         combined_questions = []
@@ -274,14 +288,14 @@ def run_simulation(dataset_path):
         return combined_questions
 
     file_names = ['20_fina_1310.json', '21_fina_1310.json']
-    readers = [DatasetReader(dataset_path, file_name, preprocess_func=format_question) for file_name in file_names]
+    readers = [DatasetReader(file_name, preprocess_func=format_question) for file_name in file_names]
     data = []
     for reader in readers:
         data.extend(reader.get_data())
     agent = EduLLM_Agent(model, embedder, memory_bank, rag_tool, bloom_classifier, knowledge_point_extractor)
     agent._preprocess_past_paper(data)
     
-    test_reader = DatasetReader(dataset_path, '23_fina_1310.json', preprocess_func = format_question)
+    test_reader = DatasetReader('23_fina_1310.json', preprocess_func = format_question)
     test_data = test_reader.get_data()
     
     # result = agent._generate_question_from_pastpaper(test_data)
@@ -301,12 +315,6 @@ def run_simulation(dataset_path):
     
     result_direct = agent._generate_question_from_pastpaper_with_knowledge_point(test_data)
     timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    with open(f'{DIR_NAME}/output/{timestamp}_direct.json', 'w') as f:
+    with open(f'./output/{timestamp}_direct.json', 'w') as f:
         json.dump(result_direct, f, indent=4)
-    generate_pdf_from_json(f"{DIR_NAME}/output/{timestamp}_direct.json", f"{DIR_NAME}/output/{timestamp}_direct.pdf", title = "FINA1310", footnotes=f"Generated time: {timestamp}")
-
-    
-if __name__ == "__main__":
-    # Example usage
-    # run_simulation("data", "20_fina_1310.json")    
-    run_simulation(r'D:\Dennis\OneDrive\yr4sem2\fyp\FYP_EDULLM\EduLLM\dataset')
+    generate_pdf_from_json(f"./output/{timestamp}_direct.json", f"./output/{timestamp}_direct.pdf", title = "FINA1310", footnotes=f"Generated time: {timestamp}")

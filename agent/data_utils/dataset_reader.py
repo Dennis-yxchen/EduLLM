@@ -2,11 +2,11 @@ import os
 import json
 
 class DatasetReader:
-    def __init__(self, file_name='comp2501.json', preprocess_func=None):
+    def __init__(self, data_path, file_name='comp2501.json', preprocess_func=None):
         # 获取当前脚本的目录
         current_dir = os.path.dirname(__file__)
         # 构建数据文件的路径
-        self.data_path = os.path.join(current_dir, '..', '..', 'dataset', file_name)
+        self.data_path = os.path.join(data_path, file_name)
         # 预处理函数
         self.preprocess_func = preprocess_func
     
