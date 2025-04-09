@@ -75,7 +75,9 @@ rag_tool = KnowledgePointRAG(
         min_similarity_score=0.7
     )
 
-bloom_classifier = BloomLevelClassifier(model=model, path = r'./bloom_classifier/definition_of_bloom.json')
+
+DIR_NAME = os.path.dirname(os.path.abspath(__file__))
+bloom_classifier = BloomLevelClassifier(model=model, path = os.path.join(DIR_NAME, r'bloom_classifier/definition_of_bloom.json'))
 knowledge_point_extractor = KnowledgePointExtractor(model, 3)
 
 
@@ -244,8 +246,7 @@ class EduLLM_Agent():
             sorted_questions = {i: new_questions[i] for i in sorted_indices}
             
             return sorted_questions
-    
-            
+
 
             
     

@@ -1,6 +1,14 @@
 import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'agent'))
+
+from agent.main_function import test
+
 from flask import Flask, request, redirect, url_for, render_template, send_from_directory, flash, jsonify
 from werkzeug.utils import secure_filename
+
+
 
 # Define folder paths
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))

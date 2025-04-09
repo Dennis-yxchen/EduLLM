@@ -25,3 +25,12 @@
 - 将 $topK$个相似问题与知识点加入 $system\\_prompt$
 - 只加入 $q_{example}$ 的知识点 ${K_{example}}$ 到 $system\\_prompt$, 得到 $final\\_prompt$
 - 生成 $q_{output} = LLM(final\\_prompt)$
+
+
+如何配环境：
+```
+conda create -n edullm python=3.12
+pip install gdm-concordia
+pip install -U sentence-transformers
+pip install reportlab
+```
