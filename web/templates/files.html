@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EDULLM - Files</title>
+  <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+  <header class="top-banner">
+    <h1>EDULLM</h1>
+  </header>
+  <div class="container">
+    <!-- Sidebar can be reused here if needed -->
+    <aside class="sidebar">
+      <button onclick="window.location.href='{{ url_for('index') }}'">Main Page</button>
+      <button onclick="window.location.href='{{ url_for('index') }}'">Upload New File</button>
+    </aside>
+    <main class="main-content">
+      <h2>Uploaded Files</h2>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="flashes">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      <ul>
+      {% for file in files %}
+        <li>
+          {{ file }} –
+          <a href="{{ url_for('uploaded_file', filename=file) }}" target="_blank">View</a> |
+          <a href="{{ url_for('edit_file', filename=file) }}">Edit</a>
+        </li>
+      {% endfor %}
+      </ul>
+    </main>
+  </div>
+</body>
+</html>
