@@ -1,4 +1,12 @@
-// -------------- Modal Open/Close Logic --------------
+// -------------------- Global variable for accumulated files --------------------
+let accumulatedFiles = [];
+
+// -------------------- DOMContentLoaded: Load KG list on page load --------------------
+document.addEventListener('DOMContentLoaded', () => {
+  loadKnowledgeBases();
+});
+
+// -------------------- Modal Open/Close Logic --------------------
 const knowledgeBaseBtn = document.getElementById('knowledgeBaseBtn');
 const kbModal = document.getElementById('kbModal');
 const closeSpan = kbModal ? kbModal.querySelector('.close') : null;
@@ -22,27 +30,27 @@ window.addEventListener('click', (event) => {
   }
 });
 
-// -------------- Load Knowledge Bases --------------
+// -------------------- Load Knowledge Bases for Modal and Test Generation --------------------
 function loadKnowledgeBases() {
   fetch('/kb_list')
     .then(response => response.json())
     .then(data => {
-      // Populate KG list in the modal left column and the test generation dropdown.
       const kbListEl = document.getElementById('kbList');
       const kbFolderSelect = document.getElementById('kb_folder');
       const testKgSelect = document.getElementById('kg_select');
+
       if (kbListEl) kbListEl.innerHTML = '';
       if (kbFolderSelect) kbFolderSelect.innerHTML = '';
       if (testKgSelect) testKgSelect.innerHTML = '';
 
       data.forEach(folderName => {
-        // Create list item with KG name and rename button
+        // Create list item with KG name and rename button.
         const li = document.createElement('li');
         const nameSpan = document.createElement('span');
         nameSpan.textContent = folderName;
         nameSpan.classList.add("kb-name");
 
-        // Single/double click logic using timer:
+        // Single/double click logic using a timer:
         let clickTimer;
         nameSpan.addEventListener("click", () => {
           if (clickTimer) return;
@@ -66,35 +74,37 @@ function loadKnowledgeBases() {
           e.stopPropagation();
           enableRename(li, folderName);
         });
+
         li.appendChild(nameSpan);
         li.appendChild(renameBtn);
         kbListEl.appendChild(li);
 
-        // Populate modal upload KG dropdown
+        // Populate the modal upload KG dropdown.
         const opt1 = document.createElement('option');
         opt1.value = folderName;
         opt1.textContent = folderName;
         if (kbFolderSelect) kbFolderSelect.appendChild(opt1);
 
-        // Populate test generation KG dropdown
+        // Populate the test generation KG dropdown.
         const opt2 = document.createElement('option');
         opt2.value = folderName;
         opt2.textContent = folderName;
         if (testKgSelect) testKgSelect.appendChild(opt2);
       });
 
-      // Load files for the first KG by default if available
+      // Load files for the first KG by default, if available.
       if (data.length > 0) {
         showKBFiles(data[0]);
-        loadPromptFiles(data[0]); // Also load prompt file list in test generation box
+        loadPromptFilesForTest(data[0]); // Also update test generation prompt file dropdown.
       } else {
-        document.getElementById('filesContainer').innerHTML = '<p>No KG available.</p>';
+        const container = document.getElementById('filesContainer');
+        if (container) container.innerHTML = '<p>No KG available.</p>';
       }
     })
     .catch(err => console.error('Error loading KG list:', err));
 }
 
-// -------------- Inline Rename --------------
+// -------------------- Inline Rename --------------------
 function enableRename(li, oldName) {
   const nameSpan = li.querySelector('.kb-name');
   nameSpan.contentEditable = "true";
@@ -102,7 +112,7 @@ function enableRename(li, oldName) {
   const finishRename = () => {
     nameSpan.contentEditable = "false";
     const newName = nameSpan.textContent.trim();
-    if(newName && newName !== oldName) {
+    if (newName && newName !== oldName) {
       renameKB(oldName, newName).then(() => {
         loadKnowledgeBases();
       }).catch(err => {
@@ -115,7 +125,7 @@ function enableRename(li, oldName) {
   };
   nameSpan.addEventListener("blur", finishRename, { once: true });
   nameSpan.addEventListener("keydown", (evt) => {
-    if(evt.key === "Enter") {
+    if (evt.key === "Enter") {
       evt.preventDefault();
       nameSpan.blur();
     }
@@ -125,22 +135,21 @@ function enableRename(li, oldName) {
 function renameKB(oldName, newName) {
   return fetch('/rename_kb', {
     method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({ old_name: oldName, new_name: newName })
   })
   .then(res => res.json())
   .then(resData => {
-    if(resData.status !== 'success'){
+    if (resData.status !== 'success') {
       throw new Error(resData.message || 'Rename error');
     }
   });
 }
 
-// -------------- Show KG Files --------------
+// -------------------- Show KG Files --------------------
 function showKBFiles(kbName) {
-  // Update the upload dropdown selection as well
   const kbFolderSelect = document.getElementById('kb_folder');
-  if(kbFolderSelect) kbFolderSelect.value = kbName;
+  if (kbFolderSelect) kbFolderSelect.value = kbName;
   fetch(`/kb_files/${encodeURIComponent(kbName)}`)
     .then(response => response.json())
     .then(files => {
@@ -180,24 +189,24 @@ function showKBFiles(kbName) {
     .catch(err => console.error('Error fetching files for', kbName, err));
 }
 
-// -------------- Delete File --------------
+// -------------------- Delete File --------------------
 function deleteFile(kbName, filename) {
   return fetch('/delete_file', {
     method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({ kb_folder: kbName, filename: filename })
   })
   .then(res => res.json())
   .then(resData => {
-    if(resData.status !== 'success'){
+    if (resData.status !== 'success') {
       throw new Error(resData.message || 'Delete error');
     }
   });
 }
 
-// -------------- Load Prompt Files for Test Generation --------------
-function loadPromptFiles(kbName) {
-  fetch(`/kb_files/${encodeURIComponent(kbName)}`)
+// -------------------- Load Prompt Files for Test Generation --------------------
+function loadPromptFilesForTest(kgName) {
+  fetch(`/kb_files/${encodeURIComponent(kgName)}`)
     .then(response => response.json())
     .then(files => {
       const promptFileSelect = document.getElementById('prompt_file');
@@ -221,51 +230,57 @@ function loadPromptFiles(kbName) {
     .catch(err => console.error('Error loading prompt files:', err));
 }
 
-// Update prompt files when test KG selection changes.
+// Update prompt file dropdown when KG selection in test generation changes.
 const testKgSelect = document.getElementById('kg_select');
 if (testKgSelect) {
   testKgSelect.addEventListener('change', (e) => {
     const selectedKg = e.target.value;
-    loadPromptFiles(selectedKg);
+    loadPromptFilesForTest(selectedKg);
   });
 }
 
-// -------------- Test Generation Form Submission --------------
+
+// -------------------- Test Generation Form Submission --------------------
 const testGenForm = document.getElementById('testGenForm');
 if (testGenForm) {
   testGenForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const kg_folder = document.getElementById('kg_select').value;
     const prompt_file = document.getElementById('prompt_file').value;
+    const genResult = document.getElementById('genResult');
+
     if (!kg_folder || !prompt_file) {
       alert("Please select both a KG and a prompt file.");
       return;
     }
+
     const formData = new URLSearchParams();
     formData.append('kg_folder', kg_folder);
     formData.append('prompt_file', prompt_file);
 
     fetch('/generate_test', {
       method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: formData.toString()
     })
     .then(res => res.json())
     .then(data => {
-      const genResult = document.getElementById('genResult');
       if (data.status === 'success') {
-        genResult.innerHTML = `<p><strong>Generated Question:</strong> ${data.generated_question}</p>`;
+        genResult.style.display = "none";
+        genResult.innerHTML = "";
       } else {
         genResult.innerHTML = `<p>Error: ${data.message}</p>`;
+        genResult.style.display = "block";
       }
     })
     .catch(err => {
-      alert('Generation failed: ' + err.message);
+      genResult.innerHTML = `<p>Error: ${err.message}</p>`;
+      genResult.style.display = "block";
     });
   });
 }
 
-// -------------- Drag & Drop and Multi-File Upload (unchanged from before) --------------
+// -------------------- Drag & Drop and Multi-File Upload --------------------
 document.addEventListener('dragover', e => e.preventDefault());
 document.addEventListener('drop', e => e.preventDefault());
 
@@ -279,7 +294,10 @@ if (uploadWindow && fileInput && previewBox) {
   });
 
   fileInput.addEventListener('change', (e) => {
-    updatePreview(e.target.files);
+    let newFiles = Array.from(e.target.files);
+    accumulatedFiles = accumulatedFiles.concat(newFiles);
+    updateFileInput();
+    updatePreview(accumulatedFiles);
   });
 
   uploadWindow.addEventListener('dragover', (e) => {
@@ -296,25 +314,27 @@ if (uploadWindow && fileInput && previewBox) {
     e.preventDefault();
     e.stopPropagation();
     uploadWindow.classList.remove('dragover');
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      const dt = new DataTransfer();
-      for (let i = 0; i < files.length; i++) {
-        dt.items.add(files[i]);
-      }
-      fileInput.files = dt.files;
-      updatePreview(fileInput.files);
-    }
+    let droppedFiles = Array.from(e.dataTransfer.files);
+    accumulatedFiles = accumulatedFiles.concat(droppedFiles);
+    updateFileInput();
+    updatePreview(accumulatedFiles);
   });
+}
+
+function updateFileInput() {
+  const dt = new DataTransfer();
+  accumulatedFiles.forEach(file => {
+    dt.items.add(file);
+  });
+  fileInput.files = dt.files;
 }
 
 function updatePreview(fileList) {
   if (fileList && fileList.length > 0) {
     let content = "<ul>";
-    for (let i = 0; i < fileList.length; i++) {
-      const file = fileList[i];
+    fileList.forEach(file => {
       content += `<li><span class="file-icon">📄</span> ${file.name} (${file.size} bytes)</li>`;
-    }
+    });
     content += "</ul>";
     previewBox.innerHTML = content;
   } else {
