@@ -201,7 +201,7 @@ def generate_test():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
-# TODO: 1. list of file upload 2. handle the transition of data file to json 3. storage of the output data 4. display of the file for user download
+# TODO: 2. handle the transition of data file to json 3. storage of the output data 4. display of the file for user download
 if __name__ == '__main__':
     os.makedirs(app.config['UPLOADS_DIR'], exist_ok=True)
     app.run(debug=True, port=5002)
