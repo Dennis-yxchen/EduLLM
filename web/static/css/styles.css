@@ -316,3 +316,48 @@ body {
 .modal-right button:hover {
   background-color: #4338ca;
 }
+
+/* --- Test Generation Layout Adjustments --- */
+.test-generation form {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.test-generation .test-gen-inputs {
+  max-width: 50vw;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.test-generation form label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.test-generation form select {
+  font-size: 1.1rem;
+  padding: 8px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.gen-btn {
+  padding: 10px 20px;
+  background-color: grey;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Hide generation result by default */
+#genResult {
+  display: none;
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fafafa;
+}

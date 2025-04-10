@@ -239,6 +239,7 @@ if (testKgSelect) {
   });
 }
 
+
 // -------------------- Test Generation Form Submission --------------------
 const testGenForm = document.getElementById('testGenForm');
 if (testGenForm) {
@@ -246,10 +247,13 @@ if (testGenForm) {
     e.preventDefault();
     const kg_folder = document.getElementById('kg_select').value;
     const prompt_file = document.getElementById('prompt_file').value;
+    const genResult = document.getElementById('genResult');
+
     if (!kg_folder || !prompt_file) {
       alert("Please select both a KG and a prompt file.");
       return;
     }
+
     const formData = new URLSearchParams();
     formData.append('kg_folder', kg_folder);
     formData.append('prompt_file', prompt_file);
@@ -261,15 +265,17 @@ if (testGenForm) {
     })
     .then(res => res.json())
     .then(data => {
-      const genResult = document.getElementById('genResult');
       if (data.status === 'success') {
-        genResult.innerHTML = `<p><strong>Generated Question(s):</strong> ${JSON.stringify(data.generated_question)}</p>`;
+        genResult.style.display = "none";
+        genResult.innerHTML = "";
       } else {
         genResult.innerHTML = `<p>Error: ${data.message}</p>`;
+        genResult.style.display = "block";
       }
     })
     .catch(err => {
-      alert('Generation failed: ' + err.message);
+      genResult.innerHTML = `<p>Error: ${err.message}</p>`;
+      genResult.style.display = "block";
     });
   });
 }

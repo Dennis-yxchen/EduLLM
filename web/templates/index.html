@@ -34,24 +34,22 @@
           <p id="totalFiles">{{ total_files }}</p>
         </div>
       </div>
+
       <!-- Test Generation Box -->
       <div class="test-generation">
         <h3>Test Generation</h3>
         <form id="testGenForm" action="{{ url_for('generate_test') }}" method="POST">
-          <label for="kg_select">Select Knowledge Base:</label>
-          <select name="kg_folder" id="kg_select">
-            <!-- Populated via JS -->
-          </select>
-          <br>
-          <label for="prompt_file">Select Prompt File:</label>
-          <select name="prompt_file" id="prompt_file">
-            <!-- Populated based on KG selection via JS -->
-          </select>
-          <br>
-          <button type="submit">Generate</button>
+          <div class="test-gen-inputs">
+            <label for="kg_select">Select Knowledge Base:</label>
+            <select name="kg_folder" id="kg_select"></select>
+
+            <label for="prompt_file">Select Prompt File:</label>
+            <select name="prompt_file" id="prompt_file"></select>
+          </div>
+          <button type="submit" class="gen-btn">Generate</button>
         </form>
         <div id="genResult">
-          <!-- Generated question will be displayed here -->
+          <!-- Will only appear on error -->
         </div>
       </div>
     </main>
@@ -74,25 +72,20 @@
           </form>
           <div class="kb-list">
             <h4>Existing Knowledge Bases</h4>
-            <ul id="kbList">
-              <!-- JavaScript will populate KG names with rename buttons -->
-            </ul>
+            <ul id="kbList"></ul>
           </div>
         </div>
+
         <!-- Right Column: File list display and file uploader -->
         <div class="modal-right">
           <h3>KG Files</h3>
-          <div id="filesContainer">
-            <!-- Files will be displayed as square containers with an icon and file name -->
-          </div>
+          <div id="filesContainer"></div>
           <hr>
           <h3>Upload File(s)</h3>
           <form id="uploadFileForm" action="{{ url_for('upload_file_route') }}" method="POST" enctype="multipart/form-data">
             <label for="kb_folder">Upload to KG:</label>
-            <select name="kb_folder" id="kb_folder">
-              <!-- Populated via JS -->
-            </select>
-            <div id="uploadWindow" class="upload-window" onclick="document.getElementById('fileInput').click()">
+            <select name="kb_folder" id="kb_folder"></select>
+            <div id="uploadWindow" class="upload-window">
               <p>Drag & drop file(s) here or click to select</p>
               <input type="file" name="file" id="fileInput" hidden multiple>
             </div>
