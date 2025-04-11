@@ -21,16 +21,25 @@ class CustomBaseGPTModel(BaseGPTModel):
         temperature: float = language_model.DEFAULT_TEMPERATURE,
         timeout: float = language_model.DEFAULT_TIMEOUT_SECONDS,
         seed: int | None = None,
+        system_prompt: str | None = None,
     ) -> str:
         # Limit tokens to 4000 for GPT models
         max_tokens = min(max_tokens, 4000)
 
-        messages = [
-            {'role': 'system',
-             'content': ('You are a helpful assistant. ')},
-            {'role': 'user',
-             'content': prompt}
-        ]
+        if system_prompt is None:
+            messages = [
+                {'role': 'system',
+                'content': ('You are a helpful assistant. ')},
+                {'role': 'user',
+                'content': prompt}
+            ]
+        else:
+            messages = [
+                {'role': 'system',
+                'content': system_prompt},
+                {'role': 'user',
+                'content': prompt}
+            ]
 
         response = self._client.chat.completions.create(
             model=self._model_name,
