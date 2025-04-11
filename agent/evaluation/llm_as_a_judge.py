@@ -1,0 +1,145 @@
+import json
+import os
+import sys
+
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+from main_function import get_model
+
+model = get_model(
+            model_name="deepseek-ai/DeepSeek-V3",
+            # model_name='Qwen/Qwen2.5-14B-Instruct',
+            api_key="sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo",
+        )
+
+def evaluate_questions(question_pairs, goal_prompt, role_prompt):
+    # Initialize counters
+    baseline_wins = {"Completeness": 0, "Knowledge Alignment": 0, "Diversity": 0, "Overall": 0}
+    EDULLM_wins = {"Completeness": 0, "Knowledge Alignment": 0, "Diversity": 0, "Overall": 0}
+    ties = {"Completeness": 0, "Knowledge Alignment": 0, "Diversity": 0, "Overall": 0}
+    
+    results = []
+    
+    for i, pair in enumerate(question_pairs, 1):
+        question, generated_question_baseline, generated_question_EDULLM = pair
+        
+        # Prepare the prompt
+        current_prompt = goal_prompt.replace('<<original question>>', question)
+        current_prompt = current_prompt.replace('<<answer1>>', generated_question_baseline)
+        current_prompt = current_prompt.replace('<<answer2>>', generated_question_EDULLM)
+        print(current_prompt)
+        # Get model response
+        model_response = model.sample_text(
+            prompt=current_prompt,
+            temperature=0.0,
+            max_tokens=4096,
+            terminators=(),
+            system_prompt=role_prompt,
+        )
+        
+        if model_response.startswith('`') or model_response.endswith('`'):
+            model_response = model_response.strip('`')
+            if model_response[:4].upper() == 'JSON':
+                model_response = model_response[4:]
+
+        
+        try:
+            # Parse the JSON response
+            evaluation = json.loads(model_response)
+            
+            # Count wins for each criterion
+            for criterion in ["Completeness", "Knowledge Alignment", "Diversity"]:
+                winner = evaluation[criterion]["Winner"]
+                if winner == "Answer 1":
+                    baseline_wins[criterion] += 1
+                elif winner == "Answer 2":
+                    EDULLM_wins[criterion] += 1
+                else:
+                    ties[criterion] += 1
+            
+            # Determine overall winner (simple majority)
+            baseline_score = sum(1 for criterion in ["Completeness", "Knowledge Alignment", "Diversity"] 
+                            if evaluation[criterion]["Winner"] == "Answer 1")
+            EDULLM_score = sum(1 for criterion in ["Completeness", "Knowledge Alignment", "Diversity"] 
+                            if evaluation[criterion]["Winner"] == "Answer 2")
+            
+            if baseline_score > EDULLM_score:
+                overall_winner = "Answer 1"
+                baseline_wins["Overall"] += 1
+            elif EDULLM_score > baseline_score:
+                overall_winner = "Answer 2"
+                EDULLM_wins["Overall"] += 1
+            else:
+                overall_winner = "Tie"
+                ties["Overall"] += 1
+            
+            # Add overall winner to the evaluation
+            evaluation["Overall"] = {"Winner": overall_winner}
+            
+            results.append({
+                "Question": question,
+                "Baseline": generated_question_baseline,
+                "EDULLM": generated_question_EDULLM,
+                "Evaluation": evaluation
+            })
+            
+            print(f"\nEvaluation for pair {i}:")
+            print(f"Original question: {question}")
+            print(f"Baseline: {generated_question_baseline}")
+            print(f"EDULLM: {generated_question_EDULLM}")
+            print("Evaluation results:")
+            print(json.dumps(evaluation, indent=2))
+            
+        except json.JSONDecodeError as e:
+            print(f"Error parsing JSON response for pair {i}: {e}")
+            print(f"Model response: {model_response}")
+            results.append({
+                "Question": question,
+                "Baseline": generated_question_baseline,
+                "EDULLM": generated_question_EDULLM,
+                "Error": "Failed to parse evaluation",
+                "RawResponse": model_response
+            })
+    
+    # Print summary statistics
+    print("\n=== Final Statistics ===")
+    print(f"Total question pairs evaluated: {len(question_pairs)}")
+    print("\nBaseline wins:")
+    for criterion, count in baseline_wins.items():
+        print(f"{criterion}: {count}")
+    
+    print("\nEDULLM wins:")
+    for criterion, count in EDULLM_wins.items():
+        print(f"{criterion}: {count}")
+    
+    print("\nTies:")
+    for criterion, count in ties.items():
+        print(f"{criterion}: {count}")
+    
+    return results
+
+
+
+if __name__ == "__main__":
+    role_prompt = ''
+    ABS_DIR = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(ABS_DIR, 'role_prompt.txt'), 'r', encoding='utf-8') as f:
+        role_prompt = f.read()
+        
+    goal_prompt = ''
+    with open(os.path.join(ABS_DIR, 'goal_prompt.txt'), 'r', encoding='utf-8') as f:
+        goal_prompt = f.read()
+        
+    print(role_prompt)
+    print(goal_prompt)
+    question = ['What is the capital of France?'] # replace with your question
+    generated_question_baseline = ['The capital of France is Paris.'] # replace with your generated question from the baseline model
+    generated_question_EDULLM = ['Paris is the capital city of France.'] # replace with your generated question from the EDULLM model
+    question_pairs = None
+    result = evaluate_questions(tuple(zip(
+        question, generated_question_baseline, generated_question_EDULLM
+        )), goal_prompt, role_prompt)
+    
+    import pandas as pd
+    df = pd.DataFrame(result)
+    df.to_csv(f'{ABS_DIR}\evaluation_results.csv', index=False)
+    print("Evaluation results saved to evaluation_results.csv")
