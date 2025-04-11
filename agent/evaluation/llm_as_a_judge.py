@@ -135,6 +135,11 @@ if __name__ == "__main__":
     generated_question_baseline = ['The capital of France is Paris.'] # replace with your generated question from the baseline model
     generated_question_EDULLM = ['Paris is the capital city of France.'] # replace with your generated question from the EDULLM model
     question_pairs = None
-    evaluate_questions(tuple(zip(
+    result = evaluate_questions(tuple(zip(
         question, generated_question_baseline, generated_question_EDULLM
         )), goal_prompt, role_prompt)
+    
+    import pandas as pd
+    df = pd.DataFrame(result)
+    df.to_csv(f'{ABS_DIR}\evaluation_results.csv', index=False)
+    print("Evaluation results saved to evaluation_results.csv")
