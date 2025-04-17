@@ -21,13 +21,13 @@ def evaluate_questions(question_pairs, goal_prompt, role_prompt):
     results = []
     
     for i, pair in tqdm.tqdm(enumerate(question_pairs, 1), desc="Evaluating questions", total=len(question_pairs)):
-        question, generated_question_EDULLM, generated_question_baseline = pair
+        question, generated_question_baseline, generated_question_EDULLM = pair
         
         # Prepare the prompt
         current_prompt = goal_prompt.replace('<<original question>>', question)
-        current_prompt = current_prompt.replace('<<answer1>>', generated_question_EDULLM)
-        current_prompt = current_prompt.replace('<<answer2>>', generated_question_baseline)
-        print(current_prompt)
+        current_prompt = current_prompt.replace('<<answer1>>', generated_question_baseline)
+        current_prompt = current_prompt.replace('<<answer2>>', generated_question_EDULLM)
+        # print(current_prompt)
         # Get model response
         model_response = model.sample_text(
             prompt=current_prompt,
@@ -83,16 +83,25 @@ def evaluate_questions(question_pairs, goal_prompt, role_prompt):
                 "Evaluation": evaluation
             })
             
-            print(f"\nEvaluation for pair {i}:")
-            print(f"Original question: {question}")
-            print(f"Baseline: {generated_question_baseline}")
-            print(f"EDULLM: {generated_question_EDULLM}")
-            print("Evaluation results:")
-            print(json.dumps(evaluation, indent=2))
+            # print(f"\nEvaluation for pair {i}:")
+            # print(f"Original question: {question}")
+            # print(f"Baseline: {generated_question_baseline}")
+            # print(f"EDULLM: {generated_question_EDULLM}")
+            # print("Evaluation results:")
+            # print(json.dumps(evaluation, indent=2))
+            with open(f'./result_0417/evaluation.json', 'a', encoding='utf-8') as f:
+                json.dump({
+                    "Question": question,
+                    "Baseline": generated_question_baseline,
+                    "EDULLM": generated_question_EDULLM,
+                    "Evaluation": evaluation
+                }, f, ensure_ascii=False)
+                f.write('\n')
+            
             
         except json.JSONDecodeError as e:
-            print(f"Error parsing JSON response for pair {i}: {e}")
-            print(f"Model response: {model_response}")
+            # print(f"Error parsing JSON response for pair {i}: {e}")
+            # print(f"Model response: {model_response}")
             results.append({
                 "Question": question,
                 "Baseline": generated_question_baseline,
@@ -100,6 +109,15 @@ def evaluate_questions(question_pairs, goal_prompt, role_prompt):
                 "Error": "Failed to parse evaluation",
                 "RawResponse": model_response
             })
+            with open(f'./result_0417/evaluation_error.json', 'a', encoding='utf-8') as f:
+                json.dump({
+                "Question": question,
+                "Baseline": generated_question_baseline,
+                "EDULLM": generated_question_EDULLM,
+                "Error": "Failed to parse evaluation",
+                "RawResponse": model_response
+            }, f, ensure_ascii=False)
+                f.write('\n')
     
     # Print summary statistics
     print("\n=== Final Statistics ===")
