@@ -97,8 +97,6 @@ class EduLLM_Agent():
         self._knowledge_point_extractor = knowledge_point_extractor
         
         # self._question_info_dict = dict()
-        
-    
     
     
     def _preprocess_past_paper(self, past_paper:Tuple[str]):
@@ -248,16 +246,95 @@ class EduLLM_Agent():
             return sorted_questions
 
 
-            
-    
+    def _generate_question_by_knowledge_point_and_question_and_bloom(self, question):
+        prompt = interactive_document.InteractiveDocument(self._model)
+        # 1. extract knowledge point
+        knowledge_point, knowledge_prompt_string = self._knowledge_point_extractor.extract_knowledge_point(question)
+        # 2. retrieve question by knowledge point
+        questions_from_keywords_dict = self._rag_tool.retrieve_question_by_keywords(keywords=knowledge_point, 
+                                                                    num_of_question_to_retrieve = RAGConfig.NUM_RETRIEVED_DOCS)
+        # question_from_question = self._rag_tool.retrieve_question_by_similarity(question = question,
+        #                                                             num_of_question_to_retrieve = RAGConfig.NUM_RETRIEVED_DOCS//2)
+        print(questions_from_keywords_dict)
+        
+        # 3. classify bloom level
+        bloom_level, bloom_prompt_string = self._bloom_classifier.classify_bloom_level(question)
+        print(f"bloom level: {bloom_level}")
+        
+        formatted_data = [
+            f"{text}\nknowledge points: {','.join(knowledge_points)}\n"
+            for text, knowledge_points in zip(questions_from_keywords_dict['text'], questions_from_keywords_dict['knowledge_points'])
+        ]
+        
+        bloom_level_dict = self._bloom_classifier.get_name_description_dict()
+        bloom_level_description = bloom_level_dict[bloom_level.strip(' \'\",;.*?')]
+        
+        print(f"bloom level description: {bloom_level_description}")
         
         
-            
-            
-            
+        # 3. generate question
+        generating_questions = (
+                f"Given knowledge points that this question want to assess:\n"
+                f"Knowledge point: \n{','.join(knowledge_point)}\n"
+                f"Some example questions with related knowledge points:\n"
+                f"{'\n'.join(formatted_data)}\n"
+                "generate a new question that is analogous in terms of subject matter and complexity. \n"
+                f"The bloom level of the new question should be {bloom_level}.\n"
+                f"Which means {bloom_level_description}.\n"
+                "Please provide only the new question in your response."
+            )
         
-        
+        new_question = prompt.open_question(generating_questions, terminators=(),
+                                            max_tokens = 4096,)
+        return new_question, prompt.view().text()
 
+
+    def _generate_question_from_pastpaper_with_knowledge_point_and_bloom(self, past_paper):
+        # idea: 
+        new_questions = dict()
+        question_with_index = enumerate(past_paper)
+        import concurrent.futures
+        max_workers = min(8, len(past_paper))
+        for index, question in tqdm(question_with_index, desc="Generating questions"):
+            print(f"Generating question {index + 1}/{len(past_paper)}")
+            new_question, prompt_string = self._generate_question_by_knowledge_point_and_question_and_bloom(question)
+            new_questions[index] = new_question
+            print(f"Generated question: {new_question}")
+            print(f"prompt: {prompt_string}")
+            print(f"\n\n\n")
+        return new_questions
+        # with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        #     future_to_index = {}
+            
+        #     for index, question in question_with_index:
+        #         print(f"Submitting question {index + 1}/{len(past_paper)} for generation")
+        #         # 提交任务到线程池
+        #         future = executor.submit(
+        #             self._generate_question_by_knowledge_point_and_question_and_bloom, 
+        #             question
+        #         )
+        #         future_to_index[future] = index
+            
+        #     # 初始化结果字典
+        #     new_questions = {}
+            
+        #     # 等待所有任务完成
+        #     for future in concurrent.futures.as_completed(future_to_index):
+        #         index = future_to_index[future]
+        #         try:
+        #             new_question, prompt_string = future.result()
+        #             new_questions[index] = new_question
+        #             print(f"Generated question {index + 1}: {new_question}")
+        #             print(f"prompt: {prompt_string}")
+        #             print("\n\n\n")
+        #         except Exception as exc:
+        #             print(f'Question {index + 1} generated an exception: {exc}')
+            
+        #     # 按原始索引排序结果
+        #     sorted_indices = sorted(new_questions.keys())
+        #     sorted_questions = {i: new_questions[i] for i in sorted_indices}
+            
+        #     return sorted_questions
 
 
 
@@ -288,14 +365,14 @@ if __name__ == "__main__":
         return combined_questions
 
     file_names = ['20_fina_1310.json', '21_fina_1310.json']
-    readers = [DatasetReader(file_name, preprocess_func=format_question) for file_name in file_names]
+    readers = [DatasetReader(data_path='..\\dataset', file_name=file_name, preprocess_func=format_question) for file_name in file_names]
     data = []
     for reader in readers:
         data.extend(reader.get_data())
     agent = EduLLM_Agent(model, embedder, memory_bank, rag_tool, bloom_classifier, knowledge_point_extractor)
     agent._preprocess_past_paper(data)
     
-    test_reader = DatasetReader('23_fina_1310.json', preprocess_func = format_question)
+    test_reader = DatasetReader(data_path='..\\dataset', file_name='23_fina_1310.json', preprocess_func = format_question)
     test_data = test_reader.get_data()
     
     # result = agent._generate_question_from_pastpaper(test_data)
@@ -313,8 +390,10 @@ if __name__ == "__main__":
     # Clear the terminal
     os.system('cls' if os.name == 'nt' else 'clear')
     
-    result_direct = agent._generate_question_from_pastpaper_with_knowledge_point(test_data)
+    # result_direct = agent._generate_question_from_pastpaper_with_knowledge_point(test_data)
+    result_direct = agent._generate_question_from_pastpaper_with_knowledge_point_and_bloom(test_data)
     timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    with open(f'./output/{timestamp}_direct.json', 'w') as f:
+    suffix = 'KP_bloom'
+    with open(f'./output/{timestamp}_{suffix}.json', 'w') as f:
         json.dump(result_direct, f, indent=4)
-    generate_pdf_from_json(f"./output/{timestamp}_direct.json", f"./output/{timestamp}_direct.pdf", title = "FINA1310", footnotes=f"Generated time: {timestamp}")
+    generate_pdf_from_json(f"./output/{timestamp}_{suffix}.json", f"./output/{timestamp}_{suffix}.pdf", title = "FINA1310", footnotes=f"Generated time: {timestamp}")
