@@ -9,8 +9,11 @@ For each criterion, choose the better answer (either Answer 1 or Answer 2) and e
 Here is the original question: <<original question>>
 
 Here are the two answers:
-- Generated Question 1: <<answer1>>
-- Generated Question 2: <<answer2>>
+Generated Question 1:
+<<answer1>>
+
+Generated Question 2:
+<<answer2>>
 
 Evaluate both answers using the three criteria listed above and provide detailed explanations for each criterion.
 
