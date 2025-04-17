@@ -4,7 +4,8 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 from main_function import get_model
-
+from data_utils.dataset_reader import DatasetReader
+import tqdm
 model = get_model(
             model_name="deepseek-ai/DeepSeek-V3",
             # model_name='Qwen/Qwen2.5-14B-Instruct',
@@ -19,19 +20,19 @@ def evaluate_questions(question_pairs, goal_prompt, role_prompt):
     
     results = []
     
-    for i, pair in enumerate(question_pairs, 1):
-        question, generated_question_baseline, generated_question_EDULLM = pair
+    for i, pair in tqdm.tqdm(enumerate(question_pairs, 1), desc="Evaluating questions", total=len(question_pairs)):
+        question, generated_question_EDULLM, generated_question_baseline = pair
         
         # Prepare the prompt
         current_prompt = goal_prompt.replace('<<original question>>', question)
-        current_prompt = current_prompt.replace('<<answer1>>', generated_question_baseline)
-        current_prompt = current_prompt.replace('<<answer2>>', generated_question_EDULLM)
+        current_prompt = current_prompt.replace('<<answer1>>', generated_question_EDULLM)
+        current_prompt = current_prompt.replace('<<answer2>>', generated_question_baseline)
         print(current_prompt)
         # Get model response
         model_response = model.sample_text(
             prompt=current_prompt,
             temperature=0.0,
-            max_tokens=4096,
+            max_tokens=8192,
             terminators=(),
             system_prompt=role_prompt,
         )
@@ -117,6 +118,44 @@ def evaluate_questions(question_pairs, goal_prompt, role_prompt):
     
     return results
 
+def format_question(questions):
+        combined_questions = []
+
+        # Iterate through each item in the data list
+        for item in questions:
+            # Extract the components
+            question = item['question']
+            q_type = item['type']
+            options = item.get('options', None)  # Use get to handle missing keys
+            
+            # Start building the formatted string
+            formatted_str = f"Question: {question}\nType: {q_type}\n"
+            
+            if options is not None:
+                # Join the options with newline and indentation
+                options_str = '\n    '.join(options)
+                formatted_str += f"Options:\n    {options_str}\n"
+            else:
+                formatted_str += "Options: No options provided.\n"
+            
+            # Append the formatted string to the list
+            combined_questions.append(formatted_str)
+        return combined_questions
+    
+def get_original_question(path):
+    dataset_reader = DatasetReader(data_path=path, file_name='23_fina_1310.json', preprocess_func = format_question)
+    test_data = dataset_reader.get_data()
+    return test_data
+
+def get_data(path):
+    with open(path, 'r', encoding='utf-8') as f:
+        data_dict = json.load(f)
+    
+    data_list = []
+    for key in data_dict.keys():
+        data_list.append((data_dict[key]))
+    
+    return data_list
 
 
 if __name__ == "__main__":
@@ -129,17 +168,26 @@ if __name__ == "__main__":
     with open(os.path.join(ABS_DIR, 'goal_prompt.txt'), 'r', encoding='utf-8') as f:
         goal_prompt = f.read()
         
-    print(role_prompt)
-    print(goal_prompt)
-    question = ['What is the capital of France?'] # replace with your question
-    generated_question_baseline = ['The capital of France is Paris.'] # replace with your generated question from the baseline model
-    generated_question_EDULLM = ['Paris is the capital city of France.'] # replace with your generated question from the EDULLM model
-    question_pairs = None
+    # print(role_prompt)
+    # print(goal_prompt)
+    # question = ['What is the capital of France?'] # replace with your question
+    # generated_question_baseline = ['The capital of France is Paris.'] # replace with your generated question from the baseline model
+    # generated_question_EDULLM = ['Paris is the capital city of France.'] # replace with your generated question from the EDULLM model
+    # question_pairs = None
+    original_path = r'./result_0417'
+    original_question = get_original_question(original_path)    
+    # raise
+    baseline = get_data(os.path.join(original_path, '2025_04_16_19_42_54_directly.json'))
+    EduLLM_KP = get_data(os.path.join(original_path, '2025_04_16_17_14_29_KP.json'))
+    
+    print("Original question length: ", len(original_question))
+    print("Baseline length: ", len(baseline))
+    print("EduLLM_KP length: ", len(EduLLM_KP))
     result = evaluate_questions(tuple(zip(
-        question, generated_question_baseline, generated_question_EDULLM
+        original_question, EduLLM_KP, baseline
         )), goal_prompt, role_prompt)
     
     import pandas as pd
     df = pd.DataFrame(result)
-    df.to_csv(f'{ABS_DIR}\evaluation_results.csv', index=False)
+    df.to_csv(fr'{ABS_DIR}\evaluation_results_with_original_question.csv', index=False)
     print("Evaluation results saved to evaluation_results.csv")
