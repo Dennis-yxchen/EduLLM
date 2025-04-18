@@ -1,0 +1,188 @@
+Question,Baseline,EDULLM,Evaluation
+"Question: You just bought an insurance that costs you $510,000 at the beginning of the year. The insurance is an annuity that will pay you $50,000 at the end of each year. The first payment would be made at the end of this year. If it takes you 20 years to earn back what you paid, what is the APR of this annuity? Choose the closest answer.
+Type: multiple-choice
+Options:
+    a. 5.5%
+    b. 6.0%
+    c. 6.5%
+    d. 7.5%
+    e. 8.0%
+    f. 9.0%
+","**Question:**  
+
+You are considering two investment options:  
+
+1. **Annuity A** pays $3,000 at the **beginning** of each year for 15 years.  
+2. **Annuity B** pays a fixed amount at the **end** of each year for 15 years.  
+
+Both annuities have the same present value when discounted at an annual rate of 7.5%.  
+
+**What is the annual payment of Annuity B?**  
+
+**Type:** multiple-choice  
+**Options:**  
+A. $2,850  
+B. $3,000  
+C. $3,225  
+D. $3,450  
+E. $3,600  
+
+*(Knowledge points: Annuity present value calculations, Ordinary annuities vs. annuities due, Solving for payment in financial contexts)*","**Question:**  
+
+You are considering two investment options to fund your child's college education. The first option is an annuity that pays $3,000 at the beginning of each year for 10 years. The second option is an annuity that pays a different amount at the end of each year for the same duration. The annual discount rate is 6.5%.  
+
+(a) What is the present value of the first annuity (paying at the beginning of each year)?  
+
+(b) If the two annuities have equal present values, how much does the second annuity pay each year (at the end of each year)?  
+
+(c) Suppose you decide to make a single lump-sum investment today instead of using either annuity. How much would you need to invest today to match the present value of the first annuity?  
+
+**Type:** long-answer  
+**Options:** No options provided.  
+
+**Knowledge Points:**  
+- Annuities due vs. ordinary annuities  
+- Present value (PV) calculations  
+- Discount rate application  
+- Lump-sum equivalent of annuity cash flows","{'Completeness': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 is more complete as it includes multiple parts (a, b, c) that cover different aspects of the annuity problem, ensuring a comprehensive understanding. It also provides clear instructions for each part, making it solvable without ambiguity. Answer 1, while complete, is simpler and lacks the depth of Answer 2.'}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 better aligns with the knowledge points by explicitly addressing annuities due vs. ordinary annuities, present value calculations, and lump-sum equivalents. It also requires the application of the discount rate in multiple contexts, which is more aligned with the original question's complexity. Answer 1 focuses on a single aspect (solving for payment) and does not cover as many knowledge points.""}, 'Diversity': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 introduces more diversity by including multiple sub-questions that assess the topic from different angles (present value, equal present value condition, lump-sum equivalent). This variety ensures a broader assessment of the student's understanding. Answer 1, while clear, is more straightforward and lacks the varied perspectives offered by Answer 2.""}, 'Overall': {'Winner': 'Answer 2'}}"
+"Question: Which of the below statement(s) is(are) true about the term structure? I. Assume the term structure is upward sloping now. All else unchanged, if the expected long-term inflation increases relative to the short-term inflation, the slope of the term structure will become steeper. II. Assume the term structure is downward sloping now and the real rate is flat. It is likely the expected long-term inflation is lower than the short-term inflation. III. Assume the term structure is downward sloping now and the real rate is flat. It is likely the long-term interest rate risk premium is lower than the short-term interest rate risk premium.
+Type: multiple-choice
+Options:
+    a. I and III only
+    b. II and III only
+    c. I, II and III
+    d. None of the statements are true
+","**Question:**  
+
+Consider the following statements about the term structure of interest rates:  
+
+I. An upward-sloping yield curve implies that market participants expect higher inflation in the future.  
+II. A flat yield curve suggests that real interest rates are expected to decline over time.  
+III. A downward-sloping (inverted) yield curve may indicate that investors are demanding a higher interest rate risk premium for long-term bonds.  
+IV. The term structure reflects both inflation expectations and the real interest rate, but not liquidity preferences.  
+
+Which of the statements above are correct?  
+
+**Type:** multiple-choice  
+**Options:**  
+A. I and II only  
+B. I and III only  
+C. II and III only  
+D. I, II, and III only  
+E. I, III, and IV only  
+
+*(Analyze the components of the term structure, differentiate between inflation expectations, real rates, and risk premiums, and evaluate the validity of each statement.)*","**Question:** Which of the following factors would most likely lead to a steeper yield curve?  
+
+**Type:** multiple-choice  
+**Options:**  
+A. Decreasing short-term interest rates and stable long-term inflation expectations  
+B. Increasing short-term interest rates and declining long-term inflation expectations  
+C. Stable short-term interest rates and increasing long-term inflation expectations  
+D. Decreasing short-term interest rates and declining long-term inflation expectations  
+E. Increasing short-term and long-term interest rates at the same pace  
+
+**Knowledge Points:**  
+- Yield curve slope dynamics  
+- Inflation expectations impact on term structure  
+- Interest rate risk premium influence on yield curve shape","{'Completeness': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 includes a clear stem, multiple statements to evaluate, and a set of options that cover all possible combinations of the statements. The question is solvable without ambiguity. Answer 2, while clear, is more narrowly focused on a single scenario (factors leading to a steeper yield curve) and lacks the detailed breakdown of components seen in Answer 1.'}, 'Knowledge Alignment': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 effectively targets the intended knowledge point by evaluating multiple aspects of the term structure (inflation expectations, real rates, risk premiums) and aligns well with the cognitive level required to analyze these components. Answer 2 is also aligned but is more limited in scope, focusing primarily on yield curve slope dynamics without delving as deeply into the underlying factors.'}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 introduces varied perspectives by including multiple statements that cover different aspects of the term structure (e.g., yield curve shapes, inflation expectations, risk premiums). This diversity allows for a broader assessment of the topic. Answer 2, while clear, is more uniform in its focus on a single scenario (yield curve steepening) and does not offer the same level of varied perspectives or approaches.'}, 'Overall': {'Winner': 'Answer 1'}}"
+"Question: Assume today is January 1, 2023. You are planning for your retirement on January 1, 2038, and you have two retirement goals. Goal 1: Five months after you retire, you want to go on a vacation to Europe. To do so, you are going to need to withdraw a lump sum payment of $85,000 at the beginning of the fifth month that you retire. Goal 2: Once you retire, at the end of each month you are going to withdraw some money for daily and medical expenses. Your first withdrawal will be at the end of the month that you retire. For your first withdrawal, you want to take $12,000, and after that, you expect that the expenses are going to grow by 0.25% each month and last for 25 years. APR is 6% compounded monthly. a. To fulfil your two retirement goals, what is the total amount that you need to have saved by the time you retire? b. On average your salary is expected to grow at a rate of 0.2% each month, and you are going to deposit 30% of your monthly salary into a savings account. If by the time you retire you have saved $X in total (amount as calculated in part (a)), what is your monthly salary when you make your first deposit? What is your monthly salary when you make your third deposit?
+Type: short-answer
+Options: No options provided.
+","**Question:**  
+
+You are planning for retirement and want to determine how much you need to save annually to reach your goal. You currently have $50,000 in your retirement account and aim to accumulate $1,500,000 by the time you retire in 25 years. The account earns an annual interest rate of 6%, compounded monthly.  
+
+(a) What is the effective annual rate (EAR) for this account?  
+(b) How much must you deposit at the **end** of each year to reach your retirement goal, given your current savings?  
+(c) If you instead make deposits at the **beginning** of each year, how much would your annual deposit need to be?  
+
+**Type:** long-answer  
+**Options:** No options provided.  
+
+*(Assesses: Effective annual rate calculation, future value of annuity for retirement planning, ordinary annuity vs. annuity due adjustments.)*","**Question:**  
+
+Five years ago, Maria invested $5,000 in a savings account, and three years ago, John invested $7,500 in a different account. Today, both investments are worth $6,000 each. Assuming both continue to earn their respective rates of return, which of the following statements is correct?  
+
+**Type:** multiple-choice  
+**Options:**  
+A. Maria earns a higher annual rate of return than John.  
+B. Two years from now, John's investment will be worth more than Maria's.  
+C. One year ago, Maria's investment was worth more than John's.  
+D. John's average annual return is 1.5 times Maria's return.  
+E. Maria’s investment has grown at a compounded rate twice that of John’s.  
+
+**Knowledge points:** Time Value of Money, Rate of Return Calculation, Comparison of Investment Performance","{'Completeness': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 provides a complete question with all necessary components (stem, constraints, and query) to be solvable without ambiguity. It includes multiple parts (a, b, c) that guide the solver through different aspects of the problem. Answer 2, while clear, is a multiple-choice question that lacks the depth and detailed constraints of Answer 1.'}, 'Knowledge Alignment': {'Winner': 'Answer 1', 'Explanation': ""Answer 1 aligns well with the intended knowledge points, focusing on retirement planning, effective annual rate calculation, and annuity adjustments. It targets a higher cognitive level by requiring calculations and comparisons. Answer 2, while relevant to time value of money, simplifies the assessment to a multiple-choice format, which may not fully capture the depth of the original question's knowledge points.""}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 introduces varied perspectives by addressing different aspects of retirement savings (EAR, annual deposits, and timing of deposits). It uses a long-answer format that allows for a comprehensive assessment. Answer 2, though it introduces a comparison between two investments, is limited by its multiple-choice format and does not explore as many facets of the topic as Answer 1.'}, 'Overall': {'Winner': 'Answer 1'}}"
+"Question: Company MNL currently has bond A in the market. Bond A is a 15% 12-year bond which pays out quarterly coupons. Bond A has a face value of $3500. Company MNL just issued a new Bond - Bond B. Bond B sells as a premium bond in which it is sold at 12% above par. Bond B pays out coupon every 6 months and has 15 years to maturity. The YTM for both bonds today is 8%. a. What is the current yield of bond A? b. What is the coupon rate of bond B? c. 6 years from now YTM decreases to 4% for both bonds, and you sell bond A, what is the holding period return for bond A?
+Type: short-answer
+Options: No options provided.
+","**Question:**  
+
+A bond with a face value of $1,000 pays a 6% annual coupon and is currently priced at $1,120. The bond has 8 years remaining until maturity.  
+
+a) Calculate the current yield of the bond.  
+b) If the yield to maturity (YTM) decreases by 1.5% in two years and you sell the bond at that time, what will be the selling price?  
+c) What is the holding period return (HPR) if you buy the bond today and sell it after two years under the conditions in part (b)?  
+
+**Type:** short-answer  
+**Options:** No options provided.  
+
+**Knowledge Points:**  
+- Current yield calculation for bonds  
+- Bond pricing with changing YTM  
+- Holding period return (HPR) determination","**Question:**  
+
+A bond with a face value of $1,000 pays a 6% annual coupon and has 8 years remaining until maturity. The bond is currently priced at $1,100.  
+
+a) What is the current yield of the bond?  
+b) If the yield to maturity (YTM) decreases by 1.5% in two years and you sell the bond at that time, what will be your holding period return (HPR)?  
+
+**Type:** short-answer  
+**Options:** No options provided.  
+
+**Knowledge points:**  
+- Current yield calculation for bonds  
+- Holding period return for bonds with changing YTM  
+- Bond price determination with changing YTM","{'Completeness': {'Winner': 'Answer 1', 'Explanation': ""Answer 1 includes all necessary components (stem, constraints, and query) to be solvable without ambiguity. It clearly defines the bond's face value, coupon rate, current price, and remaining maturity, and it asks three distinct questions (current yield, selling price after YTM change, and holding period return). Answer 2, while also complete, omits the explicit calculation of the selling price after the YTM change, which is a key intermediate step for determining the HPR.""}, 'Knowledge Alignment': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 accurately targets the intended knowledge points (current yield, bond pricing with changing YTM, and HPR) and aligns well with the cognitive level required to solve the original question. It explicitly asks for the selling price after a YTM change, which is a critical step in understanding bond pricing dynamics. Answer 2 also aligns well but skips the explicit selling price calculation, which slightly weakens its alignment with the full scope of the knowledge points.'}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 introduces more varied perspectives and approaches by explicitly asking for the selling price after a YTM change before calculating the HPR. This adds an additional layer of complexity and understanding. Answer 2, while still diverse, combines the selling price and HPR into a single question, which slightly reduces the diversity of assessment approaches.'}, 'Overall': {'Winner': 'Answer 1'}}"
+"Question: Company RA is going to undertake a large project in collaboration with Company EF. Company RA will undertake on the project starting today, the beginning of the year. The project will cost $15,000,000 in today's value, and it will take full 7 years in total to complete (i.e. the project is completed at the end of the 7th year). After the project is completed, company EF is going to pay company RA $20,000,000 in a lump sum, and it is agreed that the payment will be paid exactly two months after the project is completed. 80% of the project cost is financed by a loan. Company RA arranged a 20-year loan today with a bank, and company RA is required to make fixed equal payments every month. (The first repayment will be made at the end of this month). a. If the APR is 3%, how much does company RA need to repay each month? b. Exactly one month after Company RA receives payments from Company EF (after the loan repayment for that month is made), the company is going to repay all remaining instalments of the bank loan in one balloon payment. How large would the balloon payment be?
+Type: short-answer
+Options: No options provided.
+","**Question:**  
+
+You are considering taking out a $300,000 mortgage to buy a house. The loan has a 30-year term with a fixed annual interest rate of 4.5%, compounded monthly.  
+
+a. Calculate the **monthly mortgage payment** required to fully amortize the loan over the 30-year period.  
+
+b. After making payments for 10 years, you decide to refinance the remaining balance at a new rate of 3.75% for the remaining 20 years. What will be your **new monthly payment** after refinancing?  
+
+c. How much **total interest** will you save over the life of the loan by refinancing after 10 years?  
+
+**Type:** short-answer  
+**Options:** No options provided.  
+
+**Knowledge Points:** Loan amortization, Present value of an annuity, Time value of money, Refinancing calculations.","**Question:**  
+
+A homebuyer is taking out a 30-year mortgage for $400,000 at a fixed annual interest rate of 5%. The loan requires monthly payments, with the first payment due one month from today. However, the buyer also agrees to a **balloon payment** of $100,000 at the end of the 10th year to reduce the principal early.  
+
+a) Calculate the **monthly mortgage payment** (excluding the balloon payment).  
+b) Determine the **remaining loan balance** immediately after the balloon payment is made at the end of Year 10.  
+c) If the buyer refinances the remaining balance at Year 10 for another 20 years at a reduced rate of 4%, what will be the new **monthly payment**?  
+
+**Type:** long-answer  
+**Options:** No options provided.  
+**Knowledge Points:** Time Value of Money, Loan Amortization, Balloon Payment Calculation, Refinancing.","{'Completeness': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 provides a clear and complete question with all necessary components (stem, constraints, and query) to be solvable without ambiguity. It includes three parts (a, b, c) that guide the solver through a logical sequence of calculations. Answer 2, while also complete, introduces a balloon payment which adds complexity but does not necessarily make the question more complete.'}, 'Knowledge Alignment': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 accurately targets the intended knowledge points (Loan amortization, Present value of an annuity, Time value of money, Refinancing calculations) and maintains a consistent cognitive level throughout. Answer 2 also aligns well but introduces a balloon payment scenario which, while relevant, slightly deviates from the straightforward loan amortization and refinancing focus of the original question.'}, 'Diversity': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 introduces a more varied perspective by including a balloon payment and refinancing scenario, which adds diversity to the question format and approach. This makes the question more dynamic and tests the solver's ability to handle multiple financial concepts in one scenario. Answer 1, while thorough, follows a more traditional and linear approach.""}, 'Overall': {'Winner': 'Answer 1'}}"
+"Question: Below is a summary of dividends paid by stock XY issued by Company XY. Each dividend of this stock is paid on Jan 1st. 2002 Jan 1st Company XY just paid a dividend of $3, and company XY announced that to prepare financially for a project, dividend paid is going to fall by $1 each year for the following two years. That is, the 2003 dividend will be $1 less than 2002, and the 2004 dividend will be $1 less than 2003. 2005 Jan 1st – 2008 Jan 1st When Company XY undertake the project, there were no dividend paid 2009 Jan 1st Project was completed and a dividend of $2 was paid on 2009 Jan 1st. Company XY announced that for the following years the growth rate of dividend will be 2%. The growth rate will then increase by 2 percentage point each year until it reaches 6%, afterwards the dividend would grow at a growth rate of 6% indefinitely. The required return for stock XY is 9%. What is the price of the stock XY on 2002 Jan 1st?
+Type: short-answer
+Options: No options provided.
+","**Question:**  
+TechGrow Inc. just paid a dividend of $5 per share. The company expects its dividends to grow at a rapid rate of 18% annually for the next five years. After this period, the growth rate will stabilize at a constant rate of 5% per year indefinitely. If the required rate of return for TechGrow's stock is 12%, what is the current value of the stock today?  
+
+**Type:** short-answer  
+**Options:** No options provided.  
+**Knowledge Points:** Dividend Discount Model (DDM) two-stage growth model, Present value of high-growth phase dividends, Terminal value calculation post high-growth phase.","**Question:**  
+Greenfield Industries just paid a dividend of $1.50 per share. The company expects dividends to grow at a high rate of 15% for the next five years, after which the growth rate will stabilize at a constant 4% indefinitely. If the required rate of return on the stock is 10%, what is the current stock price?  
+
+**Type:** short-answer  
+**Options:** No options provided.  
+
+**Knowledge Points:**  
+Dividend Discount Model DDM, High growth and normal growth phase valuation, Present value of irregular dividends, Required return and growth phases.","{'Completeness': {'Winner': 'Answer 1', 'Explanation': ""Both questions contain all necessary components (stem, constraints, and query) to be solvable without ambiguity. However, Answer 1 provides a slightly clearer structure by explicitly mentioning the two-stage growth model and the terminal value calculation, which aids in understanding the problem's requirements.""}, 'Knowledge Alignment': {'Winner': 'Answer 1', 'Explanation': ""Answer 1 more accurately targets the intended knowledge point by explicitly mentioning the Dividend Discount Model (DDM) two-stage growth model, which aligns closely with the original question's complexity and cognitive level. Answer 2, while also aligned, does not explicitly mention the two-stage model, which is a key aspect of the original question.""}, 'Diversity': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 introduces a slightly more varied perspective by using different growth rates and a different initial dividend, which provides a different context while still assessing the same knowledge point. This variation helps in testing the same concept under slightly different conditions, enhancing the diversity of assessment.'}, 'Overall': {'Winner': 'Answer 1'}}"
