@@ -26,17 +26,19 @@ st_model = sentence_transformers.SentenceTransformer(
     'sentence-transformers/all-mpnet-base-v2')
 embedder = lambda x: st_model.encode(x, show_progress_bar=False)
 
-# api_type = 'ollama'
-# model_name = 'qwen2.5:14b'
+print(f"get the embedder")
+
 disable_language_model = False
 if disable_language_model:
     model = no_language_model.NoLanguageModel()
 else:
     model = get_model(
-        model_name="deepseek-ai/DeepSeek-V3",
-        # model_name='Qwen/Qwen2.5-14B-Instruct',
+        # model_name="deepseek-ai/DeepSeek-V3",
+        model_name='Qwen/Qwen2.5-14B-Instruct',
         api_key="sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo",
     )
+
+print(f"get the model")
 
 # the memory bank
 memory_bank = KnowledgePointMemory(
@@ -311,6 +313,8 @@ if __name__ == "__main__":
             combined_questions.append(formatted_str)
         return combined_questions
 
+    
+    print(f"preprocessing datasets")
     file_names = ['20_fina_1310.json', '21_fina_1310.json']
     readers = [DatasetReader(data_path='..\\dataset', file_name=file_name, preprocess_func=format_question) for file_name in file_names]
     data = []
@@ -319,6 +323,7 @@ if __name__ == "__main__":
     agent = EduLLM_Agent(model, embedder, memory_bank, rag_tool, bloom_classifier, knowledge_point_extractor)
     agent._preprocess_past_paper(data)
     
+    print(f"generating dataset")
     test_reader = DatasetReader(data_path='..\\dataset', file_name='23_fina_1310.json', preprocess_func = format_question)
     test_data = test_reader.get_data()
     
@@ -329,7 +334,6 @@ if __name__ == "__main__":
     # Clear the terminal
     os.system('cls' if os.name == 'nt' else 'clear')
     
-    # result_direct = agent._generate_question_from_pastpaper_with_knowledge_point(test_data)
     
     
     # select the method here
