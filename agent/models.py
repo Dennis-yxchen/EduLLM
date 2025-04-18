@@ -84,7 +84,7 @@ class CustomOpenAI(CustomBaseGPTModel):
     self._api_key = api_key
     client = OpenAI(
         base_url='https://api.siliconflow.cn/v1',
-        api_key=self._api_key
+        api_key=self._api_key,
     )
     
     super().__init__(model_name=model_name,

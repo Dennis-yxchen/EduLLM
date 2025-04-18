@@ -6,6 +6,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 from main_function import get_model
 from data_utils.dataset_reader import DatasetReader
 import tqdm
+import openai
 model = get_model(
             model_name="deepseek-ai/DeepSeek-V3",
             # model_name='Qwen/Qwen2.5-14B-Instruct',
@@ -91,6 +92,7 @@ def evaluate_questions(question_pairs, goal_prompt, role_prompt):
             # print(json.dumps(evaluation, indent=2))
             with open(f'./result_0417/evaluation.json', 'a', encoding='utf-8') as f:
                 json.dump({
+                    'index': i,
                     "Question": question,
                     "Baseline": generated_question_baseline,
                     "EDULLM": generated_question_EDULLM,
@@ -98,11 +100,31 @@ def evaluate_questions(question_pairs, goal_prompt, role_prompt):
                 }, f, ensure_ascii=False)
                 f.write('\n')
             
-            
-        except json.JSONDecodeError as e:
-            # print(f"Error parsing JSON response for pair {i}: {e}")
-            # print(f"Model response: {model_response}")
+        except openai.APIError as e:
+            # Handle OpenAI timeout error
             results.append({
+                'index': i,
+                "Question": question,
+                "Baseline": generated_question_baseline,
+                "EDULLM": generated_question_EDULLM,
+                "Error": "OpenAI Timeout Error",
+                "RawResponse": str(e)
+            })
+            with open(f'./result_0417/evaluation_error.json', 'a', encoding='utf-8') as f:
+                json.dump({
+                    'index': i,
+                    "Question": question,
+                    "Baseline": generated_question_baseline,
+                    "EDULLM": generated_question_EDULLM,
+                    "Error": "OpenAI Timeout Error",
+                    "RawResponse": str(e)
+                }, f, ensure_ascii=False)
+                f.write('\n')
+
+        except json.JSONDecodeError as e:
+            # Handle JSON parsing error
+            results.append({
+                'index': i,
                 "Question": question,
                 "Baseline": generated_question_baseline,
                 "EDULLM": generated_question_EDULLM,
@@ -111,12 +133,13 @@ def evaluate_questions(question_pairs, goal_prompt, role_prompt):
             })
             with open(f'./result_0417/evaluation_error.json', 'a', encoding='utf-8') as f:
                 json.dump({
-                "Question": question,
-                "Baseline": generated_question_baseline,
-                "EDULLM": generated_question_EDULLM,
-                "Error": "Failed to parse evaluation",
-                "RawResponse": model_response
-            }, f, ensure_ascii=False)
+                    'index': i,
+                    "Question": question,
+                    "Baseline": generated_question_baseline,
+                    "EDULLM": generated_question_EDULLM,
+                    "Error": "Failed to parse evaluation",
+                    "RawResponse": model_response
+                }, f, ensure_ascii=False)
                 f.write('\n')
     
     # Print summary statistics
@@ -195,17 +218,26 @@ if __name__ == "__main__":
     original_path = r'./result_0417'
     original_question = get_original_question(original_path)    
     # raise
-    baseline = get_data(os.path.join(original_path, '2025_04_16_19_42_54_directly.json'))
-    EduLLM_KP = get_data(os.path.join(original_path, '2025_04_16_17_14_29_KP.json'))
+    baseline = get_data(os.path.join(original_path, 'vanillaRAG.json'))
+    EduLLM_KP = get_data(os.path.join(original_path, 'KP.json'))
     
-    print("Original question length: ", len(original_question))
-    print("Baseline length: ", len(baseline))
-    print("EduLLM_KP length: ", len(EduLLM_KP))
+    # print("Original question length: ", len(original_question))
+    # print("Baseline length: ", len(baseline))
+    # print("EduLLM_KP length: ", len(EduLLM_KP))
+    # result = evaluate_questions(tuple(zip(
+    #     original_question, EduLLM_KP, baseline
+    #     )), goal_prompt, role_prompt)
+    
+    error_handle_question = original_question[-3:]
+    error_baseline = baseline[-3:]
+    error_EduLLM_KP = EduLLM_KP[-3:]
+    
+    
     result = evaluate_questions(tuple(zip(
-        original_question, EduLLM_KP, baseline
+        error_handle_question, error_EduLLM_KP, error_baseline
         )), goal_prompt, role_prompt)
     
     import pandas as pd
     df = pd.DataFrame(result)
-    df.to_csv(fr'{ABS_DIR}\evaluation_results_with_original_question.csv', index=False)
+    df.to_csv(fr'{ABS_DIR}\evaluation_results_VRAG_VS_KPB.csv', index=False)
     print("Evaluation results saved to evaluation_results.csv")
