@@ -94,6 +94,7 @@ def create_kb():
         flash(f"Knowledge Base '{safe_name}' already exists!")
     return redirect(url_for('index'))
 
+
 @app.route('/rename_kb', methods=['POST'])
 def rename_kb():
     """
