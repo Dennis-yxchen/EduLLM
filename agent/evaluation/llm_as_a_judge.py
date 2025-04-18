@@ -4,7 +4,7 @@ import sys
 
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 
-from main_function_ import get_model
+from main_function_for_evaluation import get_model
 from data_utils.dataset_reader import DatasetReader
 import tqdm
 import openai
