@@ -161,7 +161,7 @@ class KnowledgePointMemory(NaiveAssociativeMemory):
           按余弦相似度降序排序的行。
         """
         with self._memory_bank_lock:
-            cosine_similarities = self._memory_bank['embedding'].apply(
+            cosine_similarities = self._memory_bank['text_embedding'].apply(
                 lambda y: np.dot(x, y)
             )
 
@@ -185,10 +185,11 @@ class KnowledgePointMemory(NaiveAssociativeMemory):
           按相似度降序排序的行。
         """
         with self._memory_bank_lock:
-            cosine_similarities = self._memory_bank['embedding'].apply(
+            # print(f"x: {x.shape}")
+            # print(f"self._memory_bank['text_embedding']: {self._memory_bank['text_embedding'].shape}")
+            cosine_similarities = self._memory_bank['text_embedding'].apply(
                 lambda y: np.dot(x, y)
             )
-
             similarity_score = cosine_similarities
 
             if use_importance:
@@ -208,7 +209,7 @@ class KnowledgePointMemory(NaiveAssociativeMemory):
         返回与输入向量x相似度大于阈值的行
         """
         with self._memory_bank_lock:
-            cosine_similarities = self._memory_bank['embedding'].apply(
+            cosine_similarities = self._memory_bank['text_embedding'].apply(
                 lambda y: np.dot(x, y)
             )
 
@@ -283,6 +284,7 @@ class KnowledgePointMemory(NaiveAssociativeMemory):
         """
         # Get query embedding
         query_embedding = self._embedder(query)
+        print('query_embedding:', query_embedding.shape)
 
         # Get similar rows using pandas DataFrame
         similar_rows = self._get_top_k_similar_rows(
@@ -525,3 +527,4 @@ if __name__ == "__main__":
     rag.add_question_to_memory("Analyze financial health via DuPont ROE decomposition", 
             knowledge_points=["return_on_equity", "profit_margins", "asset_turnover_ratio"])
     print(rag.retrieve_question_by_keywords(['coding'], 4))
+    print(rag.retrieve_question_by_similarity('How to reverse a string in Python?', 4))
