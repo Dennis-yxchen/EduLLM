@@ -6,7 +6,8 @@ class KnowledgePointExtractor():
         self._model = model
         self._max_knowledge = max_knowledge
         
-        
+    
+    # extract the knowledge point from question
     def extract_knowledge_point(self, original_question, learning_outcome:tuple[str]=None):
         # this question assess which learning outcome?
         question = (
