@@ -3,7 +3,6 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-print(sys.path)
 
 from main_function_ import get_model
 from data_utils.dataset_reader import DatasetReader
