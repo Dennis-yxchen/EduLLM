@@ -1,0 +1,380 @@
+index,Question,Baseline,EDULLM,Evaluation
+1,"Question: Which of the following decision(s) is(are) associated with capital structure management? I. Company XYZ deciding to build a new plant in India II. Company XYZ deciding to issue $15million worth of new bonds in the stock market III. Company XYZ deciding to take a 25-year loan from a bank at an APR of 8% IV. Company XYZ deciding to use cash to purchase $20,000 of raw materials from its supplier
+Type: multiple-choice
+Options:
+    a. II only
+    b. III only
+    c. IV only
+    d. I and II only
+    e. II and III only
+    f. II and IV only
+","**Question:** A company is considering different financing options to raise capital for a new project. The management team is evaluating the trade-offs between issuing new equity and taking on additional debt. Which of the following statements accurately describes the impact of these financing decisions on the company's capital structure?  
+
+**Type:** multiple-choice  
+**Options:**  
+A. Issuing new equity will increase financial leverage and reduce the risk of bankruptcy.  
+B. Taking on additional debt will dilute existing shareholders' ownership but lower the cost of capital.  
+C. Using debt financing increases tax shields due to interest deductibility but also raises financial risk.  
+D. Equity financing does not affect the company's control structure or voting rights of existing shareholders.  
+E. Both debt and equity financing have identical impacts on a firm's weighted average cost of capital (WACC).  
+
+**Knowledge Points:**  
+- Capital structure management  
+- Debt vs. equity financing trade-offs  
+- Impact of financing decisions on financial risk and cost of capital","**Question:** Which of the following decision(s) is(are) associated with working capital management?  
+I. Company ABC deciding to extend its accounts payable period from 30 to 45 days  
+II. Company ABC deciding to issue $10 million in new common stock  
+III. Company ABC deciding to increase its inventory levels by 20% to prepare for seasonal demand  
+IV. Company ABC deciding to invest in a new long-term project with a 10-year payback period  
+
+Type: multiple-choice  
+Options:  
+    a. I only  
+    b. III only  
+    c. I and III only  
+    d. II and IV only  
+    e. I, II, and III only  
+    f. II, III, and IV only","{'Completeness': {'Winner': 'Answer 1', 'Explanation': ""Answer 1 provides a clear stem, constraints, and query, making it solvable without ambiguity. The question is well-structured and includes all necessary components. Answer 2, while complete, slightly deviates from the original question's focus on capital structure management by shifting to working capital management, which might confuse the test-taker regarding the intended knowledge point.""}, 'Knowledge Alignment': {'Winner': 'Answer 1', 'Explanation': ""Answer 1 accurately targets the intended knowledge point of capital structure management and the cognitive level by focusing on the trade-offs between debt and equity financing. It aligns well with the original question's intent. Answer 2, however, shifts focus to working capital management, which is a different topic and does not align with the original question's knowledge point.""}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 introduces varied perspectives by discussing the impacts of different financing decisions on capital structure, financial risk, and cost of capital. It offers a deeper exploration of the topic. Answer 2, while diverse in its options, does not provide the same level of varied perspectives or depth as it shifts to a different topic (working capital management).'}, 'Overall': {'Winner': 'Answer 1'}}"
+2,"Question: Which of the following statement(s) is (are) true about business organizational forms? I. When the CEO of a corporation holds more equity shares of this corporation, the agency problem is less severe II. A general partnership has limited liability III. A disadvantage of corporation is it is double taxed IV. It is easier to start a business as a corporation than as a sole proprietorship V. Sole proprietorships are taxed on personal income VI. It is hard for sole proprietorships to raise capital and they have limited growth opportunities
+Type: multiple-choice
+Options:
+    a. I, II, III and V only
+    b. II, III, IV and VI only
+    c. I, III, V, and VI only
+    d. I, III, IV, and V only
+    e. II, IV, V, and VI only
+    f. All I, II, II, IV, V and VI are true
+","**Question**: A corporation is considering issuing dividends to its shareholders. The board of directors is aware that distributing profits as dividends will result in the shareholders being taxed on this income, and the corporation itself cannot deduct these dividend payments from its taxable income. Which of the following best describes this situation? Type: multiple-choice Options:     A. Agency problem     B. Double taxation     C. General partnership liability     D. Limited liability     E. Dividend exemption 
+knowledge points: Corporation double taxation,Shareholder taxation,Dividend distribution","**Question:** Which of the following statement(s) is (are) accurate regarding financial management and business structures?  
+I. A sole proprietorship has unlimited liability but is the easiest business form to establish.  
+II. In a corporation, shareholders have limited liability, but the business faces double taxation.  
+III. A limited partnership must have at least one general partner who manages the business and assumes unlimited liability.  
+IV. The primary goal of financial management is to maximize shareholder wealth, not just profits.  
+V. A general partnership does not require a formal agreement and all partners share liability equally.  
+VI. Agency problems arise when managers prioritize personal interests over shareholder interests.  
+
+Type: multiple-choice  
+Options:  
+    a. I, II, and IV only  
+    b. II, III, V, and VI only  
+    c. I, II, III, and VI only  
+    d. I, III, IV, and V only  
+    e. II, IV, V, and VI only  
+    f. All I, II, III, IV, V, and VI are true","{'Completeness': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 includes a stem, multiple statements (constraints), and a clear query with multiple-choice options, making it fully solvable without ambiguity. Answer 1, while complete, is simpler and lacks the depth of multiple statements, which could limit its ability to fully assess the knowledge point.'}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 accurately targets a broader range of knowledge points related to financial management and business structures, aligning well with the original question's intent. Answer 1 focuses narrowly on double taxation, which, while relevant, does not cover as much ground as Answer 2.""}, 'Diversity': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 introduces varied perspectives and formats by including multiple statements (I-VI) that cover different aspects of business structures and financial management. This diversity allows for a more comprehensive assessment of the topic. Answer 1, while clear, is more limited in scope and does not offer the same level of varied assessment.'}, 'Overall': {'Winner': 'Answer 2'}}"
+3,"Question: Which of the following statement(s) is(are) true about a discount bond? I. Price of bond will decrease over time as it approaches maturity, given all else unchanged II. Before the bond matures, the price of the bond is lower than its face value III. Coupon rate of the bond is lower than the yield to maturity IV. Bond value will decrease if coupon rate decreases, given all else unchanged V. Value of the bond would decrease if the yield to maturity decrease, given all else unchanged
+Type: multiple-choice
+Options:
+    a. II, III and IV only
+    b. I, II, and IV only
+    c. I, II, III, and IV only
+    d. II, III, IV and V only
+    e. I, II, III and V only
+    f. All I, II, III, IV and V are true
+","**Question:** A bond is currently trading at a price above its par value. Which of the following statements must be true for this bond?  
+
+I. The bond is selling at a premium.  
+II. The yield to maturity is higher than the coupon rate.  
+III. The coupon rate is higher than the yield to maturity.  
+IV. The current yield is less than the coupon rate.  
+V. The bond is a zero-coupon bond.  
+
+**Type:** multiple-choice  
+**Options:**  
+A. I and III only  
+B. I and IV only  
+C. I, III, and IV  
+D. II and V only  
+E. III and V only  
+
+**Knowledge points:** Relationship between bond price and yield to maturity, Bond pricing terminology (premium vs. discount), Coupon rate and yield comparisons, Current yield vs. coupon rate.","**Question:** Which of the following statement(s) is(are) true about a premium bond?  
+I. Price of the bond will increase over time as it approaches maturity, given all else unchanged  
+II. Before the bond matures, the price of the bond is higher than its face value  
+III. Coupon rate of the bond is higher than the yield to maturity  
+IV. Bond value will increase if coupon rate increases, given all else unchanged  
+V. Value of the bond would increase if the yield to maturity decreases, given all else unchanged  
+
+Type: multiple-choice  
+Options:  
+    a. II, III and IV only  
+    b. I, II, and IV only  
+    c. I, II, III, and IV only  
+    d. II, III, IV and V only  
+    e. I, II, III and V only  
+    f. All I, II, III, IV and V are true","{'Completeness': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 is more complete as it mirrors the structure of the original question, including all necessary components (stem, constraints, and query) without ambiguity. Answer 1, while clear, introduces a slightly different scenario (bond trading above par value) which deviates from the original question's focus on discount bonds, potentially causing confusion.""}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 aligns more closely with the original question's knowledge point about bond pricing and characteristics, specifically focusing on premium bonds, which is the inverse of discount bonds. This maintains the cognitive level and intent of the original question. Answer 1, while relevant, shifts focus to a bond trading above par value, which is a related but distinct concept.""}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 introduces a different scenario (bond trading above par value) and includes a mix of statements about premium bonds, yield to maturity, and current yield, providing a broader perspective on bond pricing. This adds diversity in assessing the topic. Answer 2, while well-aligned, follows a very similar format and approach to the original question, offering less diversity.'}, 'Overall': {'Winner': 'Answer 2'}}"
+4,"Question: Which of the above bond has the lowest interest rate risk? Bond A is a 13-year bond that pays out annual coupon of $40 and has a face value of $2000. Bond B will mature in 10 years and has a coupon rate of 9%. Bond C is a zero-coupon bond that has a time to maturity of 15 years. Bond D has an annual coupon payment of $20 and will mature in 20 years. Bond E is a 15-year bond with a face value of $3,000 and pays out annual coupons of $270.
+Type: multiple-choice
+Options:
+    a. Bond A
+    b. Bond B
+    c. Bond C
+    d. Bond D
+    e. Bond E
+    f. Not enough information is available
+","**Question:** Which of the following bonds will experience the greatest percentage change in price for a given shift in interest rates?  
+
+**Type:** multiple-choice  
+**Options:**  
+A. A 5-year bond with a 6% coupon rate  
+B. A 10-year bond with a 6% coupon rate  
+C. A 10-year zero-coupon bond  
+D. A 5-year zero-coupon bond  
+E. A 20-year bond with a 4% coupon rate  
+
+**Knowledge points:**  
+- Impact of maturity on bond price sensitivity  
+- Effect of coupon payments on interest rate risk  
+- Zero-coupon bond price volatility compared to coupon bonds","**Question:** XYZ Corporation has five different bonds currently outstanding. Which one of the following bonds has the greatest interest rate risk? 
+
+Bond F is a 12-year bond that pays an annual coupon of $50 and has a face value of $1,500.  
+Bond G will mature in 8 years and has a coupon rate of 8%.  
+Bond H is a zero-coupon bond with a time to maturity of 18 years.  
+Bond I has an annual coupon payment of $30 and will mature in 25 years.  
+Bond J is a 10-year bond with a face value of $2,000 and pays annual coupons of $160.  
+
+Type: multiple-choice  
+Options:  
+    a. Bond F  
+    b. Bond G  
+    c. Bond H  
+    d. Bond I  
+    e. Bond J  
+    f. Not enough information is available","{'Completeness': {'Winner': 'Answer 2', 'Explanation': ""Both questions are complete in terms of stem, constraints, and query, but Answer 2 provides more detailed bond descriptions (e.g., face value, coupon payments) similar to the original question, making it more aligned with the original's structure and clarity.""}, 'Knowledge Alignment': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 directly targets the knowledge point of interest rate risk and price sensitivity, with options that clearly vary in maturity and coupon structure to test the concept. Answer 2, while also aligned, is more similar to the original question and does not introduce new dimensions to the knowledge point.'}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': ""Answer 1 introduces a different format by asking about the 'greatest percentage change in price' rather than just 'lowest interest rate risk,' and includes a mix of coupon and zero-coupon bonds with varying maturities. This provides a broader assessment of the topic. Answer 2 is more repetitive of the original question's structure and lacks this variation.""}, 'Overall': {'Winner': 'Answer 1'}}"
+5,"Question: High Growth Bank wants to charge an EAR of 9% on their borrowers. If quarterly compounding is used, the bank needs to report an APR of _____. Choose the closest answer.
+Type: multiple-choice
+Options:
+    a. 8.5%
+    b. 8.7%
+    c. 8.9%
+    d. 9.0%
+    e. 9.4%
+","**Question**: A savings account offers a nominal interest rate of 6% per year, but compounds interest monthly. Another savings account offers a nominal rate of 6.1% per year, but compounds interest annually. Which account provides a higher effective annual rate (EAR)? Type: multiple-choice Options:  
+A. The first account; monthly compounding results in a higher EAR.  
+B. The second account; the higher nominal rate outweighs the lower compounding frequency.  
+C. Both accounts have the same EAR because the nominal rates are nearly identical.  
+D. The first account; the compounding frequency has no effect on the EAR.  
+E. The second account; annual compounding always yields a higher EAR than monthly compounding.  
+knowledge points: Effective annual rate EAR, Annual percentage rate APR, Compounding frequency impact, Nominal vs. effective interest rates","**Question:** Prosperity Credit Union aims to offer an EAR of 6% on their savings accounts. If monthly compounding is used, the credit union needs to advertise an APR of _____. Choose the closest answer.
+Type: multiple-choice
+Options:
+    a. 5.5%
+    b. 5.8%
+    c. 6.0%
+    d. 6.2%
+    e. 6.5%","{'Completeness': {'Winner': 'Answer 2', 'Explanation': ""Both questions are complete with a stem, constraints, and query, but Answer 2 mirrors the original question's structure more closely, making it immediately clear what is being asked. Answer 1, while complete, introduces a comparison between two accounts, which adds complexity but does not necessarily improve completeness.""}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 directly aligns with the original question's knowledge point, focusing on the relationship between EAR and APR with a given compounding frequency. Answer 1, while related, shifts the focus to comparing two different accounts, which slightly deviates from the original question's intent of calculating APR from EAR.""}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 introduces a different perspective by comparing two accounts with different compounding frequencies and nominal rates, which adds variety in assessing the understanding of EAR and compounding effects. Answer 2, while well-aligned, follows a very similar format to the original question, offering less diversity in approach.'}, 'Overall Winner': 'Answer 2', 'Overall Explanation': ""While Answer 1 offers more diversity, Answer 2 wins overall due to its superior completeness and knowledge alignment. It stays truer to the original question's intent and structure, making it a more effective assessment tool for the targeted knowledge point."", 'Overall': {'Winner': 'Answer 2'}}"
+6,"Question: Stock ABC is a constant growth stock that would pay out dividends each year till forever. A dividend of $2 was just paid today and the price of stock ABC today is $210. One year from today (at the end of Year 1), the stock price is $220.5 (after Year-1’s dividend is just paid). The required return is _____, capital gains yield is _____, dividend yield is _____. Choose the closest answer.
+Type: multiple-choice
+Options:
+    a. 6.5%, 5%, 1.1%
+    b. 6%, 1%, 5%
+    c. 6%, 5%, 1%
+    d. 5%, 1%, 4%
+    e. 5.5%, 5%, 0.5%
+","**Question:**  
+ABC Corporation has a required rate of return of 8%. The company just paid a dividend of $1.50 per share, and its dividends are expected to grow at a constant rate of 5% per year indefinitely. What is the expected dividend yield for ABC Corporation's stock this year?  
+
+**Type:** multiple-choice  
+**Options:**  
+A. 3%  
+B. 3.5%  
+C. 4%  
+D. 4.5%  
+E. Not enough information to answer  
+
+**Knowledge points:**  
+Dividend Discount Model with constant growth, Dividend yield calculation, Relationship between required return and growth rate","**Question:** Stock XYZ is a constant growth stock that pays dividends annually indefinitely. A dividend of $3 was just paid today, and the current stock price is $150. One year from today (at the end of Year 1), the stock price is projected to be $157.5 (after Year-1’s dividend is paid). The required return is _____, capital gains yield is _____, and dividend yield is _____. Choose the closest answer.
+Type: multiple-choice
+Options:
+    a. 7%, 5%, 2%
+    b. 6%, 4%, 2%
+    c. 8%, 5%, 3%
+    d. 5%, 3%, 2%
+    e. 7.5%, 5%, 2.5%","{'Completeness': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 includes all necessary components (stem, constraints, and query) to be solvable without ambiguity, similar to the original question. It provides the current dividend, stock price, and projected future stock price, along with a clear query about required return, capital gains yield, and dividend yield. Answer 1, while complete, lacks the multi-part query and comprehensive data points present in Answer 2 and the original question.'}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 more closely aligns with the original question's knowledge point, which involves calculating required return, capital gains yield, and dividend yield for a constant growth stock. Answer 1 focuses solely on dividend yield, which narrows the scope and does not fully capture the breadth of the original question's intent.""}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 introduces a different format by focusing on a single aspect (dividend yield) and provides a simpler, more straightforward question. This variation offers a different perspective and approach to assessing the topic, which adds diversity compared to the more complex, multi-part questions in Answer 2 and the original question.'}, 'Overall': {'Winner': 'Answer 2'}}"
+7,"Question: Below the table shows the credit ratings of bonds and the corresponding YTMs. A bond has an AA rating. The price of the bond is $2040.16 and this bond makes semi-annual coupon payments. If it matures in 20 years, what is the coupon rate of this bond? Choose the closest answer.
+Type: multiple-choice
+Options:
+    a. 5%
+    b. 10%
+    c. 15%
+    d. 20%
+    e. 25%
+","**Question:**  
+
+A bond with a face value of $1,000 pays semi-annual coupons and has a current price of $1,150. The bond has a yield to maturity (YTM) of 5% and 8 years remaining until maturity.  
+
+a) What is the semi-annual coupon payment of the bond?  
+b) What is the annual coupon rate of the bond?  
+
+**Type:** short-answer  
+**Options:** No options provided.  
+
+**Knowledge Points:**  
+- Bond pricing and YTM relationship  
+- Semi-annual coupon payments calculation  
+- Coupon rate determination from bond price","**Question:** A corporate bond has a BBB rating and a face value of $1,000. The bond is currently priced at $1,250.50 and pays semi-annual coupons. If the bond matures in 15 years, what is its yield to maturity (YTM)? Choose the closest answer.  
+Type: multiple-choice  
+Options:  
+    a. 4.5%  
+    b. 5.0%  
+    c. 5.5%  
+    d. 6.0%  
+    e. 6.5%","{'Completeness': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 provides all necessary components (stem, constraints, and query) in a clear and solvable format, including a multiple-choice structure with specific options. Answer 1, while detailed, lacks options for the short-answer format, which could lead to ambiguity in expected responses.'}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 accurately targets the knowledge point of yield to maturity (YTM) calculation, which is closely related to the original question's focus on bond pricing and coupon rates. Answer 1 shifts focus to coupon payment and rate calculations, which, while relevant, are not as directly aligned with the original question's intent.""}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 introduces diversity by breaking the question into two parts (semi-annual coupon payment and annual coupon rate) and using a short-answer format, which offers a different approach to assessing the topic. Answer 2, while well-structured, follows a more traditional multiple-choice format similar to the original question.'}, 'Overall': {'Winner': 'Answer 2'}}"
+8,"Question: Stock Alpha just paid out a dividend of $50 today. The dividend payment will be made annually with a 2% growth rate over the next 15 years. After that, the dividend payments will remain at a constant level. The required return is 9%. Stock Gamma is going to pay a dividend of $15 today, and it will make constant quarterly dividend payments till forever. The current market price is $765. Which of the below statement(s) is(are) true about stock Alpha and stock Gamma? I. In terms of APR, the required return is lower for stock Alpha than stock Gamma II. Price of stock Alpha today is higher than stock Gamma
+Type: multiple-choice
+Options:
+    a. None of the statements are true
+    b. I only
+    c. II only
+    d. Both I and II are true
+","**Question:**  
+TechGen Inc. just paid an annual dividend of $2.00 per share. Analysts expect the company's dividends to grow at a high rate of 15% per year for the next five years. After that, the growth rate is expected to stabilize at a constant rate of 5% per year indefinitely. If the required rate of return for TechGen's stock is 12%, what is the current intrinsic value of the stock?  
+
+**Type:** short-answer  
+**Options:** No options provided.  
+
+**Knowledge points:**  
+Dividend Discount Model DDM, Two-stage growth model, Present value of dividends and terminal value.","**Question:**  
+Stock Beta recently paid a dividend of $25 today. The dividend will grow at a rate of 5% annually for the next 10 years, after which it will stabilize and remain constant indefinitely. The required return on the stock is 12%. Stock Delta pays a quarterly dividend of $8, and these payments will continue forever. The current market price of Stock Delta is $320. Which of the following statements is/are true about Stock Beta and Stock Delta?  
+
+**I.** The effective annual required return is higher for Stock Beta than for Stock Delta.  
+**II.** The current price of Stock Beta is greater than the current price of Stock Delta.  
+
+**Type:** multiple-choice  
+**Options:**  
+a. None of the statements are true  
+b. I only  
+c. II only  
+d. Both I and II are true","{'Completeness': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 includes all necessary components (stem, constraints, and query) to be solvable without ambiguity. It provides a clear scenario for both stocks, specifies the growth rates, required returns, and asks a direct multiple-choice question. Answer 1, while complete in terms of providing a scenario and a question, lacks options for a multiple-choice format, which could be seen as less complete for assessing understanding in a structured way.'}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 accurately targets the intended knowledge points, which include the Dividend Discount Model (DDM), two-stage growth model, and the comparison of required returns and stock prices, similar to the original question. It maintains the cognitive level by requiring analysis and comparison. Answer 1 also aligns well with the knowledge points but focuses solely on calculating the intrinsic value without the comparative aspect, which slightly narrows its alignment with the original question's broader scope.""}, 'Diversity': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 introduces varied perspectives by comparing two stocks with different dividend policies and growth stages, similar to the original question. It also uses a multiple-choice format, which adds diversity in assessment methods. Answer 1, while clear and focused, does not offer the same level of diversity in terms of question format or the comparative analysis aspect.'}, 'Overall': {'Winner': 'Answer 2'}}"
+9,"Question: You just bought an insurance that costs you $510,000 at the beginning of the year. The insurance is an annuity that will pay you $50,000 at the end of each year. The first payment would be made at the end of this year. If it takes you 20 years to earn back what you paid, what is the APR of this annuity? Choose the closest answer.
+Type: multiple-choice
+Options:
+    a. 5.5%
+    b. 6.0%
+    c. 6.5%
+    d. 7.5%
+    e. 8.0%
+    f. 9.0%
+","**Question:**  
+
+You are considering two investment options to fund your child's college education. The first option is an annuity that pays $3,000 at the beginning of each year for 10 years. The second option is an annuity that pays a different amount at the end of each year for the same duration. The annual discount rate is 6.5%.  
+
+(a) What is the present value of the first annuity (paying at the beginning of each year)?  
+
+(b) If the two annuities have equal present values, how much does the second annuity pay each year (at the end of each year)?  
+
+(c) Suppose you decide to make a single lump-sum investment today instead of using either annuity. How much would you need to invest today to match the present value of the first annuity?  
+
+**Type:** long-answer  
+**Options:** No options provided.  
+
+**Knowledge Points:**  
+- Annuities due vs. ordinary annuities  
+- Present value (PV) calculations  
+- Discount rate application  
+- Lump-sum equivalent of annuity cash flows","**Question:** You purchase an annuity that costs $250,000 upfront. The annuity will pay you $20,000 at the end of each year for the next 15 years. If you break even on your investment after 12 years, what is the approximate annual percentage rate (APR) of this annuity? Choose the closest answer.  
+
+**Type:** multiple-choice  
+**Options:**  
+a. 4.0%  
+b. 4.5%  
+c. 5.0%  
+d. 5.5%  
+e. 6.0%  
+f. 6.5%","{'Completeness': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 provides a comprehensive question with multiple parts (a, b, c) that cover different aspects of annuity calculations, ensuring all necessary components (stem, constraints, and query) are included. Answer 2, while complete, is simpler and lacks the depth of Answer 1.'}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 more closely aligns with the original question's knowledge point, focusing on calculating the APR of an annuity, which is the core concept in the original question. Answer 1, while detailed, strays from the original focus by introducing multiple annuity types and lump-sum investments.""}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 introduces varied perspectives and formats by including multiple parts that test different aspects of annuities (due vs. ordinary, present value, lump-sum equivalent). Answer 2, while aligned with the original question, does not offer as much diversity in approach or format.'}, 'Overall': {'Winner': 'Answer 1'}}"
+1,"Question: Which of the below statement(s) is(are) true about the term structure? I. Assume the term structure is upward sloping now. All else unchanged, if the expected long-term inflation increases relative to the short-term inflation, the slope of the term structure will become steeper. II. Assume the term structure is downward sloping now and the real rate is flat. It is likely the expected long-term inflation is lower than the short-term inflation. III. Assume the term structure is downward sloping now and the real rate is flat. It is likely the long-term interest rate risk premium is lower than the short-term interest rate risk premium.
+Type: multiple-choice
+Options:
+    a. I and III only
+    b. II and III only
+    c. I, II and III
+    d. None of the statements are true
+","**Question:** Which of the following factors would most likely lead to a steeper yield curve?  
+
+**Type:** multiple-choice  
+**Options:**  
+A. Decreasing short-term interest rates and stable long-term inflation expectations  
+B. Increasing short-term interest rates and declining long-term inflation expectations  
+C. Stable short-term interest rates and increasing long-term inflation expectations  
+D. Decreasing short-term interest rates and declining long-term inflation expectations  
+E. Increasing short-term and long-term interest rates at the same pace  
+
+**Knowledge Points:**  
+- Yield curve slope dynamics  
+- Inflation expectations impact on term structure  
+- Interest rate risk premium influence on yield curve shape","**Question:** Which of the following statement(s) is(are) true about yield curves?  
+I. If the yield curve is upward sloping and the Federal Reserve signals a future increase in short-term interest rates, the yield curve is likely to flatten.  
+II. A flat yield curve implies that the market expects no change in future interest rates.  
+III. An inverted yield curve suggests that long-term inflation expectations are lower than short-term inflation expectations.  
+
+**Type:** multiple-choice  
+**Options:**  
+a. I and II only  
+b. II and III only  
+c. I and III only  
+d. None of the statements are true","{'Completeness': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 provides a clear stem, specific constraints (factors affecting the yield curve), and a direct query about which factor would lead to a steeper yield curve. The options are well-defined and cover a range of scenarios. Answer 2, while complete, is slightly less direct as it asks for true statements about yield curves, which is broader and could introduce more ambiguity in interpretation.'}, 'Knowledge Alignment': {'Winner': 'Answer 1', 'Explanation': ""Answer 1 directly targets the knowledge point of yield curve slope dynamics and the impact of inflation expectations and interest rates, closely aligning with the original question's focus. Answer 2 also aligns but includes a broader range of concepts (e.g., Federal Reserve signals, flat yield curve implications), which slightly dilutes the focus on the term structure's slope and inflation expectations.""}, 'Diversity': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 introduces more varied perspectives by including statements about Federal Reserve signals, flat yield curves, and inverted yield curves, providing a broader assessment of yield curve knowledge. Answer 1, while clear and aligned, is more narrowly focused on factors affecting the slope of the yield curve.'}, 'Overall': {'Winner': 'Answer 1'}}"
+2,"Question: Assume today is January 1, 2023. You are planning for your retirement on January 1, 2038, and you have two retirement goals. Goal 1: Five months after you retire, you want to go on a vacation to Europe. To do so, you are going to need to withdraw a lump sum payment of $85,000 at the beginning of the fifth month that you retire. Goal 2: Once you retire, at the end of each month you are going to withdraw some money for daily and medical expenses. Your first withdrawal will be at the end of the month that you retire. For your first withdrawal, you want to take $12,000, and after that, you expect that the expenses are going to grow by 0.25% each month and last for 25 years. APR is 6% compounded monthly. a. To fulfil your two retirement goals, what is the total amount that you need to have saved by the time you retire? b. On average your salary is expected to grow at a rate of 0.2% each month, and you are going to deposit 30% of your monthly salary into a savings account. If by the time you retire you have saved $X in total (amount as calculated in part (a)), what is your monthly salary when you make your first deposit? What is your monthly salary when you make your third deposit?
+Type: short-answer
+Options: No options provided.
+","**Question:**  
+
+Five years ago, Maria invested $5,000 in a savings account, and three years ago, John invested $7,500 in a different account. Today, both investments are worth $6,000 each. Assuming both continue to earn their respective rates of return, which of the following statements is correct?  
+
+**Type:** multiple-choice  
+**Options:**  
+A. Maria earns a higher annual rate of return than John.  
+B. Two years from now, John's investment will be worth more than Maria's.  
+C. One year ago, Maria's investment was worth more than John's.  
+D. John's average annual return is 1.5 times Maria's return.  
+E. Maria’s investment has grown at a compounded rate twice that of John’s.  
+
+**Knowledge points:** Time Value of Money, Rate of Return Calculation, Comparison of Investment Performance","**Question:** Assume today is January 1, 2025. You are planning for your retirement on January 1, 2045, and you have two retirement goals. Goal 1: Six months after you retire, you want to go on a vacation to Asia. To do so, you are going to need to withdraw a lump sum payment of $100,000 at the beginning of the sixth month that you retire. Goal 2: Once you retire, at the end of each month you are going to withdraw some money for daily and medical expenses. Your first withdrawal will be at the end of the month that you retire. For your first withdrawal, you want to take $15,000, and after that, you expect that the expenses are going to grow by 0.3% each month and last for 30 years. APR is 7% compounded monthly. a. To fulfill your two retirement goals, what is the total amount that you need to have saved by the time you retire? b. On average your salary is expected to grow at a rate of 0.25% each month, and you are going to deposit 35% of your monthly salary into a savings account. If by the time you retire you have saved $Y in total (amount as calculated in part (a)), what is your monthly salary when you make your first deposit? What is your monthly salary when you make your fifth deposit?  
+Type: short-answer  
+Options: No options provided.","{'Completeness': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 is more complete as it includes all necessary components (stem, constraints, and query) to be solvable without ambiguity, similar to the original question. It clearly outlines the retirement goals, the time frame, the financial requirements, and the calculations needed. Answer 1, while complete in its own right, lacks the depth and detail of the original question and Answer 2, focusing instead on a simpler comparison of investment returns.'}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 aligns more closely with the knowledge points targeted in the original question, which involve complex financial planning, time value of money, and retirement savings calculations. Answer 1, while related to financial concepts, deviates from the original question's focus by addressing a simpler scenario of comparing investment returns, which does not fully capture the depth of the original question's knowledge points.""}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': 'Answer 1 introduces a different format (multiple-choice) and a varied perspective (comparison of two investments) compared to the original question, which adds diversity in assessing the topic. Answer 2, while thorough, closely mirrors the structure and approach of the original question, offering less diversity in terms of format and perspective.'}, 'Overall': {'Winner': 'Answer 2'}}"
+1,"Question: Company MNL currently has bond A in the market. Bond A is a 15% 12-year bond which pays out quarterly coupons. Bond A has a face value of $3500. Company MNL just issued a new Bond - Bond B. Bond B sells as a premium bond in which it is sold at 12% above par. Bond B pays out coupon every 6 months and has 15 years to maturity. The YTM for both bonds today is 8%. a. What is the current yield of bond A? b. What is the coupon rate of bond B? c. 6 years from now YTM decreases to 4% for both bonds, and you sell bond A, what is the holding period return for bond A?
+Type: short-answer
+Options: No options provided.
+","**Question:**  
+
+A bond with a face value of $1,000 pays a 6% annual coupon and has 8 years remaining until maturity. The bond is currently priced at $1,100.  
+
+a) What is the current yield of the bond?  
+b) If the yield to maturity (YTM) decreases by 1.5% in two years and you sell the bond at that time, what will be your holding period return (HPR)?  
+
+**Type:** short-answer  
+**Options:** No options provided.  
+
+**Knowledge points:**  
+- Current yield calculation for bonds  
+- Holding period return for bonds with changing YTM  
+- Bond price determination with changing YTM","**Question:** Company XYZ currently has Bond X in the market. Bond X is a 10% 8-year bond that pays out semi-annual coupons. Bond X has a face value of $2,000. Company XYZ just issued a new Bond - Bond Y. Bond Y sells at a discount, priced at 8% below par. Bond Y pays out coupons annually and has 10 years to maturity. The YTM for both bonds today is 6%. a. What is the current yield of Bond X? b. What is the coupon rate of Bond Y? c. 4 years from now, the YTM decreases to 3% for both bonds, and you sell Bond X. What is the holding period return for Bond X?  
+Type: short-answer  
+Options: No options provided.","{'Completeness': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 includes all necessary components (stem, constraints, and query) to be solvable without ambiguity, similar to the original question. It provides detailed information about both bonds (Bond X and Bond Y), including their coupon rates, face values, payment frequencies, and YTM changes over time. Answer 1, while complete, lacks the depth of information and the multi-part structure that mirrors the original question.'}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 accurately targets the intended knowledge points and cognitive level, closely following the structure and complexity of the original question. It covers current yield, coupon rate, and holding period return with changing YTM, just like the original. Answer 1 also aligns well but simplifies the scenario by focusing on a single bond and a less complex YTM change.'}, 'Diversity': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 introduces varied perspectives by including two bonds with different characteristics (premium vs. discount, semi-annual vs. annual coupons) and a multi-part question that assesses different aspects of bond valuation. Answer 1, while effective, is more straightforward and lacks the diversity in bond types and question parts that Answer 2 provides.'}, 'Overall': {'Winner': 'Answer 2'}}"
+2,"Question: Company RA is going to undertake a large project in collaboration with Company EF. Company RA will undertake on the project starting today, the beginning of the year. The project will cost $15,000,000 in today's value, and it will take full 7 years in total to complete (i.e. the project is completed at the end of the 7th year). After the project is completed, company EF is going to pay company RA $20,000,000 in a lump sum, and it is agreed that the payment will be paid exactly two months after the project is completed. 80% of the project cost is financed by a loan. Company RA arranged a 20-year loan today with a bank, and company RA is required to make fixed equal payments every month. (The first repayment will be made at the end of this month). a. If the APR is 3%, how much does company RA need to repay each month? b. Exactly one month after Company RA receives payments from Company EF (after the loan repayment for that month is made), the company is going to repay all remaining instalments of the bank loan in one balloon payment. How large would the balloon payment be?
+Type: short-answer
+Options: No options provided.
+","**Question:**  
+
+A homebuyer is taking out a 30-year mortgage for $400,000 at a fixed annual interest rate of 5%. The loan requires monthly payments, with the first payment due one month from today. However, the buyer also agrees to a **balloon payment** of $100,000 at the end of the 10th year to reduce the principal early.  
+
+a) Calculate the **monthly mortgage payment** (excluding the balloon payment).  
+b) Determine the **remaining loan balance** immediately after the balloon payment is made at the end of Year 10.  
+c) If the buyer refinances the remaining balance at Year 10 for another 20 years at a reduced rate of 4%, what will be the new **monthly payment**?  
+
+**Type:** long-answer  
+**Options:** No options provided.  
+**Knowledge Points:** Time Value of Money, Loan Amortization, Balloon Payment Calculation, Refinancing.","**Question:** Company XY is embarking on a major construction project in partnership with Company ZW. Company XY will start the project today, at the beginning of the year. The total cost of the project is $12,000,000 in today's value, and it will take exactly 5 years to complete (i.e., the project will be finished at the end of the 5th year). Upon completion, Company ZW will pay Company XY a lump sum of $18,000,000, with the payment scheduled to be made exactly three months after the project is completed. 75% of the project cost is financed through a loan. Company XY secured a 15-year loan today with a bank, requiring fixed equal monthly payments. (The first repayment will be due at the end of this month.) a. If the APR is 4%, how much will Company XY need to repay each month? b. Exactly two months after Company XY receives the payment from Company ZW (after the loan repayment for that month is made), the company plans to repay all remaining loan installments in one balloon payment. How much will the balloon payment be?  
+
+Type: short-answer  
+Options: No options provided.","{'Completeness': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 closely mirrors the structure and components of the original question, including the project cost, timeline, financing details, and the two-part query (monthly repayment and balloon payment). Answer 1, while detailed, introduces additional elements like refinancing and a balloon payment at Year 10, which deviate from the original question's focus and may introduce unnecessary complexity.""}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 aligns more accurately with the intended knowledge points of the original question, such as loan amortization, time value of money, and balloon payment calculation under similar constraints. Answer 1, though comprehensive, strays from the original context by introducing refinancing and a different loan structure, which may not be the primary focus of the original question.'}, 'Diversity': {'Winner': 'Answer 1', 'Explanation': ""Answer 1 introduces more varied perspectives and formats, such as refinancing and a multi-part question (a, b, c), which provide a broader assessment of the topic. However, this diversity comes at the cost of alignment with the original question's simplicity and focus. Answer 2 maintains a straightforward approach similar to the original, lacking the diversity of Answer 1 but staying true to the original intent.""}, 'Overall': {'Winner': 'Answer 2'}}"
+3,"Question: Below is a summary of dividends paid by stock XY issued by Company XY. Each dividend of this stock is paid on Jan 1st. 2002 Jan 1st Company XY just paid a dividend of $3, and company XY announced that to prepare financially for a project, dividend paid is going to fall by $1 each year for the following two years. That is, the 2003 dividend will be $1 less than 2002, and the 2004 dividend will be $1 less than 2003. 2005 Jan 1st – 2008 Jan 1st When Company XY undertake the project, there were no dividend paid 2009 Jan 1st Project was completed and a dividend of $2 was paid on 2009 Jan 1st. Company XY announced that for the following years the growth rate of dividend will be 2%. The growth rate will then increase by 2 percentage point each year until it reaches 6%, afterwards the dividend would grow at a growth rate of 6% indefinitely. The required return for stock XY is 9%. What is the price of the stock XY on 2002 Jan 1st?
+Type: short-answer
+Options: No options provided.
+","**Question:**  
+Greenfield Industries just paid a dividend of $1.50 per share. The company expects dividends to grow at a high rate of 15% for the next five years, after which the growth rate will stabilize at a constant 4% indefinitely. If the required rate of return on the stock is 10%, what is the current stock price?  
+
+**Type:** short-answer  
+**Options:** No options provided.  
+
+**Knowledge Points:**  
+Dividend Discount Model DDM, High growth and normal growth phase valuation, Present value of irregular dividends, Required return and growth phases.","**Question:** TechGrow Inc. just paid a dividend of $4 per share on January 1st, 2023. The company announced that due to a major investment in R&D, the dividend will decrease by $0.50 each year for the next three years (2024, 2025, and 2026). Starting from January 1st, 2027, no dividends will be paid for the following two years (2027 and 2028) as the company focuses on completing its R&D project. On January 1st, 2029, the company will resume dividend payments with a dividend of $3 per share. After that, the dividend will grow at a rate of 3% per year for the next four years (2030 to 2033). From 2034 onwards, the dividend growth rate will stabilize at 5% per year indefinitely. The required return for TechGrow stock is 8%. What is the price of the stock on January 1st, 2023?  
+Type: short-answer  
+Options: No options provided.","{'Completeness': {'Winner': 'Answer 2', 'Explanation': 'Answer 2 provides a more detailed and structured scenario, including specific years, dividend changes, and growth phases, similar to the original question. It clearly outlines the dividend reductions, the period of no dividends, and the subsequent growth phases, making it solvable without ambiguity. Answer 1, while complete, lacks the detailed phases and transitions present in Answer 2.'}, 'Knowledge Alignment': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 closely aligns with the original question's knowledge point by incorporating multiple phases of dividend changes, including reductions, no dividends, and varying growth rates. It effectively tests the understanding of the Dividend Discount Model (DDM) under complex, multi-phase scenarios. Answer 1, though aligned, simplifies the scenario to only two growth phases, missing the opportunity to assess more intricate aspects of DDM.""}, 'Diversity': {'Winner': 'Answer 2', 'Explanation': ""Answer 2 introduces a more diverse and complex scenario with multiple phases of dividend changes, including reductions, a period of no dividends, and varying growth rates. This diversity better mirrors real-world financial scenarios and provides a richer assessment of the student's ability to apply DDM in varied contexts. Answer 1, while valid, presents a more straightforward and less diverse scenario.""}, 'Overall': {'Winner': 'Answer 2'}}"
