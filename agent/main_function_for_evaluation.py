@@ -7,10 +7,6 @@ import sentence_transformers
 from concordia.language_model import utils
 import json
 import os
-
-
-# sys.path.insert(0, os.path.abspath('.'))
-# 'nohup ollama serve > ./output.log 2>&1 &'
 from concordia.document import interactive_document
 from rag_related.extract_knowledge_point import KnowledgePointExtractor
 from rag_related.memory_without_time import NaiveAssociativeMemory
@@ -30,14 +26,9 @@ st_model = sentence_transformers.SentenceTransformer(
     'sentence-transformers/all-mpnet-base-v2')
 embedder = lambda x: st_model.encode(x, show_progress_bar=False)
 
-# api_type = 'ollama'
-# model_name = 'qwen2.5:14b'
+print(f"get the embedder")
+
 disable_language_model = False
-# model = utils.language_model_setup(
-#     api_type=api_type,
-#     model_name=model_name,
-#     disable_language_model=disable_language_model,
-# )
 if disable_language_model:
     model = no_language_model.NoLanguageModel()
 else:
@@ -46,19 +37,10 @@ else:
         # model_name='Qwen/Qwen2.5-14B-Instruct',
         api_key="sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo",
     )
-# memory_bank = NaiveAssociativeMemory(
-#     embedder,
-#     importance_threshold=RAGConfig.IMPORTANCE_THRESHOLD,
-#     max_memories=RAGConfig.MAX_MEMORIES,
-#     deduplication_threshold=RAGConfig.DEDUPLICATION_THRESHOLD,
-#     contextualize_size=RAGConfig.CONTEXTUALIZE_SIZE,)
 
-# rag_tool = NaiveRAG(
-#     model,
-#     embedder, 
-#     memory_bank, 
-#     min_similarity_score = RAGConfig.MIN_SIMILARITY_SCORE)
+print(f"get the model")
 
+# the memory bank
 memory_bank = KnowledgePointMemory(
         sentence_embedder=embedder,
         importance_threshold=0.5,
@@ -68,6 +50,7 @@ memory_bank = KnowledgePointMemory(
         num_knowledge_points=3
     )
 
+# the wrapper for the rag function
 rag_tool = KnowledgePointRAG(
         model=model,  # Replace with your actual model
         sentence_embedder=embedder,
@@ -77,7 +60,11 @@ rag_tool = KnowledgePointRAG(
 
 
 DIR_NAME = os.path.dirname(os.path.abspath(__file__))
+
+# the bloom classifier (EduLLM w/ Bloom)
 bloom_classifier = BloomLevelClassifier(model=model, path = os.path.join(DIR_NAME, r'bloom_classifier/definition_of_bloom.json'))
+
+# knowledge point extractor for the EduLLM (Knowledge Point retrieval)
 knowledge_point_extractor = KnowledgePointExtractor(model, 3)
 
 
@@ -95,9 +82,7 @@ class EduLLM_Agent():
         self._rag_tool = rag_tool
         self._bloom_classifier = bloom_classifier
         self._knowledge_point_extractor = knowledge_point_extractor
-        
-        # self._question_info_dict = dict()
-    
+            
     
     def _preprocess_past_paper(self, past_paper:Tuple[str]):
         """
@@ -107,26 +92,17 @@ class EduLLM_Agent():
         3. knowledge point as query, bloom level + few-shot example
         """
         for question in past_paper:
-            # 先不用这俩
             bloom_level, bloom_prompt_string = self._bloom_classifier.classify_bloom_level(question)
             knowledge_point, extract_knowledge_string = self._knowledge_point_extractor.extract_knowledge_point(question)
             print(f"question: {question}")
             print(f"bloom level: {bloom_level}")
             print(f"knowledge point: {knowledge_point}")
             print(f"\n\n\n")
-            # 先用naive rag测试
+            
+            # add question to the memory with knowledge points
             self._rag_tool.add_question_to_memory(question = question, knowledge_points = knowledge_point)
-            # self._question_info_dict[question.strip()] = {
-            #     "bloom_level": bloom_level,
-            #     "knowledge_point": knowledge_point,
-            #     # "bloom_prompt_string": bloom_prompt_string,
-            #     # "extract_knowledge_string": extract_knowledge_string
-            # }
-            # print(self._question_info_dict)
-                
-    def _json_to_text(self, question_json):
-        pass
     
+    # Naive RAG
     def _generate_question_from_pastpaper_vanilla(self, past_paper):
         new_questions = dict()
         for index, question in enumerate(tqdm(past_paper, desc="Generating questions")):
@@ -148,7 +124,8 @@ class EduLLM_Agent():
             # print(f"prompt: {prompt.view().text()}")
             print(f"\n\n\n")
         return new_questions
-            
+
+    # direct generation
     def _generate_question_directly(self, past_paper):
         new_questions = dict()
         for index, question in enumerate(tqdm(past_paper, desc="Generating questions")):
@@ -166,6 +143,7 @@ class EduLLM_Agent():
             print(f"\n\n\n")
         return new_questions
     
+    # EduLLM with Knowledge points, but without question, generate one question
     def _generate_question_by_knowledge_point_and_question(self,question):
         prompt = interactive_document.InteractiveDocument(self._model)
         # 1. extract knowledge point
@@ -173,9 +151,8 @@ class EduLLM_Agent():
         # 2. retrieve question by knowledge point
         questions_from_keywords_dict = self._rag_tool.retrieve_question_by_keywords(keywords=knowledge_point, 
                                                                     num_of_question_to_retrieve = RAGConfig.NUM_RETRIEVED_DOCS)
-        # question_from_question = self._rag_tool.retrieve_question_by_similarity(question = question,
-        #                                                             num_of_question_to_retrieve = RAGConfig.NUM_RETRIEVED_DOCS//2)
-        print(questions_from_keywords_dict)
+
+        
         
         formatted_data = [
             f"{text}\nknowledge points: {','.join(knowledge_points)}\n"
@@ -197,13 +174,16 @@ class EduLLM_Agent():
         return new_question, prompt.view().text()
         
         
-    
+    # Generate whole paper with _generate_question_by_knowledge_point_and_question
     def _generate_question_from_pastpaper_with_knowledge_point(self, past_paper):
         # idea: 
         new_questions = dict()
         question_with_index = enumerate(past_paper)
         import concurrent.futures
         max_workers = min(8, len(past_paper))
+        
+        
+        ## iterative version
         # for index, question in tqdm(question_with_index, desc="Generating questions"):
         #     print(f"Generating question {index + 1}/{len(past_paper)}")
         #     new_question, prompt_string = self._generate_question_by_knowledge_point_and_question(question)
@@ -212,22 +192,24 @@ class EduLLM_Agent():
         #     print(f"prompt: {prompt_string}")
         #     print(f"\n\n\n")
         # return new_questions
+        
+        # concurrent version
         with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
             future_to_index = {}
             
             for index, question in question_with_index:
                 print(f"Submitting question {index + 1}/{len(past_paper)} for generation")
-                # 提交任务到线程池
+                # Submit task to thread pool
                 future = executor.submit(
                     self._generate_question_by_knowledge_point_and_question, 
                     question
                 )
                 future_to_index[future] = index
             
-            # 初始化结果字典
+            # Initialize the result dictionary
             new_questions = {}
             
-            # 等待所有任务完成
+            # Wait for all tasks to complete
             for future in concurrent.futures.as_completed(future_to_index):
                 index = future_to_index[future]
                 try:
@@ -239,13 +221,13 @@ class EduLLM_Agent():
                 except Exception as exc:
                     print(f'Question {index + 1} generated an exception: {exc}')
             
-            # 按原始索引排序结果
+            # Sort results by original index
             sorted_indices = sorted(new_questions.keys())
             sorted_questions = {i: new_questions[i] for i in sorted_indices}
             
             return sorted_questions
 
-
+    # Generate one question by EduLLM (our method) and with bloom level
     def _generate_question_by_knowledge_point_and_question_and_bloom(self, question):
         prompt = interactive_document.InteractiveDocument(self._model)
         # 1. extract knowledge point
@@ -253,8 +235,7 @@ class EduLLM_Agent():
         # 2. retrieve question by knowledge point
         questions_from_keywords_dict = self._rag_tool.retrieve_question_by_keywords(keywords=knowledge_point, 
                                                                     num_of_question_to_retrieve = RAGConfig.NUM_RETRIEVED_DOCS)
-        # question_from_question = self._rag_tool.retrieve_question_by_similarity(question = question,
-        #                                                             num_of_question_to_retrieve = RAGConfig.NUM_RETRIEVED_DOCS//2)
+        
         print(questions_from_keywords_dict)
         
         # 3. classify bloom level
@@ -288,7 +269,7 @@ class EduLLM_Agent():
                                             max_tokens = 4096,)
         return new_question, prompt.view().text()
 
-
+    # Generate whole paper with _generate_question_by_knowledge_point_and_question_and_bloom
     def _generate_question_from_pastpaper_with_knowledge_point_and_bloom(self, past_paper):
         # idea: 
         new_questions = dict()
@@ -303,38 +284,6 @@ class EduLLM_Agent():
             print(f"prompt: {prompt_string}")
             print(f"\n\n\n")
         return new_questions
-        # with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
-        #     future_to_index = {}
-            
-        #     for index, question in question_with_index:
-        #         print(f"Submitting question {index + 1}/{len(past_paper)} for generation")
-        #         # 提交任务到线程池
-        #         future = executor.submit(
-        #             self._generate_question_by_knowledge_point_and_question_and_bloom, 
-        #             question
-        #         )
-        #         future_to_index[future] = index
-            
-        #     # 初始化结果字典
-        #     new_questions = {}
-            
-        #     # 等待所有任务完成
-        #     for future in concurrent.futures.as_completed(future_to_index):
-        #         index = future_to_index[future]
-        #         try:
-        #             new_question, prompt_string = future.result()
-        #             new_questions[index] = new_question
-        #             print(f"Generated question {index + 1}: {new_question}")
-        #             print(f"prompt: {prompt_string}")
-        #             print("\n\n\n")
-        #         except Exception as exc:
-        #             print(f'Question {index + 1} generated an exception: {exc}')
-            
-        #     # 按原始索引排序结果
-        #     sorted_indices = sorted(new_questions.keys())
-        #     sorted_questions = {i: new_questions[i] for i in sorted_indices}
-            
-        #     return sorted_questions
 
 
 
@@ -364,6 +313,8 @@ if __name__ == "__main__":
             combined_questions.append(formatted_str)
         return combined_questions
 
+    
+    print(f"preprocessing datasets")
     file_names = ['20_fina_1310.json', '21_fina_1310.json']
     readers = [DatasetReader(data_path='..\\dataset', file_name=file_name, preprocess_func=format_question) for file_name in file_names]
     data = []
@@ -372,28 +323,30 @@ if __name__ == "__main__":
     agent = EduLLM_Agent(model, embedder, memory_bank, rag_tool, bloom_classifier, knowledge_point_extractor)
     agent._preprocess_past_paper(data)
     
+    print(f"generating dataset")
     test_reader = DatasetReader(data_path='..\\dataset', file_name='23_fina_1310.json', preprocess_func = format_question)
     test_data = test_reader.get_data()
     
-    # result = agent._generate_question_from_pastpaper(test_data)
     from datetime import datetime
     import time
-
-    # timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    # with open(f'./output/{timestamp}.json', 'w') as f:
-        # json.dump(result, f, indent=4)
-    # generate_pdf_from_json(f"./output/{timestamp}.json", f"./output/{timestamp}.pdf", title = "FINA1310", footnotes=f"Generated time: {timestamp}")
-    
-    # Sleep for 5 seconds
     time.sleep(5)
 
     # Clear the terminal
     os.system('cls' if os.name == 'nt' else 'clear')
     
-    # result_direct = agent._generate_question_from_pastpaper_with_knowledge_point(test_data)
+    
+    
+    # select the method here
+    ###
+    # _generate_question_from_pastpaper_with_knowledge_point_and_bloom(pastpaper)
+    # _generate_question_from_pastpaper_with_knowledge_point(pastpaper)
+    # _generate_question_from_pastpaper_vanilla(pastpaper)
+    # _generate_question_directly(pastpaper)
+    ###
+    
+    suffix = 'KP_bloom'
     result_direct = agent._generate_question_from_pastpaper_with_knowledge_point_and_bloom(test_data)
     timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    suffix = 'KP_bloom'
     with open(f'./output/{timestamp}_{suffix}.json', 'w') as f:
         json.dump(result_direct, f, indent=4)
     generate_pdf_from_json(f"./output/{timestamp}_{suffix}.json", f"./output/{timestamp}_{suffix}.pdf", title = "FINA1310", footnotes=f"Generated time: {timestamp}")

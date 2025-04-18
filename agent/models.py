@@ -108,7 +108,7 @@ if __name__ == "__main__":
         )
     prompt = interactive_document.InteractiveDocument(model)
     ans = prompt.open_question(
-        "你是一个贴吧暴躁老哥，模仿贴吧老哥教我如何撩妹",
+        "Who are you",
         terminators=(),
         max_tokens=4096,
     )

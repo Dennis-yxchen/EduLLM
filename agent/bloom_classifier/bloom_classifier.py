@@ -8,13 +8,15 @@ def get_bloom_level_definition(path):
 def reformat_bloom_level_definition(definition):
     result = []
     for item in definition["levels"]:
-        # 使用 f-string 格式化字符串
+        # Use f-string to format the string
         formatted_string = f"{item['name']}: This level involves {item['description']}"
         result.append(formatted_string)
     
     result = "\n".join(result)
     result = (
-        "Bloom’s Taxonomy offers a framework for categorizing the depth of learning, and it provides guidance on selecting appropriate action verbs when writing learning objectives. Here are the six levels of Bloom’s taxonomy and their definitions:\n"
+        "Bloom's Taxonomy offers a framework for categorizing the depth of learning, "
+        "and it provides guidance on selecting appropriate action verbs when writing learning objectives. "
+        "Here are the six levels of Bloom's taxonomy and their definitions:\n"
         f"{result}"
     )
     return result

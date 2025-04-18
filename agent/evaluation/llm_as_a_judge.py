@@ -3,16 +3,19 @@ import os
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
-from main_function import get_model
+
+from main_function_for_evaluation import get_model
 from data_utils.dataset_reader import DatasetReader
 import tqdm
 import openai
+
 model = get_model(
             model_name="deepseek-ai/DeepSeek-V3",
             # model_name='Qwen/Qwen2.5-14B-Instruct',
             api_key="sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo",
         )
 
+# evaluate the question by LLM as a judge
 def evaluate_questions(question_pairs, goal_prompt, role_prompt):
     # Initialize counters
     baseline_wins = {"Completeness": 0, "Knowledge Alignment": 0, "Diversity": 0, "Overall": 0}
@@ -84,12 +87,7 @@ def evaluate_questions(question_pairs, goal_prompt, role_prompt):
                 "Evaluation": evaluation
             })
             
-            # print(f"\nEvaluation for pair {i}:")
-            # print(f"Original question: {question}")
-            # print(f"Baseline: {generated_question_baseline}")
-            # print(f"EDULLM: {generated_question_EDULLM}")
-            # print("Evaluation results:")
-            # print(json.dumps(evaluation, indent=2))
+            # store the backup evaluation
             with open(f'./result_0417/evaluation.json', 'a', encoding='utf-8') as f:
                 json.dump({
                     'index': i,
@@ -209,32 +207,17 @@ if __name__ == "__main__":
     with open(os.path.join(ABS_DIR, 'goal_prompt.txt'), 'r', encoding='utf-8') as f:
         goal_prompt = f.read()
         
-    # print(role_prompt)
-    # print(goal_prompt)
-    # question = ['What is the capital of France?'] # replace with your question
-    # generated_question_baseline = ['The capital of France is Paris.'] # replace with your generated question from the baseline model
-    # generated_question_EDULLM = ['Paris is the capital city of France.'] # replace with your generated question from the EDULLM model
-    # question_pairs = None
     original_path = r'./result_0417'
-    original_question = get_original_question(original_path)    
-    # raise
+    original_question = get_original_question(original_path)        
+    
     baseline = get_data(os.path.join(original_path, 'vanillaRAG.json'))
     EduLLM_KP = get_data(os.path.join(original_path, 'KP.json'))
     
-    # print("Original question length: ", len(original_question))
-    # print("Baseline length: ", len(baseline))
-    # print("EduLLM_KP length: ", len(EduLLM_KP))
-    # result = evaluate_questions(tuple(zip(
-    #     original_question, EduLLM_KP, baseline
-    #     )), goal_prompt, role_prompt)
-    
-    error_handle_question = original_question[-3:]
-    error_baseline = baseline[-3:]
-    error_EduLLM_KP = EduLLM_KP[-3:]
-    
-    
+    print("Original question length: ", len(original_question))
+    print("Baseline length: ", len(baseline))
+    print("EduLLM_KP length: ", len(EduLLM_KP))
     result = evaluate_questions(tuple(zip(
-        error_handle_question, error_EduLLM_KP, error_baseline
+        original_question, EduLLM_KP, baseline
         )), goal_prompt, role_prompt)
     
     import pandas as pd

@@ -10,7 +10,7 @@ from rag_related.importance_model import ConstantImportanceModel
 
 # _NUM_TO_RETRIEVE_TO_CONTEXTUALIZE_IMPORTANCE = 25
 class NaiveAssociativeMemory:
-    """实现关联记忆的类"""
+    """Class implementing associative memory"""
 
     def __init__(self,
                  sentence_embedder : Callable[[str], np.ndarray],
@@ -21,12 +21,14 @@ class NaiveAssociativeMemory:
                  importance: Callable[[str, Sequence[tuple[str, float]]], float] | None = None,
                  seed: int | None = None,
                  ):
-        """构造函数
+        """Constructor
 
-        参数:
-          sentence_embedder: 文本嵌入模型
-          importance: 将句子映射到 [0, 1] 范围内的重要性模型，如果为None，则使用一个将所有记忆设置为1.0重要性的恒定重要性模型
-          seed: 随机数生成器使用的可选种子。如果为None，则使用默认rng。
+        Args:
+          sentence_embedder: Text embedding model
+          importance: A model that maps sentences to importance in the range [0, 1]. 
+                  If None, a constant importance model is used that sets all memories to an importance of 1.0.
+          seed: Optional seed used by the random number generator. 
+            If None, the default RNG is used.
         """
         self._memory_bank_lock = threading.Lock()
         self._seed = seed
@@ -47,7 +49,7 @@ class NaiveAssociativeMemory:
         self._stored_hashes = set()
 
     def get_state(self) -> dict:
-        """将 NaiveAssociativeMemory 转换为字典"""
+        """Convert NaiveAssociativeMemory to a dictionary"""
         with self._memory_bank_lock:
             output = {
                 'seed': self._seed,
@@ -57,7 +59,7 @@ class NaiveAssociativeMemory:
         return output
     
     def set_state(self, state: dict) -> None:
-        """从字典设置 NaiveAssociativeMemory"""
+        """Set NaiveAssociativeMemory from a dictionary"""
         with self._memory_bank_lock:
             self._seed = state['seed']
             self._stored_hashes = set(state['stored_hashes'])
@@ -70,12 +72,12 @@ class NaiveAssociativeMemory:
         tags: Iterable[str] = (),
         importance: float | None = None,
     ) -> None:
-        """添加非重复条目（文本、标签、重要性）到记忆中
+        """Add unique entries (text, tags, importance) to memory.
 
-        参数:
-          text: 添加到记忆中的内容
-          tags: 可选标签
-          importance: 可选地设置记忆的重要性。
+        Args:
+          text: Content to be added to memory.
+          tags: Optional tags.
+          importance: Optionally set the importance of the memory.
         """
         if importance is None:
             with self._memory_bank_lock:
@@ -86,7 +88,6 @@ class NaiveAssociativeMemory:
             context = self.retrieve_random_with_importance(k=num_to_retrieve)
             importance = self._importance(text, context)
 
-        # 移除记忆中的所有换行符。
         text = text.replace('\n', ' ')
 
         contents = {
@@ -111,11 +112,11 @@ class NaiveAssociativeMemory:
         texts: Iterable[str],
         **kwargs,
     ) -> None:
-        """添加文本到记忆中
+        """Add texts to memory
 
-        参数:
-          texts: 要添加到记忆中的字符串列表
-          **kwargs: 传递给 .add 的参数
+        Args:
+          texts: List of strings to add to memory
+          **kwargs: Parameters to pass to .add
         """
         for text in texts:
             self.add(text, **kwargs)
@@ -125,14 +126,14 @@ class NaiveAssociativeMemory:
             return self._memory_bank.copy()
 
     def _get_top_k_cosine(self, x: np.ndarray, k: int):
-        """返回与输入向量x最相似的前k行
+        """Return the top-k rows most similar to the input vector x.
 
-        参数:
-          x: 输入向量。
-          k: 返回的行数。
+        Args:
+          x: Input vector.
+          k: Number of rows to return.
 
-        返回:
-          按余弦相似度降序排序的行。
+        Returns:
+          Rows sorted in descending order of cosine similarity.
         """
         with self._memory_bank_lock:
             cosine_similarities = self._memory_bank['embedding'].apply(
@@ -148,15 +149,15 @@ class NaiveAssociativeMemory:
     def _get_top_k_similar_rows(
         self, x, k: int, use_importance: bool = True
     ):
-        """返回与输入向量x最相似的前k行
+        """Return the top-k rows most similar to the input vector x.
 
-        参数:
-          x: 输入向量。
-          k: 返回的行数。
-          use_importance: 如果为true则按重要性加权相似度
+        Args:
+          x: Input vector.
+          k: Number of rows to return.
+          use_importance: If true, weight similarity by importance.
 
-        返回:
-          按相似度降序排序的行。
+        Returns:
+          Rows sorted in descending order of similarity.
         """
         with self._memory_bank_lock:
             cosine_similarities = self._memory_bank['embedding'].apply(
@@ -179,7 +180,7 @@ class NaiveAssociativeMemory:
         self, x, threshold: float
     ):
         """
-        返回与输入向量x相似度大于阈值的行
+        Returns rows with similarity to the input vector x greater than the threshold.
         """
         with self._memory_bank_lock:
             cosine_similarities = self._memory_bank['embedding'].apply(
@@ -199,13 +200,13 @@ class NaiveAssociativeMemory:
         self,
         data: pd.DataFrame,
     ) -> Sequence[str]:
-        """将数据框格式化为字符串列表
+        """Format the DataFrame into a list of strings.
 
-        参数:
-          data: 要处理的数据框
+        Args:
+          data: The DataFrame to process.
 
-        返回:
-          字符串列表，每个记忆对应一个字符串
+        Returns:
+          A list of strings, where each memory corresponds to one string.
         """
         output = data['text']
         return output.tolist()
@@ -244,15 +245,14 @@ class NaiveAssociativeMemory:
         query: str,
         threshold: float = 0.7,
     ) -> Sequence[str]:
-        """关联检索记忆
+        """Retrieve memories by similarity with a threshold.
 
-        参数:
-          query: 用于检索的字符串
-          k: 要检索的记忆数量
-          use_importance: 是否使用重要性进行检索
+        Args:
+          query: The query string for retrieval.
+          threshold: The similarity threshold for retrieval.
 
-        返回:
-          对应记忆的字符串列表
+        Returns:
+          A list of memory strings that meet the similarity threshold.
         """
         query_embedding = self._embedder(query)
 
@@ -267,13 +267,13 @@ class NaiveAssociativeMemory:
         self,
         regex: str,
     ) -> Sequence[str]:
-        """通过正则表达式检索记忆
+        """Retrieve memories using a regular expression.
 
-        参数:
-          regex: 匹配的正则表达式
+        Args:
+          regex: The regular expression to match.
 
-        返回:
-          对应记忆的字符串列表
+        Returns:
+          A list of memory strings that match the regular expression.
         """
         with self._memory_bank_lock:
             data = self._memory_bank[self._memory_bank['text'].str.contains(regex)]
@@ -284,13 +284,13 @@ class NaiveAssociativeMemory:
         self,
         k: int = 1,
     ) -> Sequence[str]:
-        """检索随机的记忆
+        """Retrieve random memories.
 
-        参数:
-          k: 要检索的记忆数量
+        Args:
+          k: Number of memories to retrieve.
 
-        返回:
-          对应记忆的字符串列表
+        Returns:
+          A list of memory strings.
         """
         with self._memory_bank_lock:
             data = self._memory_bank.sample(k, random_state=self._seed)
@@ -300,69 +300,70 @@ class NaiveAssociativeMemory:
         self,
         k: int = 1,
     ) -> Sequence[tuple[str, float]]:
-        """检索随机的记忆并返回重要性
+        """Retrieve random memories and return their importance.
 
-        参数:
-          k: 要检索的记忆数量
+        Args:
+          k: Number of memories to retrieve.
 
-        返回:
-          对应记忆的字符串列表及其重要性值
+        Returns:
+          A list of memory strings along with their importance values.
         """
         with self._memory_bank_lock:
             data = self._memory_bank.sample(k, random_state=self._seed)
         return tuple(zip(list(data['text']), list(data['importance'])))
 
     def __len__(self):
-        """返回记忆库中的条目数量
+        """Return the number of entries in the memory bank.
 
-        由于记忆不能被删除，长度不会减少，可用于检查记忆库的内容是否发生变化。
+        Since memories cannot be deleted, the length will not decrease, 
+        and this can be used to check if the content of the memory bank has changed.
         """
         with self._memory_bank_lock:
             return len(self._memory_bank)
 
     def get_mean_importance(self) -> float:
-        """返回记忆库中记忆的重要性的平均值"""
+        """Return the average importance of memories in the memory bank."""
         with self._memory_bank_lock:
             return self._memory_bank['importance'].mean()
 
     def get_max_importance(self) -> float:
-        """返回记忆库中记忆的最大重要性"""
+        """Return the maximum importance of memories in the memory bank."""
         with self._memory_bank_lock:
             return self._memory_bank['importance'].max()
 
     def get_min_importance(self) -> float:
-        """返回记忆库中记忆的重要性的最小重要性"""
+        """Return the minimum importance of memories in the memory bank."""
         with self._memory_bank_lock:
             return self._memory_bank['importance'].min()
 
     def set_num_to_retrieve_to_contextualize_importance(
         self, num_to_retrieve: int) -> None:
-        """设置用于上下文化重要性的要检索的记忆数量
+        """Set the number of memories to retrieve for contextualizing importance.
 
-        设置为0以禁用重要性的上下文化
+        Set to 0 to disable contextualization of importance.
 
-        参数:
-          num_to_retrieve: 用于上下文化重要性的要检索的记忆数量
+        Args:
+          num_to_retrieve: Number of memories to retrieve for contextualizing importance.
         """
         self._num_to_retrieve_to_contextualize_importance = num_to_retrieve
 
     def get_all_memories_as_text(self) -> Sequence[str]:
-        """返回记忆库中的所有记忆作为字符串序列"""
+        """Return all memories in the memory bank as a sequence of strings"""
         memories_data_frame = self.get_data_frame()
         texts = self._pd_to_text(memories_data_frame)
         return texts
     
     def save(self, file_path: str) -> None:
-        """将记忆库保存到 JSON 文件"""
+        """Save the memory bank to a JSON file"""
         state = self.get_state()
         with open(file_path, 'w') as f:
             json.dump(state, f, indent=4)
 
     def load(self, file_path: str) -> None:
-        """从 JSON 文件加载记忆库"""
+        """Load the memory bank from a JSON file"""
         with open(file_path, 'r') as f:
             state = json.load(f)
-        # 将 embedding 从列表转换回 np.ndarray
+        # Convert embedding from list back to np.ndarray
         for item in state['memory_bank']:
             item['embedding'] = np.array(item['embedding'])
         self.set_state(state)
