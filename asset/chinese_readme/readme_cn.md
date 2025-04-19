@@ -21,7 +21,7 @@
 - 构建 $system\\_prompt$
 - 将 $topK$个相似问题与知识点加入 $system\\_prompt$
 - 只加入 $q_{example}$ 的知识点 ${K_{example}}$ 到 $system\\_prompt$, 得到 $final\\_prompt$
-- 生成 \(q_{output} = LLM(final\_ prompt) \)
+- 生成 $q_{output} = LLM(final\_ prompt)$
 ---
 
 #### 如何配环境：
