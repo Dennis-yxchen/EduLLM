@@ -82,7 +82,7 @@ if __name__ == '__main__':
     file_path = "../dataset/23_fina_1310.json"
     output_folder = "../dataset/jsonfolder"
     api_url = "https://api.siliconflow.cn/v1"
-    api_key = "sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo"
+    api_key = "Your API HERE"
 
     convert_to_json_with_openai(
         file_path=file_path,

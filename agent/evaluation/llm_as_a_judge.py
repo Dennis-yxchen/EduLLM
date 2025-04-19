@@ -12,7 +12,7 @@ import openai
 model = get_model(
             model_name="deepseek-ai/DeepSeek-V3",
             # model_name='Qwen/Qwen2.5-14B-Instruct',
-            api_key="sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo",
+            api_key="Your API HERE",
         )
 
 # evaluate the question by LLM as a judge
