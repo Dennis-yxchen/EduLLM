@@ -16,31 +16,31 @@
 ## Algorithm Design
 
 ### Building the Database:
-- Pass all questions from the dataset \( Q = \{q_1, q_2, \ldots, q_n\} \) into the database \( MEM \).
-- For each question \( q_i \), extract its corresponding **knowledge points** \( K_i = \{[k_i^1, k_i^2, \ldots, k_i^p]\} \), where \( p \) is a predefined hyperparameter.
-- For each knowledge point \( k \in K_i \), convert it into a vector \( v \in V_i \) using a text embedding function \( \text{Embedder} \):  
-  \( V_i = \text{Embedder}(K_i) \).  
-  - If \( |V_i| \neq p \), pad with \( \vec{0} \) until \( |V_i| = p \).
-- For each question \( q_i \), create a memory entry \( \text{memory}_q\{q_i, V_i, K_i\} \) and store it in \( MEM \).
-- The final database becomes \( MEM = \{\text{memory}_1, \ldots, \text{memory}_n\} \).
+- Pass all questions from the dataset $Q = \{q_1, q_2, \ldots, q_n\}$ into the database $MEM$.
+- For each question $q_i$, extract its corresponding **knowledge points** $K_i = \{[k_i^1, k_i^2, \ldots, k_i^p]\}$, where $p$ is a predefined hyperparameter.
+- For each knowledge point $k \in K_i$, convert it into a vector $v \in V_i$ using a text embedding function $\text{Embedder}$:  
+  $V_i = \text{Embedder}(K_i)$.  
+  - If $|V_i| \neq p$, pad with $\vec{0}$ until $|V_i| = p$.
+- For each question $q_i$, create a memory entry $\text{memory}_q\{q_i, V_i, K_i\}$ and store it in $MEM$.
+- The final database becomes $MEM = \{\text{memory}_1, \ldots, \text{memory}_n\}$.
 
 ---
 
 ### Retrieving from the Database:
-- For an input question \( q_{\text{example}} \), extract its knowledge points \( K_{\text{example}} \).
-- Convert \( K_{\text{example}} \) into vectors \( V_{\text{example}} \) using \( \text{Embedder} \). Pad with \( \vec{0} \) if \( |V_{\text{example}}| \neq p \).
-- For each vector \( v_{\text{example}}^i \in V_{\text{example}} \), compute the dot-product similarity with all vectors in \( MEM \) (i.e., \( [V_1, V_2, \ldots, V_n] \)).
-- Sum all pairwise similarities for each \( q_i \) in \( MEM \):  
-  \( \text{sim} = \text{pairwise}(V_i, V_{\text{example}}) \), then take the average: \( \text{sum}(\text{sim}) / p^2 \).
-- Return the \( \text{topK} \) most similar questions and their associated knowledge points.
+- For an input question $q_{\text{example}}$, extract its knowledge points $K_{\text{example}}$.
+- Convert $K_{\text{example}}$ into vectors $V_{\text{example}}$ using $\text{Embedder}$. Pad with $\vec{0}$ if $|V_{\text{example}}| \neq p$.
+- For each vector $v_{\text{example}}^i \in V_{\text{example}}$, compute the dot-product similarity with all vectors in $MEM$ (i.e., $[V_1, V_2, \ldots, V_n]$).
+- Sum all pairwise similarities for each $q_i$ in $MEM$:  
+  $\text{sim} = \text{pairwise}(V_i, V_{\text{example}})$, then take the average: $\text{sum}(\text{sim}) / p^2$.
+- Return the $\text{topK}$ most similar questions and their associated knowledge points.
 
 ---
 
 ### Generating Questions:
 - Construct a `system_prompt`.
-- Add the \( \text{topK} \) similar questions and their knowledge points to `system_prompt`.
-- Include only the knowledge points \( K_{\text{example}} \) of \( q_{\text{example}} \) in `system_prompt` to form the `final_prompt`.
-- Generate the output question: \( q_{\text{output}} = \text{LLM}(\text{final\_ prompt}) \).
+- Add the $\text{topK}$ similar questions and their knowledge points to `system_prompt`.
+- Include only the knowledge points $K_{\text{example}}$ of $q_{\text{example}}$ in `system_prompt` to form the `final_prompt`.
+- Generate the output question: $q_{\text{output}} = \text{LLM}(\text{final\_ prompt})$.
 
 ---
 
