@@ -1,6 +1,6 @@
 # EduLLM: Applying Large Language Models in the Education Industry
 
-![icon](.\asset\Edullm_icon.png)
+![icon](./asset/Edullm_icon.png)
 
 ## Progress
 
@@ -56,7 +56,7 @@ pip install reportlab
 ---
 
 ### Chinese version:
-- [中文版](.\asset\chinese_readme\readme_cn.md)
+- [中文版](./asset/chinese_readme/readme_cn.md)
 
 <!-- ## How to run:
 
