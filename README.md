@@ -40,7 +40,7 @@
 - Construct a `system_prompt`.
 - Add the $\text{topK}$ similar questions and their knowledge points to `system_prompt`.
 - Include only the knowledge points $K_{\text{example}}$ of $q_{\text{example}}$ in `system_prompt` to form the `final_prompt`.
-- Generate the output question: $q_{\text{output}} = \text{LLM}(\text{final\_ prompt})$.
+- Generate the output question: $q_{\text{output}} = \text{LLM}(\text{final\\_prompt})$.
 
 ---
 
