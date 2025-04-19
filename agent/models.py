@@ -104,7 +104,7 @@ def get_model(model_name: str, api_key: str) -> CustomOpenAI:
 if __name__ == "__main__":
     model = CustomOpenAI(
         model_name="deepseek-ai/DeepSeek-V3",
-        api_key="sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo",
+        api_key="Your API HERE",
         )
     prompt = interactive_document.InteractiveDocument(model)
     ans = prompt.open_question(

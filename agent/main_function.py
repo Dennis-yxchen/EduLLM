@@ -213,7 +213,7 @@ def run_simulation(kg_path: str, prompt_filename: str):
         model = get_model(
             model_name="deepseek-ai/DeepSeek-V3",
             # model_name='Qwen/Qwen2.5-14B-Instruct',
-            api_key="sk-ufvfjzrydqzznjfnqabneayuhyimirhnwekmiemjyskvxedo",
+            api_key="Your API HERE",
         )
     # memory_bank = NaiveAssociativeMemory(
     #     embedder,
